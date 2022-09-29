@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_spi.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:47 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SPI &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="TIMER" href="driver_timer.html" />
+    <link rel="prev" title="PWM" href="driver_pwm.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SPI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-spi-works">How SPI works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#drive-coding">Drive coding</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-connection">Hardware connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#makefile-kconfig">Makefile/Kconfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-the-dts-nodes">Configure the DTS nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-spi-drivers">Define SPI drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#registration-of-spi-equipment">Registration of SPI equipment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-write-spi-data">Read-write SPI data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#open-spi-demo">Open SPI demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#common-spi-interface">Common SPI interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interface-usage">Interface usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#faqs">FAQs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#q1-spi-data-transfer-exception">Q1: SPI data transfer exception?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>SPI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/driver_spi.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="spi">
+<h1>SPI<a class="headerlink" href="#spi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>SPI is a high-speed, full-duplex, synchronous serial communication interface for connecting microcontroller, sensors, storage devices, etc.The derivation of SPI2 is done on the double row extension pins of ROC-RK3399-PC Pro . Users can check the bottom plate silk screen by themselves.</p>
+</div>
+<div class="section" id="how-spi-works">
+<h2>How SPI works<a class="headerlink" href="#how-spi-works" title="Permalink to this headline">¶</a></h2>
+<p>SPI works in a master-slave mode, which typically has one master device and one or more slave devices, requiring at least four wires, respectively:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CS</span>		    <span class="nb">slice</span> <span class="n">selection</span> <span class="n">signal</span>
+<span class="n">SCLK</span>		<span class="n">clock</span> <span class="n">letter</span>
+<span class="n">MOSI</span>		<span class="n">master</span> <span class="n">device</span> <span class="n">data</span> <span class="n">output</span> <span class="ow">and</span> <span class="n">slave</span> <span class="n">device</span> <span class="n">data</span> <span class="nb">input</span>
+<span class="n">MISO</span>		<span class="n">master</span> <span class="n">device</span> <span class="n">data</span> <span class="nb">input</span> <span class="ow">and</span> <span class="n">slave</span> <span class="n">device</span> <span class="n">data</span> <span class="n">output</span>
+</pre></div>
+</div>
+<p>The Linux kernel uses a combination of CPOL and CPHA to represent the four working modes of the current SPI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CPOL＝0，CPHA＝0		SPI_MODE_0
+CPOL＝0，CPHA＝1		SPI_MODE_1
+CPOL＝1，CPHA＝0		SPI_MODE_2
+CPOL＝1，CPHA＝1		SPI_MODE_3
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>CPOL :</strong> Represents the state of the initial level of the clock signal, 0 is the low level and 1 is the high level.</p></li>
+<li><p><strong>CPHA :</strong> Is sampling along which clock, 0 is sampling along the first clock and 1 is sampling along the second clock.</p></li>
+</ul>
+<p>The waveforms of SPI’s four working modes are as follows:</p>
+<p><img alt="_images/spi_waveform.en.jpg" src="_images/spi_waveform.en.jpg" /></p>
+</div>
+<div class="section" id="drive-coding">
+<h2>Drive coding<a class="headerlink" href="#drive-coding" title="Permalink to this headline">¶</a></h2>
+<p>The following W25Q128FV Flash module as an example of a simple introduction to the preparation of SPI driver.</p>
+<div class="section" id="hardware-connection">
+<h3>Hardware connection<a class="headerlink" href="#hardware-connection" title="Permalink to this headline">¶</a></h3>
+<p>The hardware connection between ROC-RK3399-PC Pro and W25Q128FV is shown in the following table:</p>
+<p><img alt="_images/spi_hardware_connection.jpg" src="_images/spi_hardware_connection.jpg" /></p>
+</div>
+<div class="section" id="makefile-kconfig">
+<h3>Makefile/Kconfig<a class="headerlink" href="#makefile-kconfig" title="Permalink to this headline">¶</a></h3>
+<p>Add the corresponding driver file configuration in <code class="docutils literal notranslate"><span class="pre">kernel/drivers/spi/Kconfig</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="n">SPI_FIREFLY</span>
+       <span class="n">tristate</span> <span class="s2">&quot;Firefly SPI demo support &quot;</span>
+       <span class="n">default</span> <span class="n">y</span>
+        <span class="n">help</span>
+          <span class="n">Select</span> <span class="n">this</span> <span class="n">option</span> <span class="k">if</span> <span class="n">your</span> <span class="n">Firefly</span> <span class="n">board</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">run</span> <span class="n">SPI</span> <span class="n">demo</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Add the corresponding driver file name in <code class="docutils literal notranslate"><span class="pre">kernel/drivers/spi/Makefile</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>obj-$(CONFIG_SPI_FIREFLY)              += spi-firefly-demo.o
+</pre></div>
+</div>
+<p>Select the added driver file in config, such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  │ Symbol: SPI_FIREFLY [=y]
+  │ Type  : tristate
+  │ Prompt: Firefly SPI demo support
+  │   Location:
+  │     -&gt; Device Drivers
+  │       -&gt; SPI support (SPI [=y])
+  │   Defined at drivers/spi/Kconfig:704
+  │   Depends on: SPI [=y] &amp;&amp; SPI_MASTER [=y]
+</pre></div>
+</div>
+</div>
+<div class="section" id="configure-the-dts-nodes">
+<h3>Configure the DTS nodes<a class="headerlink" href="#configure-the-dts-nodes" title="Permalink to this headline">¶</a></h3>
+<p>Add SPI driver node description in <code class="docutils literal notranslate"><span class="pre">kernel/arch/arm64/boot/dts/rockchip/rk3399-firefly-demo.dtsi</span></code>, as shown below:</p>
+<p>/* Firefly SPI demo */</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">spi1</span> <span class="p">{</span>
+    <span class="n">spi_demo</span><span class="p">:</span> <span class="n">spi</span><span class="o">-</span><span class="n">demo</span><span class="nd">@00</span><span class="p">{</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;firefly,rk3399-spi&quot;</span><span class="p">;</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x00</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">spi</span><span class="o">-</span><span class="nb">max</span><span class="o">-</span><span class="n">frequency</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">48000000</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="o">/*</span> <span class="n">rk3399</span> <span class="n">driver</span> <span class="n">support</span> <span class="n">SPI_CPOL</span> <span class="o">|</span> <span class="n">SPI_CPHA</span> <span class="o">|</span> <span class="n">SPI_CS_HIGH</span> <span class="o">*/</span>
+        <span class="o">//</span><span class="n">spi</span><span class="o">-</span><span class="n">cpha</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">SPI</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CPHA</span><span class="o">=</span><span class="mi">1</span> <span class="o">*/</span>
+        <span class="o">//</span><span class="n">spi</span><span class="o">-</span><span class="n">cpol</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">SPI</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CPOL</span><span class="o">=</span><span class="mi">1</span> <span class="o">*/</span>
+        <span class="o">//</span><span class="n">spi</span><span class="o">-</span><span class="n">cs</span><span class="o">-</span><span class="n">high</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="o">&amp;</span><span class="n">spidev0</span> <span class="p">{</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>status :</strong> set <code class="docutils literal notranslate"><span class="pre">okay</span></code> if you want to enable SPI, or <code class="docutils literal notranslate"><span class="pre">disable</span></code> if not.</p></li>
+<li><p><strong>spi-demo&#64;00 :</strong> since <code class="docutils literal notranslate"><span class="pre">CS0</span></code> is used in this example, it is set to <code class="docutils literal notranslate"><span class="pre">00</span></code>; if <code class="docutils literal notranslate"><span class="pre">CS1</span></code> is used, it is set to <code class="docutils literal notranslate"><span class="pre">01</span></code>.</p></li>
+<li><p><strong>compatible :</strong> the attribute here must be <code class="docutils literal notranslate"><span class="pre">compatible</span></code> with the member of the structure in the driver: <code class="docutils literal notranslate"><span class="pre">of_device_id</span></code>.</p></li>
+<li><p><strong>reg :</strong> this is consistent with <code class="docutils literal notranslate"><span class="pre">spi-demo&#64;00</span></code>, set to: <code class="docutils literal notranslate"><span class="pre">0x00</span></code> in this example.</p></li>
+<li><p><strong>spi-max-frequency :</strong> set the highest frequency used by spi here. ROC-RK3399-PC Pro supports up to 48000000.</p></li>
+<li><p><strong>spi-cpha，spi-cpol :</strong> the working mode of spi is set here. The working mode of the module spi used in this example is SPI_MODE_0 or SPI_MODE_3. Here we choose SPI_MODE_0. If SPI_MODE_3 is used, open spi-cpha and spi-cpol in spi_demo.</p></li>
+<li><p>s<strong>pidev0 :</strong> since <code class="docutils literal notranslate"><span class="pre">spi_demo</span></code> uses the same hardware resources as <code class="docutils literal notranslate"><span class="pre">spidev0</span></code>, we need to turn off <code class="docutils literal notranslate"><span class="pre">spidev0</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="define-spi-drivers">
+<h3>Define SPI drivers<a class="headerlink" href="#define-spi-drivers" title="Permalink to this headline">¶</a></h3>
+<p>Create a new driver file in <code class="docutils literal notranslate"><span class="pre">kernel/drivers/spi/</span></code>, such as: <code class="docutils literal notranslate"><span class="pre">spi-firefly-demo.c</span></code>.</p>
+<p>Before defining the SPI driver, the user first defines the variable <code class="docutils literal notranslate"><span class="pre">of_device_id</span></code>. <code class="docutils literal notranslate"><span class="pre">Of_device_id</span></code> is used to call the device information defined in the DTS file in the driver. The definition is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">struct</span> <span class="n">of_device_id</span> <span class="n">firefly_match_table</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span><span class="o">.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;firefly,rk3399-spi&quot;</span><span class="p">,},{},};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">compatible</span></code> values here are consistent with those in the DTS file.</p>
+<p>Spi_driver is defined as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">struct</span> <span class="n">spi_driver</span> <span class="n">firefly_spi_driver</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;firefly-spi&quot;</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">THIS_MODULE</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">of_match_table</span> <span class="o">=</span> <span class="n">firefly_match_table</span><span class="p">,},</span>
+    <span class="o">.</span><span class="n">probe</span> <span class="o">=</span> <span class="n">firefly_spi_probe</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="registration-of-spi-equipment">
+<h3>Registration of SPI equipment<a class="headerlink" href="#registration-of-spi-equipment" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Static</span> <span class="pre">int</span> <span class="pre">__init</span> <span class="pre">spidev_init(void)</span></code> registers SPI driver with kernel: <code class="docutils literal notranslate"><span class="pre">spi_register_driver(&amp;firefly_spi_driver);</span></code></p>
+<p>If the kernel is successfully matched on startup, the SPI core will configure SPI’s parameters (mode, speed, etc.) and call <code class="docutils literal notranslate"><span class="pre">firefly_spi_probe</span></code>.</p>
+</div>
+<div class="section" id="read-write-spi-data">
+<h3>Read-write SPI data<a class="headerlink" href="#read-write-spi-data" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Firefly_spi_probe</span></code> USES two interface operations to read the ID of <code class="docutils literal notranslate"><span class="pre">W25Q128FV</span></code>:</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">firefly_spi_read_w25x_id_0</span></code> interface directly USES <code class="docutils literal notranslate"><span class="pre">spi_transfer</span></code> and <code class="docutils literal notranslate"><span class="pre">spi_message</span></code> to transmit data.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">firefly_spi_read_w25x_id_1</span></code> interface USES the SPI interface <code class="docutils literal notranslate"><span class="pre">spi_write_then_read</span></code> to read and write data.</p></li>
+</ul>
+<p>After success, it will print:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@rk3399_firefly_box</span><span class="p">:</span><span class="o">/</span> <span class="c1"># dmesg | grep firefly-spi</span>
+<span class="p">[</span>    <span class="mf">1.006235</span><span class="p">]</span> <span class="n">firefly</span><span class="o">-</span><span class="n">spi</span> <span class="n">spi0</span><span class="o">.</span><span class="mi">0</span><span class="p">:</span> <span class="n">Firefly</span> <span class="n">SPI</span> <span class="n">demo</span> <span class="n">program</span>
+<span class="p">[</span>    <span class="mf">1.006246</span><span class="p">]</span> <span class="n">firefly</span><span class="o">-</span><span class="n">spi</span> <span class="n">spi0</span><span class="o">.</span><span class="mi">0</span><span class="p">:</span> <span class="n">firefly_spi_probe</span><span class="p">:</span> <span class="n">setup</span> <span class="n">mode</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="o">/</span><span class="n">w</span><span class="p">,</span> <span class="mi">48000000</span> <span class="n">Hz</span> <span class="nb">max</span>
+<span class="p">[</span>    <span class="mf">1.006298</span><span class="p">]</span> <span class="n">firefly</span><span class="o">-</span><span class="n">spi</span> <span class="n">spi0</span><span class="o">.</span><span class="mi">0</span><span class="p">:</span> <span class="n">firefly_spi_read_w25x_id_0</span><span class="p">:</span> <span class="n">ID</span> <span class="o">=</span> <span class="n">ef</span> <span class="mi">40</span> <span class="mi">18</span> <span class="mi">00</span> <span class="mi">00</span>
+<span class="p">[</span>    <span class="mf">1.006361</span><span class="p">]</span> <span class="n">firefly</span><span class="o">-</span><span class="n">spi</span> <span class="n">spi0</span><span class="o">.</span><span class="mi">0</span><span class="p">:</span> <span class="n">firefly_spi_read_w25x_id_1</span><span class="p">:</span> <span class="n">ID</span> <span class="o">=</span> <span class="n">ef</span> <span class="mi">40</span> <span class="mi">18</span> <span class="mi">00</span> <span class="mi">00</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="open-spi-demo">
+<h3>Open SPI demo<a class="headerlink" href="#open-spi-demo" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">spi-firefly-demo</span></code> is not opened by default. If necessary, the <em>demo</em> driver can be opened with the following patch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span> <span class="n">a</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">demo</span><span class="o">.</span><span class="n">dtsi</span>
+<span class="o">+++</span> <span class="n">b</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">demo</span><span class="o">.</span><span class="n">dtsi</span>
+<span class="o">@@</span> <span class="o">-</span><span class="mi">64</span><span class="p">,</span><span class="mi">7</span> <span class="o">+</span><span class="mi">64</span><span class="p">,</span><span class="mi">7</span> <span class="o">@@</span> <span class="o">/*</span> <span class="n">Firefly</span> <span class="n">SPI</span> <span class="n">demo</span> <span class="o">*/</span>
+ <span class="o">&amp;</span><span class="n">spi1</span> <span class="p">{</span><span class="n">spi_demo</span><span class="p">:</span> <span class="n">spi</span><span class="o">-</span><span class="n">demo</span><span class="nd">@00</span><span class="p">{</span>
+ <span class="o">-</span>                <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">;</span>
+ <span class="o">+</span>               <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+                   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;firefly,rk3399-spi&quot;</span><span class="p">;</span>
+                   <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x00</span><span class="o">&gt;</span><span class="p">;</span>
+                   <span class="n">spi</span><span class="o">-</span><span class="nb">max</span><span class="o">-</span><span class="n">frequency</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">48000000</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="o">@@</span> <span class="o">-</span><span class="mi">76</span><span class="p">,</span><span class="mi">6</span> <span class="o">+</span><span class="mi">76</span><span class="p">,</span><span class="mi">6</span> <span class="o">@@</span>
+  <span class="p">};</span>
+
+   <span class="o">&amp;</span><span class="n">spidev0</span> <span class="p">{</span>
+   <span class="o">-</span>       <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+   <span class="o">+</span>       <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">;</span>
+ <span class="p">};</span>
+</pre></div>
+</div>
+<p>Note: Since <code class="docutils literal notranslate"><span class="pre">spi1_rxd</span></code> and <code class="docutils literal notranslate"><span class="pre">spi1_txd</span></code> feet can be reused as <code class="docutils literal notranslate"><span class="pre">uart4_rx</span></code> and <code class="docutils literal notranslate"><span class="pre">uart4_tx</span></code>, the use of uart4 should be turned off as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">port</span><span class="o">.</span><span class="n">dtsi</span>
+<span class="o">&amp;</span><span class="n">uart4</span> <span class="p">{</span>
+        <span class="n">current</span><span class="o">-</span><span class="n">speed</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">9600</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">no</span><span class="o">-</span><span class="n">loopback</span><span class="o">-</span><span class="n">test</span><span class="p">;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="common-spi-interface">
+<h3>Common SPI interface<a class="headerlink" href="#common-spi-interface" title="Permalink to this headline">¶</a></h3>
+<p>Here are the common SPI API definitions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">spi_message_init</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_message</span> <span class="o">*</span><span class="n">m</span><span class="p">);</span>
+<span class="n">void</span> <span class="n">spi_message_add_tail</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_transfer</span> <span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="n">struct</span> <span class="n">spi_message</span> <span class="o">*</span><span class="n">m</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">spi_sync</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_device</span> <span class="o">*</span><span class="n">spi</span><span class="p">,</span> <span class="n">struct</span> <span class="n">spi_message</span> <span class="o">*</span><span class="n">message</span><span class="p">)</span> <span class="p">;</span>
+<span class="nb">int</span> <span class="n">spi_write</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_device</span> <span class="o">*</span><span class="n">spi</span><span class="p">,</span> <span class="n">const</span> <span class="n">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="nb">len</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">spi_read</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_device</span> <span class="o">*</span><span class="n">spi</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="nb">len</span><span class="p">);</span>
+<span class="n">ssize_t</span> <span class="n">spi_w8r8</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_device</span> <span class="o">*</span><span class="n">spi</span><span class="p">,</span> <span class="n">u8</span> <span class="n">cmd</span><span class="p">);</span>
+<span class="n">ssize_t</span> <span class="n">spi_w8r16</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_device</span> <span class="o">*</span><span class="n">spi</span><span class="p">,</span> <span class="n">u8</span> <span class="n">cmd</span><span class="p">);</span>
+<span class="n">ssize_t</span> <span class="n">spi_w8r16be</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_device</span> <span class="o">*</span><span class="n">spi</span><span class="p">,</span> <span class="n">u8</span> <span class="n">cmd</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">spi_write_then_read</span><span class="p">(</span><span class="n">struct</span> <span class="n">spi_device</span> <span class="o">*</span><span class="n">spi</span><span class="p">,</span> <span class="n">const</span> <span class="n">void</span> <span class="o">*</span><span class="n">txbuf</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">n_tx</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">rxbuf</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">n_rx</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="interface-usage">
+<h2>Interface usage<a class="headerlink" href="#interface-usage" title="Permalink to this headline">¶</a></h2>
+<p>Linux provides a SPI user interface with limited functionality. If IRQ or other kernel driver interfaces are not required, consider using <code class="docutils literal notranslate"><span class="pre">spidev</span></code> interface to write user-level programs to control SPI devices. The corresponding path in the ROC-RK3399-PC Pro development board is <code class="docutils literal notranslate"><span class="pre">/dev/spidev0.0</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">spidev</span></code> corresponding driver code is <code class="docutils literal notranslate"><span class="pre">kernel/drivers/spi/spidev.c</span></code>.</p>
+<p>The config in the kernel needs to select <code class="docutils literal notranslate"><span class="pre">SPI_SPIDEV</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> │ Symbol: SPI_SPIDEV [=y]
+ │ Type  : tristate
+ │ Prompt: User mode SPI device driver support
+ │   Location:
+ │     -&gt; Device Drivers
+ │       -&gt; SPI support (SPI [=y])
+ │   Defined at drivers/spi/Kconfig:684
+ │   Depends on: SPI [=y] &amp;&amp; SPI_MASTER [=y]
+</pre></div>
+</div>
+<p>DTS configuration is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">spi1</span> <span class="p">{</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+    <span class="nb">max</span><span class="o">-</span><span class="n">freq</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">48000000</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">spidev</span><span class="nd">@00</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;linux,spidev&quot;</span><span class="p">;</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x00</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">spi</span><span class="o">-</span><span class="nb">max</span><span class="o">-</span><span class="n">frequency</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">48000000</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Please refer to <code class="docutils literal notranslate"><span class="pre">spidev</span></code> for detailed instructions.</p>
+</div>
+<div class="section" id="faqs">
+<h2>FAQs<a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q1-spi-data-transfer-exception">
+<h3>Q1: SPI data transfer exception?<a class="headerlink" href="#q1-spi-data-transfer-exception" title="Permalink to this headline">¶</a></h3>
+<p><strong>A1 :</strong> Make sure the <code class="docutils literal notranslate"><span class="pre">IOMUX</span></code> configuration of SPI 4 pins is correct. Confirm that when TX sends data, TX pins have normal waveform, CLK frequency is correct, CS signal is pulled down, and mode matches the device.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="driver_timer.html" class="btn btn-neutral float-right" title="TIMER" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="driver_pwm.html" class="btn btn-neutral" title="PWM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_spi.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:47 GMT -->
+</html>

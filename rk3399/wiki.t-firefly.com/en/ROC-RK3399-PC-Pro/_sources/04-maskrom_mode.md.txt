@@ -1,0 +1,30 @@
+MaskRom mode
+
+See startup mode for an introduction startup mode
+
+"MaskRom" pattern is the last line of defense equipment burn out.
+Forced entry "MaskRom" involved hardware operation, have certain risk,
+so only in the equipment into the "Loader" mode, can try "MaskRom"
+mode.
+
+Please read carefully and operate carefully!
+
+The operation steps are as follows:
+
+Disconnect all power supplies.
+
+Unplug the SD card.
+
+Connect the equipment and host machine with Type-C data cable.
+
+Use metal tweezers to connect and hold the two test points as shown in
+the following figure on ROC-RK3399-PC Pro (as shown in the figure
+below).
+
+Plug the device into the power supply.
+
+Wait a moment, then loosen the tweezers.
+
+
+At this point, the device should go into "MaskRom mode".
+

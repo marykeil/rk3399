@@ -1,0 +1,812 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_adc.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:42 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ADC &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GPIO" href="driver_gpio.html" />
+    <link rel="prev" title="U-Boot" href="uboot_introduction.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ADC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dts-configuration">DTS configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configure-dts-nodes">Configure DTS nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matches-dts-nodes-in-the-driver-file">Matches DTS nodes in the driver file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#drive-instructions">Drive instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-ad-channel">Get AD channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-the-original-data-collected-by-ad">Read the original data collected by AD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-the-collected-voltage">Calculate the collected voltage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interface-specification">Interface specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debug-method">Debug method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demo-program">Demo program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gets-all-adc-values">Gets all ADC values</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#faqs">FAQs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#follow-the-steps-above-to-apply-for-saradc-why-is-there-an-application-error">Follow the steps above to apply for SARADC. Why is there an application error?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>ADC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/driver_adc.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adc">
+<h1>ADC<a class="headerlink" href="#adc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The ROC-RK3399-PC Pro development board has two kinds of AD interface, respectively: Temperature Sensor and Successive Approximation Register. Among them:</p>
+<ul class="simple">
+<li><p>TS-ADC (Temperature Sensor): Supports two-channel, clock frequency must be less than 800KHZ.</p></li>
+<li><p>SAR-ADC (Successive Approximation Register): Supports six-channel single-ended 10-bit SAR-ADC. Must have a clock frequency less than 13MHZ.</p></li>
+</ul>
+<p>The kernel uses the industrial I/O subsystem to control the ADC, which is mainly designed for AD conversion or DA conversion sensor. The following is an example of SAR-ADC using ADC fan to introduce the basic configuration method of ADC.</p>
+</div>
+<div class="section" id="dts-configuration">
+<h2>DTS configuration<a class="headerlink" href="#dts-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configure-dts-nodes">
+<h3>Configure DTS nodes<a class="headerlink" href="#configure-dts-nodes" title="Permalink to this headline">¶</a></h3>
+<p>The SAR-ADC nodes of ROC-RK3399-PC Pro defined in <code class="docutils literal notranslate"><span class="pre">kernel/arch/arm64/boot/dts/rockchip/rk3399.dtsi</span></code> file, as showm below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">saradc</span><span class="p">:</span> <span class="n">saradc</span><span class="nd">@ff100000</span> <span class="p">{</span>
+    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;rockchip,rk3399-saradc&quot;</span><span class="p">;</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x0</span> <span class="mh">0xff100000</span> <span class="mh">0x0</span> <span class="mh">0x100</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">GIC_SPI</span> <span class="mi">62</span> <span class="n">IRQ_TYPE_LEVEL_HIGH</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="c1">#io-channel-cells = &lt;1&gt;;</span>
+    <span class="n">clocks</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">cru</span> <span class="n">SCLK_SARADC</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;&amp;</span><span class="n">cru</span> <span class="n">PCLK_SARADC</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">clock</span><span class="o">-</span><span class="n">names</span> <span class="o">=</span> <span class="s2">&quot;saradc&quot;</span><span class="p">,</span> <span class="s2">&quot;apb_pclk&quot;</span><span class="p">;</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Firstly, user needs to add the resource description of ADC in the DTS file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">demo</span><span class="o">.</span><span class="n">dtsi</span> <span class="p">:</span>
+<span class="n">adc_demo</span><span class="p">:</span> <span class="n">adc_demo</span><span class="p">{</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">;</span>
+    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;firefly,rk3399-adc&quot;</span><span class="p">;</span>
+    <span class="n">io</span><span class="o">-</span><span class="n">channels</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">saradc</span> <span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="matches-dts-nodes-in-the-driver-file">
+<h3>Matches DTS nodes in the driver file<a class="headerlink" href="#matches-dts-nodes-in-the-driver-file" title="Permalink to this headline">¶</a></h3>
+<p>The user driver can refer to Firefly adc demo:</p>
+<p>The path of Android7.1 Industry and Android10.0 is <code class="docutils literal notranslate"><span class="pre">kernel/drivers/iio/adc/adc-firefly-demo.c</span></code></p>
+<p>The path of Android8.1 box and Android7.1 box is <code class="docutils literal notranslate"><span class="pre">kernel/drivers/adc/adc-firefly-demo.c</span></code></p>
+<p>Demo is a driver that detects the status of ROC-RK3399-PC Pro’s fan. First, define the <code class="docutils literal notranslate"><span class="pre">of_device_id</span></code> structure array in the driver file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">const</span> <span class="n">struct</span> <span class="n">of_device_id</span> <span class="n">firefly_adc_match</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">{</span> <span class="o">.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;firefly,rk3399-adc&quot;</span> <span class="p">},</span>
+    <span class="p">{},</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Then populate the structure array with <code class="docutils literal notranslate"><span class="pre">platform_driver</span></code> to use ADC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">struct</span> <span class="n">platform_driver</span> <span class="n">firefly_adc_driver</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">probe</span>      <span class="o">=</span> <span class="n">firefly_adc_probe</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">remove</span>     <span class="o">=</span> <span class="n">firefly_adc_remove</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">driver</span>     <span class="o">=</span> <span class="p">{</span>
+        <span class="o">.</span><span class="n">name</span>   <span class="o">=</span> <span class="s2">&quot;firefly_adc&quot;</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">owner</span>  <span class="o">=</span> <span class="n">THIS_MODULE</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">of_match_table</span> <span class="o">=</span> <span class="n">firefly_adc_match</span><span class="p">,</span>
+        <span class="p">},</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Then, in <code class="docutils literal notranslate"><span class="pre">firefly_adc_probe</span></code>, the added resource of DTS is parsed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="nb">int</span> <span class="n">firefly_adc_probe</span><span class="p">(</span><span class="n">struct</span> <span class="n">platform_device</span> <span class="o">*</span><span class="n">pdev</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s2">&quot;firefly_adc_probe!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    <span class="n">chan</span> <span class="o">=</span> <span class="n">iio_channel_get</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">pdev</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">),</span> <span class="n">NULL</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">IS_ERR</span><span class="p">(</span><span class="n">chan</span><span class="p">)){</span>
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">NULL</span><span class="p">;</span>
+        <span class="n">printk</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">() have not set adc chan</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">__FUNCTION__</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">fan_insert</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">chan</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">INIT_DELAYED_WORK</span><span class="p">(</span><span class="o">&amp;</span><span class="n">adc_poll_work</span><span class="p">,</span> <span class="n">firefly_demo_adc_poll</span><span class="p">);</span>
+        <span class="n">schedule_delayed_work</span><span class="p">(</span><span class="o">&amp;</span><span class="n">adc_poll_work</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="drive-instructions">
+<h2>Drive instructions<a class="headerlink" href="#drive-instructions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-ad-channel">
+<h3>Get AD channel<a class="headerlink" href="#get-ad-channel" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">iio_channel</span> <span class="o">*</span><span class="n">chan</span><span class="p">;</span>                    <span class="c1">#Defines the IIO channel structure</span>
+<span class="n">chan</span> <span class="o">=</span> <span class="n">iio_channel_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pdev</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>    <span class="c1">#Get AD channel structure</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">iio_channel_get</span></code> gets the IIO channel structure through the parameter pdev passed in by the probe function. The probe function is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="nb">int</span> <span class="n">XXX_probe</span><span class="p">(</span><span class="n">struct</span> <span class="n">platform_device</span> <span class="o">*</span><span class="n">pdev</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="read-the-original-data-collected-by-ad">
+<h3>Read the original data collected by AD<a class="headerlink" href="#read-the-original-data-collected-by-ad" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">val</span><span class="p">,</span><span class="n">ret</span><span class="p">;</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">iio_read_channel_raw</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Call the <code class="docutils literal notranslate"><span class="pre">iio_read_channel_raw</span></code> function to read the raw data collected by AD and store it in <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+</div>
+<div class="section" id="calculate-the-collected-voltage">
+<h3>Calculate the collected voltage<a class="headerlink" href="#calculate-the-collected-voltage" title="Permalink to this headline">¶</a></h3>
+<p>The standard voltage is used to convert the value of AD to the voltage value required by the user. The calculation formula is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Vref</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">Vresult</span> <span class="o">/</span> <span class="n">raw</span>
+</pre></div>
+</div>
+<p>Note:</p>
+<ul class="simple">
+<li><p>Vref is the standard voltage</p></li>
+<li><p>n is the number of bits converted to AD</p></li>
+<li><p>Vresult is the collection voltage required by the user</p></li>
+<li><p>raw is the original data that AD collects</p></li>
+</ul>
+<p>For example, the standard voltage is 1.8V, the collection bits of AD is 10, and the original data collected by AD is 568, then:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Vresult</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1800</span><span class="n">mv</span> <span class="o">*</span> <span class="mi">568</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1023</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="interface-specification">
+<h2>Interface specification<a class="headerlink" href="#interface-specification" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">iio_channel</span> <span class="o">*</span><span class="n">iio_channel_get</span><span class="p">(</span><span class="n">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">dev</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">consumer_channel</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Function</strong> : Gets the iio channel description.</p></li>
+<li><p><strong>Parameters</strong> :</p>
+<ul>
+<li><p><strong>dev</strong>: Using the device description pointer of this channel.</p></li>
+<li><p><strong>consumer_channel</strong>: The IIO channel description pointer used by the device.</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">iio_channel_release</span><span class="p">(</span><span class="n">struct</span> <span class="n">iio_channel</span> <span class="o">*</span><span class="n">chan</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Function</strong> : Release the channel obtained by the <code class="docutils literal notranslate"><span class="pre">iio_channel_get</span></code> function.</p></li>
+<li><p><strong>Parameters</strong> :</p>
+<ul>
+<li><p><strong>chan</strong> ：The channel description pointer to be released.</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">iio_read_channel_raw</span><span class="p">(</span><span class="n">struct</span> <span class="n">iio_channel</span> <span class="o">*</span><span class="n">chan</span><span class="p">,</span> <span class="nb">int</span> <span class="o">*</span><span class="n">val</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Function</strong> : Read the original data collected by chan channel AD.</p></li>
+<li><p><strong>Parameters</strong> :</p>
+<ul>
+<li><p><strong>chan</strong>：Collection channel pointer to read.</p></li>
+<li><p><strong>val</strong>：The pointer to the result of reading.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="debug-method">
+<h2>Debug method<a class="headerlink" href="#debug-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="demo-program">
+<h3>Demo program<a class="headerlink" href="#demo-program" title="Permalink to this headline">¶</a></h3>
+<p>Enable adc_demo in the <code class="docutils literal notranslate"><span class="pre">kernel/arch/arm64/boot/dts/rockchip/rk3399-firefly-demo.dtsi</span></code>, change “disabled” to “okay” :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adc_demo</span><span class="p">:</span> <span class="n">adc_demo</span><span class="p">{</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;firefly,rk3399-adc&quot;</span><span class="p">;</span>
+    <span class="n">io</span><span class="o">-</span><span class="n">channels</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">saradc</span> <span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Compile the kernel, upgrade the kernel to ROC-RK3399-PC Pro development board, and then plug out the fan, the kernel log information will be printed as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[   85.158104] Fan insert! raw= 135 Voltage= 237mV
+[   88.422124] Fan out! raw= 709 Voltage=1247mV
+</pre></div>
+</div>
+</div>
+<div class="section" id="gets-all-adc-values">
+<h3>Gets all ADC values<a class="headerlink" href="#gets-all-adc-values" title="Permalink to this headline">¶</a></h3>
+<p>There is a convenient way to query the value of each SARADC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="n">iio</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">iio</span>\<span class="p">:</span><span class="n">device0</span><span class="o">/</span><span class="n">in_voltage</span><span class="o">*</span><span class="n">_raw</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="faqs">
+<h2>FAQs<a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="follow-the-steps-above-to-apply-for-saradc-why-is-there-an-application-error">
+<h3>Follow the steps above to apply for SARADC. Why is there an application error?<a class="headerlink" href="#follow-the-steps-above-to-apply-for-saradc-why-is-there-an-application-error" title="Permalink to this headline">¶</a></h3>
+<p>When the driver needs to get the ADC channel to use, it needs to control the load time of the driver, which must be after saradc initialization. Saradc uses <code class="docutils literal notranslate"><span class="pre">module_platform_driver()</span></code> for platform device driver registration and ultimately calls <code class="docutils literal notranslate"><span class="pre">module_init()</span></code>. Therefore, the driver loading function of the user only needs to use one with lower priority than <code class="docutils literal notranslate"><span class="pre">module_init()</span></code>, such as <code class="docutils literal notranslate"><span class="pre">late_initcall()</span></code>, so as to ensure that the loading time of the driver is later than the initialization time of saradc and avoid errors.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="driver_gpio.html" class="btn btn-neutral float-right" title="GPIO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="uboot_introduction.html" class="btn btn-neutral" title="U-Boot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_adc.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:43 GMT -->
+</html>

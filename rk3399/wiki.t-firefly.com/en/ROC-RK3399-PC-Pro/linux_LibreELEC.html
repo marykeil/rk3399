@@ -1,0 +1,670 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/linux_LibreELEC.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:28:49 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compile LibreELEC firmware &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href=" ./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+               
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Compile LibreELEC firmware</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/linux_LibreELEC.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="compile-libreelec-firmware">
+<h1>Compile LibreELEC firmware<a class="headerlink" href="#compile-libreelec-firmware" title="Permalink to this headline">¶</a></h1>
+<p>Use the SDK officially provided by LibreELEC and attach the patch file provided by firefly. This chapter describes the specific usage of the SDK in detail.</p>
+<div class="section" id="ready-to-work">
+<h2>Ready to work<a class="headerlink" href="#ready-to-work" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="set-up-sdk-compilation-environment">
+<h3>Set up SDK compilation environment<a class="headerlink" href="#set-up-sdk-compilation-environment" title="Permalink to this headline">¶</a></h3>
+<p><strong>Be sure to confirm the installation of the following files!</strong></p>
+<p>Here we use Ubuntu 18.04 for testing (It is recommended to use the ubuntu18.04 system for development, or use docker to deploy the Ubuntu18.04 container, otherwise the environment package cannot be installed):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">repo</span> <span class="n">git</span><span class="o">-</span><span class="n">core</span> <span class="n">gitk</span> <span class="n">git</span><span class="o">-</span><span class="n">gui</span> <span class="n">gcc</span><span class="o">-</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabihf</span> <span class="n">u</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">tools</span> <span class="n">device</span><span class="o">-</span><span class="n">tree</span><span class="o">-</span><span class="n">compiler</span> \
+<span class="n">gcc</span><span class="o">-</span><span class="n">aarch64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> <span class="n">mtools</span> <span class="n">parted</span> <span class="n">libudev</span><span class="o">-</span><span class="n">dev</span> <span class="n">libusb</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="n">dev</span> <span class="n">python</span><span class="o">-</span><span class="n">linaro</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">tools</span> \
+<span class="n">linaro</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">tools</span> <span class="n">gcc</span><span class="o">-</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabihf</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">liblz4</span><span class="o">-</span><span class="n">tool</span> <span class="n">genext2fs</span> <span class="n">lib32stdc</span><span class="o">++</span><span class="mi">6</span> \
+<span class="n">gcc</span><span class="o">-</span><span class="n">aarch64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> <span class="n">g</span><span class="o">+</span><span class="n">conf</span> <span class="n">autotools</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsigsegv2</span> <span class="n">m4</span> <span class="n">intltool</span> <span class="n">libdrm</span><span class="o">-</span><span class="n">dev</span> <span class="n">curl</span> <span class="n">sed</span> <span class="n">make</span> \
+<span class="n">binutils</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">gcc</span> <span class="n">g</span><span class="o">++</span> <span class="n">bash</span> <span class="n">patch</span> <span class="n">gzip</span> <span class="n">bzip2</span> <span class="n">perl</span> <span class="n">tar</span> <span class="n">cpio</span> <span class="n">python</span> <span class="n">unzip</span> <span class="n">rsync</span> <span class="n">file</span> <span class="n">bc</span> <span class="n">wget</span> \
+<span class="n">libncurses5</span> <span class="n">libqt4</span><span class="o">-</span><span class="n">dev</span> <span class="n">libglib2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgtk2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">dev</span> <span class="n">libglade2</span><span class="o">-</span><span class="n">dev</span> <span class="n">cvs</span> <span class="n">git</span> <span class="n">mercurial</span> <span class="n">rsync</span> <span class="n">openssh</span><span class="o">-</span><span class="n">client</span> \
+<span class="n">subversion</span> <span class="n">asciidoc</span> <span class="n">w3m</span> <span class="n">dblatex</span> <span class="n">graphviz</span> <span class="n">python</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">libc6</span><span class="p">:</span><span class="n">i386</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">texinfo</span> <span class="n">fakeroot</span> \
+<span class="n">libparse</span><span class="o">-</span><span class="n">yapp</span><span class="o">-</span><span class="n">perl</span> <span class="n">default</span><span class="o">-</span><span class="n">jre</span> <span class="n">patchutils</span> <span class="n">swig</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-libreelec-source-code">
+<h3>Download LibreELEC source code<a class="headerlink" href="#download-libreelec-source-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">LibreELEC</span><span class="o">/</span><span class="n">LibreELEC</span><span class="o">.</span><span class="n">tv</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p><strong>Recommendation:</strong> After the source code package is compiled, it occupies about 32G, and it is recommended to reserve more than 35G of available memory.</p>
+</div>
+<div class="section" id="introduction-to-the-main-directory-of-libreelec-source-code">
+<h3>Introduction to the main directory of LibreELEC source code<a class="headerlink" href="#introduction-to-the-main-directory-of-libreelec-source-code" title="Permalink to this headline">¶</a></h3>
+<p>Table of Contents:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── LibreELEC.tv
+│   ├── packages                                 Need to download and build the package directory
+│   ├── projects                                 System construction project directory supporting platform soc equipment
+│   ├── config
+│   ├── scripts                                  System build script file directory
+│   ├── create_tar.sh
+│   ├── sources                                  The storage directory of the resource package pulled from the server when building the system
+│   ├── distributions                            Configure the resource package directory required by the build system
+│   ├── target                                   The directory where the compiled results are stored
+│   ├── licenses
+│   ├── Makefile
+│   └── tools
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="compile">
+<h2>Compile<a class="headerlink" href="#compile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>It is recommended to choose version 9.95.4 of LibreELEC</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">LibreELEC</span><span class="o">.</span><span class="n">tv</span>
+<span class="c1"># commit 04dc864eeba97cee2d5375981f898ea246440a21 (tag: 9.95.4)</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="mf">9.95</span><span class="o">.</span><span class="mi">4</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Apply the corresponding patch</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">still</span> <span class="n">being</span> <span class="n">merged</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">released</span> <span class="n">soon</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># For users with poor network environment, you can use the following command to download the required source code package</span>
+<span class="c1">#PROJECT=Rockchip ARCH=arm tools/download-tool</span>
+
+<span class="c1"># Execute the compile command to build the system. The first system construction takes a long time (usually 3 to 7 hours), please be patient.</span>
+<span class="c1"># The compilation commands are described in LibreELEC.tv/projects/Rockchip/devices/RK3399/README.md.</span>
+<span class="n">PROJECT</span><span class="o">=</span><span class="n">Rockchip</span> <span class="n">DEVICE</span><span class="o">=</span><span class="n">RK3399</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span> <span class="n">UBOOT_SYSTEM</span><span class="o">=</span><span class="n">roc</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">plus</span> <span class="n">make</span> <span class="n">image</span>
+</pre></div>
+</div>
+<p><strong>You can also download the compiled <a class="reference external" href="http://en.t-firefly.com/doc/download/78.html#other_391">LibrEELEC system mirror</a></strong></p>
+<div class="section" id="make-sd-boot-card-currently-only-support-usb-sd-card-boot">
+<h3>Make SD boot card (currently only support USB/SD card boot)<a class="headerlink" href="#make-sd-boot-card-currently-only-support-usb-sd-card-boot" title="Permalink to this headline">¶</a></h3>
+<p>The compiled image file is stored in the target directory. At this time, you need to download the SD card system creation tool. Go to the following address to download the system creation tool. For example: If you are a linux64-bit operating system, click on the <a class="reference external" href="https://wiki.libreelec.tv/installation/create-media">LibreELEC.USB-SD.Creator.Linux-64bit.bin</a> tool to download.</p>
+<ul class="simple">
+<li><p>Click the select file option in the second item, find the compiled .gz file, then select the USB or SD card you want to burn, and finally write the image.</p></li>
+</ul>
+<p><strong>Note</strong>
+If you find that the headset audio cannot be used at the first power-on, you need to reprogram the mirror image.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/linux_LibreELEC.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:28:50 GMT -->
+</html>

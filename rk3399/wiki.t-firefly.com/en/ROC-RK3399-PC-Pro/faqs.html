@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:28:29 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FAQS &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Related document" href="hardware_doc.html" />
+    <link rel="prev" title="Heat sink" href="module_cooling.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rk3399-hdmi-4k-resolution">RK3399 HDMI 4K Resolution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#open-root-permissions">Open Root permissions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#what-should-i-do-if-the-boot-is-abnormal-and-restarts-cyclically">What should I do if the boot is abnormal and restarts cyclically?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-the-default-username-and-password-for-ubuntu">What is the default username and password for Ubuntu?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-support-rk3399k-chip">How to support RK3399K chip?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#git-link-address">Git link address?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-is-the-rk3399-chip-technical-manual">Where is the RK3399 chip technical manual?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-number-tool-to-write-sn-mac-address">Write number tool to write SN, MAC address</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows-way">Windows way</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux-way">Linux way</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#on-ubuntu-system-if-there-is-no-sound-after-plugging-in-headphones-what-should-i-do">On Ubuntu system, if there is no sound after plugging in headphones, what should I do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-make-the-system-crawl-log-under-android">How to make the system crawl LOG under Android?</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href=" ./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>FAQS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/faqs.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="faqs">
+<h1>FAQS<a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rk3399-hdmi-4k-resolution">
+<h2>RK3399 HDMI 4K Resolution<a class="headerlink" href="#rk3399-hdmi-4k-resolution" title="Permalink to this headline">¶</a></h2>
+<p>RK3399 firmware default support HDMI 4K resolution output, corresponding UI is 2K resolution stretch to 4K mode,
+However, some users need point-to-point 4K UI. 4K UI issue as follows:</p>
+<p>1.Is it necessary to use 4K UI?</p>
+<p>If you just want 4K video or 4K images, there is no need to configure
+4K UI, as the system’s default video player and image browser can support.</p>
+<p>2.How to configure 4K UI?</p>
+<p>Configure the FrameBuffer to 4K, and then make sure the HDMI resolution is set to 4K, as follows:</p>
+<p>android7.1/android8.1</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">persist</span><span class="o">.</span><span class="n">sys</span><span class="o">.</span><span class="n">framebuffer</span><span class="o">.</span><span class="n">main</span><span class="o">=</span><span class="mi">3840</span><span class="n">x2160</span><span class="nd">@60</span> 
+</pre></div>
+</div>
+<p>android9.0 and after</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">persist</span><span class="o">.</span><span class="n">vendor</span><span class="o">.</span><span class="n">framebuffer</span><span class="o">.</span><span class="n">main</span><span class="o">=</span><span class="mi">3840</span><span class="n">x2160</span><span class="nd">@60</span> 
+</pre></div>
+</div>
+<p>3.Flicker appears after configuring the 4K UI</p>
+<p>For details, see the <a class="reference external" href="https://drive.google.com/drive/folders/1Q8xOMXW2OUiu641FFFpxlyxe2Q319LYA?usp=sharing">[documentation]</a></p>
+<div class="section" id="open-root-permissions">
+<h3>Open Root permissions<a class="headerlink" href="#open-root-permissions" title="Permalink to this headline">¶</a></h3>
+<p>There are many powerful functions of the Android system that require root permissions. Developers often encounter permissions problems when using them. How to enable the root permissions of the system on the Firefly platform? Firefly has added the function of starting root privileges in the system. The specific steps are as follows:</p>
+<ol class="simple">
+<li><p>Find <code class="docutils literal notranslate"><span class="pre">About</span> <span class="pre">device</span></code> in <code class="docutils literal notranslate"><span class="pre">Settgins</span> <span class="pre">apk</span></code> and click into it;</p></li>
+<li><p>After clicking on <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">number</span></code> 5 times, it will prompt (you are now a developer);</p></li>
+<li><p>Then return to the previous level and click the option <code class="docutils literal notranslate"><span class="pre">Developer</span> <span class="pre">options</span></code>, and click <code class="docutils literal notranslate"><span class="pre">ROOT</span> <span class="pre">access</span></code> in the options to open the root authority function.</p></li>
+</ol>
+<p><img alt="_images/faqs_android_root.png" src="_images/faqs_android_root.png" /></p>
+</div>
+</div>
+<div class="section" id="what-should-i-do-if-the-boot-is-abnormal-and-restarts-cyclically">
+<h2>What should I do if the boot is abnormal and restarts cyclically?<a class="headerlink" href="#what-should-i-do-if-the-boot-is-abnormal-and-restarts-cyclically" title="Permalink to this headline">¶</a></h2>
+<p>It may be that the power supply current is not enough. Please use a power supply with a voltage of 12V and a current of 2.5A~3A.</p>
+</div>
+<div class="section" id="what-is-the-default-username-and-password-for-ubuntu">
+<h2>What is the default username and password for Ubuntu?<a class="headerlink" href="#what-is-the-default-username-and-password-for-ubuntu" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Username: <code class="docutils literal notranslate"><span class="pre">firefly</span></code></p></li>
+<li><p>Password: <code class="docutils literal notranslate"><span class="pre">firefly</span></code></p></li>
+<li><p>Switch super user <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-s</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="how-to-support-rk3399k-chip">
+<h2>How to support RK3399K chip?<a class="headerlink" href="#how-to-support-rk3399k-chip" title="Permalink to this headline">¶</a></h2>
+<p>The highest frequency of the RK3399K chip can reach 2.016GHz. If the hardware device in your hand uses the RK3399K chip and needs to support RK3399K, manually add the following patch. Take the RK3399K chip supported on the AIO-3399J all-in-one machine as an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Before patching, first confirm whether there is a kernel/arch/arm64/boot/dts/rockchip/rk3399k-opp.dtsi file in the SDK source code</span>
+<span class="c1">#After confirming that the file exists, manually add the following patch to the final dts, as follows, manually add the following in rk3399-firefly-aio.dts:</span>
+
+<span class="n">git</span> <span class="n">diff</span>
+<span class="n">diff</span> <span class="o">--</span><span class="n">git</span> <span class="n">a</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">aio</span><span class="o">.</span><span class="n">dts</span> <span class="n">b</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">aio</span><span class="o">.</span><span class="n">dts</span>
+<span class="n">index</span> <span class="mf">060e88</span><span class="n">d</span><span class="o">..</span><span class="mi">14</span><span class="n">f9fb3</span> <span class="mi">100644</span>
+<span class="o">---</span> <span class="n">a</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">aio</span><span class="o">.</span><span class="n">dts</span>
+<span class="o">+++</span> <span class="n">b</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">aio</span><span class="o">.</span><span class="n">dts</span>
+<span class="o">@@</span> <span class="o">-</span><span class="mi">43</span><span class="p">,</span><span class="mi">6</span> <span class="o">+</span><span class="mi">43</span><span class="p">,</span><span class="mi">7</span> <span class="o">@@</span>
+ <span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+ <span class="c1">#include &quot;rk3399-firefly-aio.dtsi&quot;</span>
+<span class="o">+</span><span class="c1">#include &quot;rk3399k-opp.dtsi&quot;</span>
+
+ <span class="o">/</span> <span class="p">{</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;AIO-3399J HDMI (Android)&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Check the main frequency list after recompiling and burning the firmware:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Small core highest frequency 1.512GHz</span>
+<span class="n">cat</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">cpufreq</span><span class="o">/</span><span class="n">policy0</span><span class="o">/</span><span class="n">scaling_available_frequencies</span>
+<span class="mi">408000</span> <span class="mi">600000</span> <span class="mi">816000</span> <span class="mi">1008000</span> <span class="mi">1200000</span> <span class="mi">1416000</span> <span class="mi">1512000</span>
+
+<span class="c1"># Large core maximum frequency 2.016GHz</span>
+<span class="n">cat</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">cpufreq</span><span class="o">/</span><span class="n">policy4</span><span class="o">/</span><span class="n">scaling_available_frequencies</span>
+<span class="mi">408000</span> <span class="mi">600000</span> <span class="mi">816000</span> <span class="mi">1008000</span> <span class="mi">1200000</span> <span class="mi">1416000</span> <span class="mi">1608000</span> <span class="mi">1800000</span> <span class="mi">2016000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-link-address">
+<h2>Git link address?<a class="headerlink" href="#git-link-address" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://gitlab.com/TeeFirefly/FireNow-Nougat">https://gitlab.com/TeeFirefly/FireNow-Nougat</a></p>
+</div>
+<div class="section" id="where-is-the-rk3399-chip-technical-manual">
+<h2>Where is the RK3399 chip technical manual?<a class="headerlink" href="#where-is-the-rk3399-chip-technical-manual" title="Permalink to this headline">¶</a></h2>
+<p>RK3399 chip technical manual link: <a class="reference external" href="http://www.t-firefly.com/download/Firefly-RK3399/docs/Chip Specifications/Rockchip_RK3399_Datasheet_V0.7_20160219.pdf">Brief</a> [Part1](http://www. t-firefly.com/download/Firefly-RK3399/docs/TRM/Rockchip%20RK3399TRM%20V1.3%20Part1.pdf) [Part2](http://www.t-firefly.com/download/Firefly-RK3399/ docs/TRM/Rockchip%20RK3399TRM%20V1.3%20Part2.pdf)</p>
+</div>
+<div class="section" id="write-number-tool-to-write-sn-mac-address">
+<h2>Write number tool to write SN, MAC address<a class="headerlink" href="#write-number-tool-to-write-sn-mac-address" title="Permalink to this headline">¶</a></h2>
+<p><font color=red><strong>Note:</strong></font> If the eMMC erase operation is performed on the development board, the previously written data will also be cleared.</p>
+<div class="section" id="windows-way">
+<h3>Windows way<a class="headerlink" href="#windows-way" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Install RKDevInfoWriteTool</p>
+<ul>
+<li><p><a class="reference external" href=" #other_297">Download link</a></p></li>
+</ul>
+</li>
+<li><p>Select “RPMB” in <strong>Settings</strong> of RKDevInfoWriteTool</p></li>
+<li><p>Configure “SN”, “WIFI MAC”, “LAN MAC”, “BT MAC”, etc. in the <strong>Settings</strong> of RKDevInfoWriteTool as needed</p></li>
+<li><p>The development board enters loader mode</p></li>
+<li><p>RKDevInfoWriteTool performs <strong>write</strong> or <strong>read</strong> operations</p></li>
+</ul>
+<p>For specific operations, please refer to the PDF document “RKDevInfoWriteTool User Guide” under the RKDevInfoWriteTool installation directory.</p>
+</div>
+<div class="section" id="linux-way">
+<h3>Linux way<a class="headerlink" href="#linux-way" title="Permalink to this headline">¶</a></h3>
+<p>How to write the number of the development board itself</p>
+<ul>
+<li><p>Buildroot enable <code class="docutils literal notranslate"><span class="pre">BR2_PACKAGE_VENDOR_STORAGE</span></code></p></li>
+<li><p>Read and write operations through the vendor_storage command</p>
+<ul class="simple">
+<li><p><a class="reference external" href=" #other_297">Download link</a></p></li>
+<li><p>SN</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vendor_storage -w VENDOR_SN_ID -t string -i cad895bedb8ee15f
+vendor_storage -r VENDOR_SN_ID -t hex -i /dev/null
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>LAN MAC</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vendor_storage -w VENDOR_LAN_MAC_ID -t string -i AABBCCDDEEFF
+vendor_storage -r VENDOR_LAN_MAC_ID -t hex -i /dev/null
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  Others can be operated according to the prompt of `vendor_storage -h`.
+</pre></div>
+</div>
+</li>
+</ul>
+<p>For how to read the application, please refer to the <code class="docutils literal notranslate"><span class="pre">vendor_storage_read</span></code> function in <code class="docutils literal notranslate"><span class="pre">buildroot/package/rockchip/vendor_storage/vendor_storage.c</span></code>.</p>
+</div>
+</div>
+<div class="section" id="on-ubuntu-system-if-there-is-no-sound-after-plugging-in-headphones-what-should-i-do">
+<h2>On Ubuntu system, if there is no sound after plugging in headphones, what should I do?<a class="headerlink" href="#on-ubuntu-system-if-there-is-no-sound-after-plugging-in-headphones-what-should-i-do" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Menu</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Multimedia</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">PulseAudio</span> <span class="pre">Volume</span> <span class="pre">Control</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> -&gt; Select the sound card that is working and turn off the other sound card.</p>
+</div>
+<div class="section" id="how-to-make-the-system-crawl-log-under-android">
+<h2>How to make the system crawl LOG under Android?<a class="headerlink" href="#how-to-make-the-system-crawl-log-under-android" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">(settings)</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">About</span> <span class="pre">phone</span> <span class="pre">(about</span> <span class="pre">phone)</span></code> -&gt; Click 5 times <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">number</span> <span class="pre">(version</span> <span class="pre">number)</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Developer</span> <span class="pre">options</span> <span class="pre">(Developer</span> <span class="pre">options)</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">logging</span> <span class="pre">to</span> <span class="pre">save</span> <span class="pre">Save)</span></code>. After the function is turned on, the folder <code class="docutils literal notranslate"><span class="pre">.LOGSAVE</span></code> will be generated under the root directory of the system <code class="docutils literal notranslate"><span class="pre">storage</span></code>, which includes the system logcat and kernel kmsg.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hardware_doc.html" class="btn btn-neutral float-right" title="Related document" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="module_cooling.html" class="btn btn-neutral" title="Heat sink" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:28:29 GMT -->
+</html>

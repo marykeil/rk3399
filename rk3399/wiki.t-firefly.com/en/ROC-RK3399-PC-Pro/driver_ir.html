@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_ir.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:44 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IR &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LCD" href="driver_lcd.html" />
+    <link rel="prev" title="I2C" href="driver_i2c.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#infrared-remote-control-configuration">Infrared remote control configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-driver">Kernel driver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#define-related-data-structures">Define related data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-get-user-code-and-ir-key">How to get user code and IR key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compile-ir-driver-into-kernel">Compile IR driver into kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#android-key-value-mapping">Android key-value mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ir-use">IR use</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+               
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>IR</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/driver_ir.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ir">
+<h1>IR<a class="headerlink" href="#ir" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="infrared-remote-control-configuration">
+<h2>Infrared remote control configuration<a class="headerlink" href="#infrared-remote-control-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The configuration steps can be divided into two parts:</p>
+<ul class="simple">
+<li><p>modify the kernel driver: kernel space changes, Linux and Android will modify this part of the content.</p></li>
+<li><p>modify key-value mapping: user-space changes (Android system only).</p></li>
+</ul>
+</div>
+<div class="section" id="kernel-driver">
+<h2>Kernel driver<a class="headerlink" href="#kernel-driver" title="Permalink to this headline">¶</a></h2>
+<p>In the Linux kernel, the IR driver only supports NEC encoding format. Here’s how to configure the infrared remote control in the kernel.</p>
+<p>The documents involved:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">drivers</span><span class="o">/</span><span class="nb">input</span><span class="o">/</span><span class="n">remotectl</span><span class="o">/</span><span class="n">rockchip_pwm_remotectl</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
+</div>
+<div class="section" id="define-related-data-structures">
+<h3>Define related data structures<a class="headerlink" href="#define-related-data-structures" title="Permalink to this headline">¶</a></h3>
+<p>Here are the steps to define the data structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">pwm3</span> <span class="p">{</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+    <span class="n">interrupts</span> <span class="o">=</span> <span class="p">;</span>
+    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;rockchip,remotectl-pwm&quot;</span><span class="p">;</span>
+    <span class="n">remote_pwm_id</span> <span class="o">=</span> <span class="p">;</span>
+    <span class="n">handle_cpu_id</span> <span class="o">=</span> <span class="p">;</span>
+    <span class="n">ir_key1</span><span class="p">{</span>
+    <span class="n">rockchip</span><span class="p">,</span><span class="n">usercode</span> <span class="o">=</span> <span class="p">;</span>
+    <span class="n">rockchip</span><span class="p">,</span><span class="n">key_table</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">{</span><span class="mh">0xeb</span><span class="p">,</span> <span class="n">KEY_POWER</span><span class="p">},</span>        <span class="o">//</span> <span class="n">Power</span>
+        <span class="o">//</span><span class="n">Control</span>
+        <span class="p">{</span><span class="mh">0xa3</span><span class="p">,</span> <span class="mi">250</span><span class="p">},</span>              <span class="o">//</span> <span class="n">Settings</span>
+        <span class="p">{</span><span class="mh">0xec</span><span class="p">,</span> <span class="n">KEY_MENU</span><span class="p">},</span>         <span class="o">//</span> <span class="n">Menu</span>
+        <span class="p">{</span><span class="mh">0xfc</span><span class="p">,</span> <span class="n">KEY_UP</span><span class="p">},</span>           <span class="o">//</span> <span class="n">Up</span>
+        <span class="p">{</span><span class="mh">0xfd</span><span class="p">,</span> <span class="n">KEY_DOWN</span><span class="p">},</span>         <span class="o">//</span> <span class="n">Down</span>
+        <span class="p">{</span><span class="mh">0xf1</span><span class="p">,</span> <span class="n">KEY_LEFT</span><span class="p">},</span>         <span class="o">//</span> <span class="n">Left</span>
+        <span class="p">{</span><span class="mh">0xe5</span><span class="p">,</span> <span class="n">KEY_RIGHT</span><span class="p">},</span>        <span class="o">//</span> <span class="n">Right</span>
+        <span class="p">{</span><span class="mh">0xf8</span><span class="p">,</span> <span class="n">KEY_REPLY</span><span class="p">},</span>        <span class="o">//</span> <span class="n">Ok</span>
+        <span class="p">{</span><span class="mh">0xb7</span><span class="p">,</span> <span class="n">KEY_HOME</span><span class="p">},</span>         <span class="o">//</span> <span class="n">Home</span>
+        <span class="p">{</span><span class="mh">0xfe</span><span class="p">,</span> <span class="n">KEY_BACK</span><span class="p">},</span>         <span class="o">//</span> <span class="n">Back</span>
+        <span class="o">//</span> <span class="n">Vol</span>
+        <span class="p">{</span><span class="mh">0xa7</span><span class="p">,</span> <span class="n">KEY_VOLUMEDOWN</span><span class="p">},</span>   <span class="o">//</span> <span class="n">Vol</span><span class="o">-</span>
+        <span class="p">{</span><span class="mh">0xf4</span><span class="p">,</span> <span class="n">KEY_VOLUMEUP</span><span class="p">},</span>     <span class="o">//</span> <span class="n">Vol</span><span class="o">+</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><em>Note : the first column is the key value, and the second column is the key code to be responded to.</em></p>
+</div>
+<div class="section" id="how-to-get-user-code-and-ir-key">
+<h3>How to get user code and IR key<a class="headerlink" href="#how-to-get-user-code-and-ir-key" title="Permalink to this headline">¶</a></h3>
+<p>Get the user code and key values from <code class="docutils literal notranslate"><span class="pre">remotectl_do_something</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">case</span> <span class="n">RMC_USERCODE</span><span class="p">:</span>
+<span class="p">{</span>
+    <span class="o">//</span><span class="n">ddata</span><span class="o">-&gt;</span><span class="n">scanData</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="o">//</span><span class="n">ddata</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">RK_PWM_TIME_BIT1_MIN</span> <span class="o">&lt;</span> <span class="n">ddata</span><span class="o">-&gt;</span><span class="n">period</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">ddata</span><span class="o">-&gt;</span><span class="n">period</span> <span class="o">&lt;</span> <span class="n">RK_PWM_TIME_BIT1_MAX</span><span class="p">)){</span>
+        <span class="n">ddata</span><span class="o">-&gt;</span><span class="n">scanData</span> <span class="o">|=</span> <span class="p">(</span><span class="mh">0x01</span><span class="o">&lt;&lt;</span><span class="n">ddata</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">ddata</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ddata</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">==</span> <span class="mh">0x10</span><span class="p">){</span><span class="o">//</span><span class="mi">16</span> <span class="n">bit</span> <span class="n">user</span> <span class="n">code</span>
+        <span class="n">DBG_CODE</span><span class="p">(</span><span class="s2">&quot;GET USERCODE=0x</span><span class="si">%x</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,((</span><span class="n">ddata</span><span class="o">-&gt;</span><span class="n">scanData</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffff</span><span class="p">));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">remotectl_keybdNum_lookup</span><span class="p">(</span><span class="n">ddata</span><span class="p">)){</span>
+            <span class="n">ddata</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RMC_GETDATA</span><span class="p">;</span>
+            <span class="n">ddata</span><span class="o">-&gt;</span><span class="n">scanData</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">ddata</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>                <span class="o">//</span><span class="n">user</span> <span class="n">code</span> <span class="n">error</span>
+            <span class="n">ddata</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RMC_PRELOAD</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Note : users can print the user code using the <code class="docutils literal notranslate"><span class="pre">DBG_CODE()</span></code> function.</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">DBG_CODE</span></code> printing can be enabled by using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">module</span><span class="o">/</span><span class="n">rockchip_pwm_remotectl</span><span class="o">/</span><span class="n">parameters</span><span class="o">/</span><span class="n">code_print</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-ir-driver-into-kernel">
+<h3>Compile IR driver into kernel<a class="headerlink" href="#compile-ir-driver-into-kernel" title="Permalink to this headline">¶</a></h3>
+<p>The steps to compile IR driver into the kernel are as follows:</p>
+<p>(1). add the following configuration to the configuration file <code class="docutils literal notranslate"><span class="pre">drivers/input/remotectl/Kconfig</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="n">RK_REMOTECTL_PWM</span>
+    <span class="nb">bool</span> <span class="s2">&quot;rkxx remoctrl pwm0 capture&quot;</span>
+<span class="n">default</span> <span class="n">n</span>
+</pre></div>
+</div>
+<p>(2). modify the Makefile under <code class="docutils literal notranslate"><span class="pre">drivers/input/remotectl</span></code> and add the following compilation options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>obj-$(RK_REMOTECTL_PWM)      += rk_pwm_remotectl.o
+</pre></div>
+</div>
+<p>(3). <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">menuconfig</span></code> is used in kernel path to select IR driver as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">Drivers</span>
+  <span class="o">---&gt;</span><span class="n">Input</span> <span class="n">device</span> <span class="n">support</span>
+  <span class="o">-----&gt;</span>  <span class="p">[</span><span class="o">*</span><span class="p">]</span>   <span class="n">rkxx</span> <span class="n">remotectl</span>
+  <span class="o">-------&gt;</span><span class="p">[</span><span class="o">*</span><span class="p">]</span>   <span class="n">rkxx</span> <span class="n">remoctrl</span> <span class="n">pwm0</span> <span class="n">capture</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>After saving, execute the <code class="docutils literal notranslate"><span class="pre">make</span></code> command to weave the driver into the kernel.</p>
+</div>
+<div class="section" id="android-key-value-mapping">
+<h3>Android key-value mapping<a class="headerlink" href="#android-key-value-mapping" title="Permalink to this headline">¶</a></h3>
+<p>File <code class="docutils literal notranslate"><span class="pre">/system/usr/keylayout/ff420030_pwm.kl</span></code>  is used to map the Linux layer to get the key value to Android on the corresponding key values. Users can add or modify the contents of the file to implement different key-value mappings.</p>
+<p>The contents of the file are as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">key</span> <span class="mi">28</span>    <span class="n">ENTER</span>
+<span class="n">key</span> <span class="mi">116</span>   <span class="n">POWER</span>             <span class="n">WAKE</span>
+<span class="n">key</span> <span class="mi">158</span>   <span class="n">BACK</span>
+<span class="n">key</span> <span class="mi">139</span>   <span class="n">MENU</span>
+<span class="n">key</span> <span class="mi">217</span>   <span class="n">SEARCH</span>
+<span class="n">key</span> <span class="mi">232</span>   <span class="n">DPAD_CENTER</span>
+<span class="n">key</span> <span class="mi">108</span>   <span class="n">DPAD_DOWN</span>
+<span class="n">key</span> <span class="mi">103</span>   <span class="n">DPAD_UP</span>
+<span class="n">key</span> <span class="mi">102</span>   <span class="n">HOME</span>
+<span class="n">key</span> <span class="mi">105</span>   <span class="n">DPAD_LEFT</span>
+<span class="n">key</span> <span class="mi">106</span>   <span class="n">DPAD_RIGHT</span>
+<span class="n">key</span> <span class="mi">115</span>   <span class="n">VOLUME_UP</span>
+<span class="n">key</span> <span class="mi">114</span>   <span class="n">VOLUME_DOWN</span>
+<span class="n">key</span> <span class="mi">143</span>   <span class="n">NOTIFICATION</span>      <span class="n">WAKE</span>
+<span class="n">key</span> <span class="mi">113</span>   <span class="n">VOLUME_MUTE</span>
+<span class="n">key</span> <span class="mi">388</span>   <span class="n">TV_KEYMOUSE_MODE_SWITCH</span>
+<span class="n">key</span> <span class="mi">400</span>   <span class="n">TV_MEDIA_MULT_BACKWARD</span>
+<span class="n">key</span> <span class="mi">401</span>   <span class="n">TV_MEDIA_MULT_FORWARD</span>
+<span class="n">key</span> <span class="mi">402</span>   <span class="n">TV_MEDIA_PLAY_PAUSE</span>
+<span class="n">key</span> <span class="mi">64</span>    <span class="n">TV_MEDIA_PLAY</span>
+<span class="n">key</span> <span class="mi">65</span>    <span class="n">TV_MEDIA_PAUSE</span>
+<span class="n">key</span> <span class="mi">66</span>    <span class="n">TV_MEDIA_STOP</span>
+</pre></div>
+</div>
+<p><em>Note : files modified through ADB take effect after restart.</em></p>
+</div>
+</div>
+<div class="section" id="ir-use">
+<h2>IR use<a class="headerlink" href="#ir-use" title="Permalink to this headline">¶</a></h2>
+<p>The diagram below, it is through the waveform generated by the infrared remote Control button, mainly consists of four parts:  <em>head</em>, <em>Control</em>, <em>information</em>, <em>signed free</em>, specific can consult <em>RC6 Protocol</em>.</p>
+<p><img alt="_images/ir.jpg" src="_images/ir.jpg" /></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="driver_lcd.html" class="btn btn-neutral float-right" title="LCD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="driver_i2c.html" class="btn btn-neutral" title="I2C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_ir.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:44 GMT -->
+</html>

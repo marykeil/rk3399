@@ -1,0 +1,1086 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_lcd.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:44 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LCD &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LED" href="driver_led.html" />
+    <link rel="prev" title="IR" href="driver_ir.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LCD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mipi-driver-configuration">MIPI Driver Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pin-configuration">Pin Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chip-power-on-configuration">Chip Power on Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#backlight-configure">Backlight Configure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-display-timing">Configure display timing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brief-description-of-driving-power-on-sequence">Brief Description of Driving Power on Sequence</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#kernel">Kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#u-boot">U-boot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#edp-dts-configuration">EDP_DTS configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Pin Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Chip Power on Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Backlight Configure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Brief Description of Driving Power on Sequence</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uboot">Uboot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>LCD</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/driver_lcd.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lcd">
+<h1>LCD<a class="headerlink" href="#lcd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>ROC-RK3399-PC Pro development board supports two LCD screen interfaces by default, one is MIPI (Maximum resolution support 2560x1600&#64;60fps), the other is EDP(Maximum resolution support 2K&#64;60fps). The positions of interfaces on the board are shown as follows:</p>
+<ul class="simple">
+<li><p>10.1 in. MIPI
+<img alt="_images/panel_mipi101.jpg" src="_images/panel_mipi101.jpg" /></p></li>
+<li><p>10.1 in. EDP
+<img alt="_images/panel_edp101.jpg" src="_images/panel_edp101.jpg" /></p></li>
+</ul>
+</div>
+<div class="section" id="mipi-driver-configuration">
+<h2>MIPI Driver Configuration<a class="headerlink" href="#mipi-driver-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pin-configuration">
+<h3>Pin Configuration<a class="headerlink" href="#pin-configuration" title="Permalink to this headline">¶</a></h3>
+<p>For pin configuration, refer to the File：<code class="docutils literal notranslate"><span class="pre">kernel/arch/arm64/boot/dts/rockchip/rk3399-roc-pc-plus-mipi101-JDM101014_BC45_A1.dts</span></code></p>
+<div class="section" id="chip-power-on-configuration">
+<h4>Chip Power on Configuration<a class="headerlink" href="#chip-power-on-configuration" title="Permalink to this headline">¶</a></h4>
+<p>From the file <code class="docutils literal notranslate"><span class="pre">rk3399-roc-pc-plus-mipi101-JDM101014_BC45_A1.dts</span></code> we can see the following statement:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&amp;dsi {
+    ⋯
+    power_ctr: power_ctr {
+            rockchip,debug = &lt;1&gt;;
+            power_enable = &lt;1&gt;;
+            lcd_55power: lcd-55power {
+                   gpios = &lt;&amp;gpio1 4 GPIO_ACTIVE_HIGH&gt;;
+                   pinctrl-names = &quot;default&quot;;
+                   pinctrl-0 = &lt;&amp;lcd_panel_55power&gt;;
+                   rockchip,delay = &lt;6&gt;;
+            };         
+            lcd_rst: lcd-rst {
+                   gpios = &lt;&amp;gpio4 29 GPIO_ACTIVE_HIGH&gt;;
+                   pinctrl-names = &quot;default&quot;;
+                   pinctrl-0 = &lt;&amp;lcd_panel_reset&gt;;
+                   rockchip,delay = &lt;6&gt;;
+            };
+        };
+    ⋯
+};
+
+⋯
+
+&amp;pinctrl {
+
+    lcd-panel {
+        lcd_panel_reset: lcd-panel-reset {
+            rockchip,pins = &lt;4 29 RK_FUNC_GPIO &amp;pcfg_pull_down&gt;;
+    };
+
+    lcd_panel_enable: lcd-panel-enable {
+        rockchip,pins = &lt;1 24 RK_FUNC_GPIO &amp;pcfg_pull_down&gt;;
+    };
+
+    lcd_panel_55power: lcd-panel-55power {
+        rockchip,pins = &lt;1 4 RK_FUNC_GPIO &amp;pcfg_pull_down&gt;;
+    };
+};
+</pre></div>
+</div>
+<p>Power control pin of LCD is defined here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>lcd_panel_reset：GPIO4_D5(GPIO_ACTIVE_HIGH)
+lcd_panel_enable：GPIO1_D0(GPIO_ACTIVE_HIGH)
+lcd_panel_55power：GPIO1_A4(GPIO_ACTIVE_HIGH)
+</pre></div>
+</div>
+<p>All are high level effective, please refer to the section of <strong>“GPIO”</strong> for specific pin configuration.</p>
+</div>
+<div class="section" id="backlight-configure">
+<h4>Backlight Configure<a class="headerlink" href="#backlight-configure" title="Permalink to this headline">¶</a></h4>
+<p>A backlight interface is set outside the ROC-RK3399-PC Pro development board to control the backlight of the screen.</p>
+<p>In the DTS file : <code class="docutils literal notranslate"><span class="pre">rk3399-roc-pc-plus-mipi101-JDM101014_BC45_A1.dts</span></code> configured in the backlight information, as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">backlight</span> <span class="p">{</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+    <span class="n">pwms</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">pwm1</span> <span class="mi">0</span> <span class="mi">50000</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">brightness</span><span class="o">-</span><span class="n">levels</span> <span class="o">=</span> <span class="o">&lt;</span>
+             <span class="o">/*</span><span class="mi">0</span> <span class="mi">23</span>  <span class="mi">23</span>  <span class="mi">24</span>  <span class="mi">24</span>  <span class="mi">25</span>  <span class="mi">25</span>  <span class="mi">26</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>  <span class="mi">87</span>
+             <span class="mi">88</span>  <span class="mi">89</span>  <span class="mi">90</span>  <span class="mi">91</span>  <span class="mi">92</span>  <span class="mi">93</span>  <span class="mi">94</span>  <span class="mi">95</span><span class="o">*/</span>
+             <span class="mi">96</span>  <span class="mi">97</span>  <span class="mi">98</span>  <span class="mi">99</span> <span class="mi">100</span> <span class="mi">101</span> <span class="mi">102</span> <span class="mi">103</span>
+            <span class="mi">104</span> <span class="mi">105</span> <span class="mi">106</span> <span class="mi">107</span> <span class="mi">108</span> <span class="mi">109</span> <span class="mi">110</span> <span class="mi">111</span>
+            <span class="mi">112</span> <span class="mi">113</span> <span class="mi">114</span> <span class="mi">115</span> <span class="mi">116</span> <span class="mi">117</span> <span class="mi">118</span> <span class="mi">119</span>
+            <span class="mi">120</span> <span class="mi">121</span> <span class="mi">122</span> <span class="mi">123</span> <span class="mi">124</span> <span class="mi">125</span> <span class="mi">126</span> <span class="mi">127</span>
+            <span class="mi">128</span> <span class="mi">129</span> <span class="mi">130</span> <span class="mi">131</span> <span class="mi">132</span> <span class="mi">133</span> <span class="mi">134</span> <span class="mi">135</span>
+            <span class="mi">136</span> <span class="mi">137</span> <span class="mi">138</span> <span class="mi">139</span> <span class="mi">140</span> <span class="mi">141</span> <span class="mi">142</span> <span class="mi">143</span>
+            <span class="mi">144</span> <span class="mi">145</span> <span class="mi">146</span> <span class="mi">147</span> <span class="mi">148</span> <span class="mi">149</span> <span class="mi">150</span> <span class="mi">151</span>
+            <span class="mi">152</span> <span class="mi">153</span> <span class="mi">154</span> <span class="mi">155</span> <span class="mi">156</span> <span class="mi">157</span> <span class="mi">158</span> <span class="mi">159</span>
+            <span class="mi">160</span> <span class="mi">161</span> <span class="mi">162</span> <span class="mi">163</span> <span class="mi">164</span> <span class="mi">165</span> <span class="mi">166</span> <span class="mi">167</span>
+            <span class="mi">168</span> <span class="mi">169</span> <span class="mi">170</span> <span class="mi">171</span> <span class="mi">172</span> <span class="mi">173</span> <span class="mi">174</span> <span class="mi">175</span>
+            <span class="mi">176</span> <span class="mi">177</span> <span class="mi">178</span> <span class="mi">179</span> <span class="mi">180</span> <span class="mi">181</span> <span class="mi">182</span> <span class="mi">183</span>
+            <span class="mi">184</span> <span class="mi">185</span> <span class="mi">186</span> <span class="mi">187</span> <span class="mi">188</span> <span class="mi">189</span> <span class="mi">190</span> <span class="mi">191</span>
+            <span class="mi">192</span> <span class="mi">193</span> <span class="mi">194</span> <span class="mi">195</span> <span class="mi">196</span> <span class="mi">197</span> <span class="mi">198</span> <span class="mi">198</span>
+            <span class="mi">199</span> <span class="mi">199</span> <span class="mi">200</span> <span class="mi">201</span> <span class="mi">201</span> <span class="mi">202</span> <span class="mi">203</span> <span class="mi">204</span>
+            <span class="mi">205</span> <span class="mi">206</span> <span class="mi">207</span> <span class="mi">208</span> <span class="mi">209</span> <span class="mi">210</span> <span class="mi">211</span> <span class="mi">212</span>
+            <span class="mi">213</span> <span class="mi">214</span> <span class="mi">215</span> <span class="mi">216</span> <span class="mi">217</span> <span class="mi">218</span> <span class="mi">219</span> <span class="mi">220</span>
+            <span class="mi">221</span> <span class="mi">222</span> <span class="mi">223</span> <span class="mi">224</span> <span class="mi">225</span> <span class="mi">226</span> <span class="mi">227</span> <span class="mi">228</span>
+            <span class="mi">229</span> <span class="mi">230</span> <span class="mi">231</span> <span class="mi">232</span> <span class="mi">233</span> <span class="mi">234</span> <span class="mi">234</span> <span class="mi">235</span>
+            <span class="mi">236</span> <span class="mi">237</span> <span class="mi">238</span> <span class="mi">239</span> <span class="mi">240</span> <span class="mi">241</span> <span class="mi">242</span> <span class="mi">243</span>
+            <span class="mi">244</span> <span class="mi">245</span> <span class="mi">246</span> <span class="mi">247</span> <span class="mi">248</span> <span class="mi">249</span> <span class="mi">250</span> <span class="mi">250</span>
+            <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">default</span><span class="o">-</span><span class="n">brightness</span><span class="o">-</span><span class="n">level</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">enable</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio1</span> <span class="mi">24</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="o">//</span><span class="n">polarity</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">pinctrl</span><span class="o">-</span><span class="n">names</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">;</span>
+    <span class="n">pinctrl</span><span class="o">-</span><span class="mi">0</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">lcd_panel_enable</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configure-display-timing">
+<h3>Configure display timing<a class="headerlink" href="#configure-display-timing" title="Permalink to this headline">¶</a></h3>
+<p>Different from EDP screen, <em>Timing</em> of MIPI screen is written in DTS file. The following statement can be seen in <code class="docutils literal notranslate"><span class="pre">rk3399-roc-pc-plus-mipi101-JDM101014_BC45_A1.dts</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="o">-</span><span class="n">timings</span> <span class="p">{</span>
+    <span class="n">native</span><span class="o">-</span><span class="n">mode</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">timing0</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">timing0</span><span class="p">:</span> <span class="n">timing0</span> <span class="p">{</span>
+    <span class="n">clock</span><span class="o">-</span><span class="n">frequency</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">67000000</span><span class="o">&gt;</span><span class="p">;</span><span class="o">//&lt;</span><span class="mi">80000000</span><span class="o">&gt;</span>
+    <span class="n">hactive</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">800</span><span class="o">&gt;</span><span class="p">;</span><span class="o">//&lt;</span><span class="mi">768</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">vactive</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1280</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">hsync</span><span class="o">-</span><span class="nb">len</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">20</span><span class="o">&gt;</span><span class="p">;</span>   <span class="o">//</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span>
+    <span class="n">hback</span><span class="o">-</span><span class="n">porch</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">20</span><span class="o">&gt;</span><span class="p">;</span> <span class="o">//</span><span class="mi">50</span><span class="p">,</span> <span class="mi">56</span>
+    <span class="n">hfront</span><span class="o">-</span><span class="n">porch</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">32</span><span class="o">&gt;</span><span class="p">;</span><span class="o">//</span><span class="mi">50</span><span class="p">,</span> <span class="mi">30</span>
+    <span class="n">vsync</span><span class="o">-</span><span class="nb">len</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">vback</span><span class="o">-</span><span class="n">porch</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">vfront</span><span class="o">-</span><span class="n">porch</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">8</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">hsync</span><span class="o">-</span><span class="n">active</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">vsync</span><span class="o">-</span><span class="n">active</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">de</span><span class="o">-</span><span class="n">active</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">pixelclk</span><span class="o">-</span><span class="n">active</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="brief-description-of-driving-power-on-sequence">
+<h3>Brief Description of Driving Power on Sequence<a class="headerlink" href="#brief-description-of-driving-power-on-sequence" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="kernel">
+<h4>Kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h4>
+<p>In <code class="docutils literal notranslate"><span class="pre">kernel/drivers/gpu/drm/panel/panel-simple.c</span></code> can be seen in <code class="docutils literal notranslate"><span class="pre">panel_simple_probe</span></code> initialization function to initialize the access sequence of functions.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>static int panel_simple_probe(struct device *dev, const struct panel_desc *desc){
+···
+ panel-&gt;base.funcs = &amp;panel_simple_funcs;
+···
+}
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">kernel/drivers/gpu/drm/panel/panel-simple.c</span></code>,you can see ：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>static int panel_simple_get_timings(struct drm_panel *panel,unsigned int num_timings,struct display_timing *timings)
+{
+    struct panel_simple *p = to_panel_simple(panel); 
+    unsigned int i;
+    if (!p-&gt;desc)  
+        return 0;
+        
+    if (p-&gt;desc-&gt;num_timings &lt; num_timings)  
+        num_timings = p-&gt;desc-&gt;num_timings;
+        
+    if (timings)  
+        for (i = 0; i &lt; num_timings; i++)   
+        timings[i] = p-&gt;desc-&gt;timings[i];
+    return p-&gt;desc-&gt;num_timings;
+}
+</pre></div>
+</div>
+<p>Initialization mipi screen after the electricity needs to send instruction to make it work, can be in kernel/arch/arm64/boot/dts/rockchip/rk3399-firefly-mipi8.dts can see mipi initialization in the command list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&amp;dsi {      
+    ⋯
+      panel-init-sequence = [
+        05 78 01 11
+        05 32 01 29
+    ];
+
+    panel-exit-sequence = [
+        05 00 01 28
+        05 00 01 10
+    ];
+    ⋯
+};
+</pre></div>
+</div>
+<p>Please refer to the following attachment for the command format and instructions:
+<a class="reference external" href="http://www.t-firefly.com/ueditor/php/upload/file/20171213/1513128959299913.pdf">Rockchip DRM Panel Porting Guide.pdf</a></p>
+<p>Send instructions can be seen in the <code class="docutils literal notranslate"><span class="pre">kernel/drivers/gpu/drm/panel/panel-simple.c</span></code> :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="nb">int</span> <span class="n">panel_simple_enable</span><span class="p">(</span><span class="n">struct</span> <span class="n">drm_panel</span> <span class="o">*</span><span class="n">panel</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">struct</span> <span class="n">panel_simple</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">to_panel_simple</span><span class="p">(</span><span class="n">panel</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">err</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">enabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">DBG</span><span class="p">(</span><span class="s2">&quot;enter</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">on_cmds</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">panel_simple_dsi_send_cmds</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">on_cmds</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="n">dev_err</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="s2">&quot;failed to send on cmds</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">desc</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">desc</span><span class="o">-&gt;</span><span class="n">delay</span><span class="o">.</span><span class="n">enable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">DBG</span><span class="p">(</span><span class="s2">&quot;p-&gt;desc-&gt;delay.enable=</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">desc</span><span class="o">-&gt;</span><span class="n">delay</span><span class="o">.</span><span class="n">enable</span><span class="p">);</span>
+        <span class="n">msleep</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">desc</span><span class="o">-&gt;</span><span class="n">delay</span><span class="o">.</span><span class="n">enable</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">backlight</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">DBG</span><span class="p">(</span><span class="s2">&quot;open backlight</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+        <span class="n">p</span><span class="o">-&gt;</span><span class="n">backlight</span><span class="o">-&gt;</span><span class="n">props</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="n">FB_BLANK_UNBLANK</span><span class="p">;</span>
+        <span class="n">backlight_update_status</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">backlight</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="u-boot">
+<h4>U-boot<a class="headerlink" href="#u-boot" title="Permalink to this headline">¶</a></h4>
+<p>Send instructions can be seen in the <code class="docutils literal notranslate"><span class="pre">u-boot/drivers/video/rockchip-dw-mipi-dsi.c</span></code> :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>static int rockchip_dw_mipi_dsi_enable(struct display_state *state)
+{
+    struct connector_state *conn_state = &amp;state-&gt;conn_state;
+    struct crtc_state *crtc_state = &amp;state-&gt;crtc_state;
+    const struct rockchip_connector *connector = conn_state-&gt;connector;
+    const struct dw_mipi_dsi_plat_data *pdata = connector-&gt;data;
+    struct dw_mipi_dsi *dsi = conn_state-&gt;private;
+    u32 val;
+    DBG(&quot;enter\n&quot;);
+    dw_mipi_dsi_set_mode(dsi, DW_MIPI_DSI_VID_MODE);
+    dsi_write(dsi, DSI_MODE_CFG, ENABLE_CMD_MODE);
+    dw_mipi_dsi_set_mode(dsi, DW_MIPI_DSI_VID_MODE);
+    if (!pdata-&gt;has_vop_sel)
+        return 0;
+    if (pdata-&gt;grf_switch_reg) {
+        if (crtc_state-&gt;crtc_id)
+            val = pdata-&gt;dsi0_en_bit | (pdata-&gt;dsi0_en_bit &lt;&lt; 16);
+        else
+            val = pdata-&gt;dsi0_en_bit &lt;&lt; 16;
+        writel(val, RKIO_GRF_PHYS + pdata-&gt;grf_switch_reg);
+    }
+    debug(&quot;vop %s output to dsi0\n&quot;, (crtc_state-&gt;crtc_id) ? &quot;LIT&quot; : &quot;BIG&quot;);
+    //rockchip_dw_mipi_dsi_read_allregs(dsi);
+    return 0;
+}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="edp-dts-configuration">
+<h2>EDP_DTS configuration<a class="headerlink" href="#edp-dts-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Pin Configuration<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>For pin configuration, refer to the File：<code class="docutils literal notranslate"><span class="pre">kernel/arch/arm64/boot/dts/rockchip/rk3399-roc-pc-plus-edp.dts</span></code></p>
+<div class="section" id="id2">
+<h4>Chip Power on Configuration<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>with the file: <code class="docutils literal notranslate"><span class="pre">kernel/arch/arm64/boot/dts/rockchip/rk3399-roc-pc-plus-edp.dts</span></code>, we can see from the file the following statement:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> edp_panel: edp-panel {
+		compatible = &quot;simple-panel&quot;;
+		bus-format = &lt;MEDIA_BUS_FMT_RGB666_1X18&gt;;
+
+		backlight = &lt;&amp;backlight&gt;;
+
+		display-timings {
+			native-mode = &lt;&amp;timing0&gt;;
+
+			timing0: timing0 {
+				clock-frequency = &lt;200000000&gt;;
+				hactive = &lt;2560&gt;;
+				vactive = &lt;1600&gt;;
+				hfront-porch = &lt;48&gt;;
+				hsync-len = &lt;80&gt;;
+				hback-porch = &lt;32&gt;;
+				vfront-porch = &lt;2&gt;;
+				vsync-len = &lt;39&gt;;
+				vback-porch = &lt;5&gt;;
+				hsync-active = &lt;0&gt;;
+				vsync-active = &lt;0&gt;;
+				de-active = &lt;0&gt;;
+				pixelclk-active = &lt;0&gt;;
+			};
+		};
+
+		ports {
+			panel_in_edp: endpoint {
+				remote-endpoint = &lt;&amp;edp_out_panel&gt;;
+			};
+		};
+
+		power_ctr: power_ctr {
+               rockchip,debug = &lt;1&gt;;
+               lcd_en: lcd-en {
+                       gpios = &lt;&amp;gpio2 5 GPIO_ACTIVE_HIGH&gt;;
+					   pinctrl-names = &quot;default&quot;;
+					   pinctrl-0 = &lt;&amp;lcd_panel_enable&gt;;
+                       rockchip,delay = &lt;1000&gt;;
+               };
+			   /*
+               lcd_edp_hpd: lcd-edp-hpd {
+                       gpios = &lt;&amp;gpio1 20 GPIO_ACTIVE_HIGH&gt;;
+					   pinctrl-names = &quot;default&quot;;
+					   pinctrl-0 = &lt;&amp;lcd_edp_hpd_enable&gt;;
+                       rockchip,delay = &lt;10&gt;;
+               };
+			   */
+       };
+	};
+
+···
+&amp;pinctrl {
+  lcd-panel {
+    lcd_panel_reset: lcd-panel-reset {
+      rockchip,pins = &lt;4 29 RK_FUNC_GPIO &amp;pcfg_pull_up&gt;;
+    };
+    lcd_panel_enable: lcd-panel-enable {
+      rockchip,pins = &lt;1 1 RK_FUNC_GPIO &amp;pcfg_pull_up&gt;;
+    };
+        lcd_panel_pwr_en: lcd-panel-pwr-en {
+            rockchip,pins = &lt;2 5 RK_FUNC_GPIO &amp;pcfg_pull_up&gt;;
+        };
+  };
+};
+</pre></div>
+</div>
+<p>Power control pin of LCD is defined here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>lcd_en：GPIO2_A4(GPIO_ACTIVE_HIGH)
+lcd-edp-hpd：GPIO1_D4(GPIO_ACTIVE_HIGH)
+</pre></div>
+</div>
+<p>All are high level effective, please refer to the section of <strong>“GPIO”</strong> for specific pin configuration.</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Backlight Configure<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>	<span class="n">backlight</span><span class="p">:</span> <span class="n">backlight</span> <span class="p">{</span>
+			<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+			<span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;pwm-backlight&quot;</span><span class="p">;</span>
+			<span class="n">pwms</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">pwm0</span> <span class="mi">0</span> <span class="mi">25000</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="n">enable</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio1</span> <span class="mi">24</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="n">pinctrl</span><span class="o">-</span><span class="n">names</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">;</span>
+			<span class="n">pinctrl</span><span class="o">-</span><span class="mi">0</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">lcd_backlight_enable</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="n">brightness</span><span class="o">-</span><span class="n">levels</span> <span class="o">=</span> <span class="o">&lt;</span>
+			  <span class="mi">0</span>   <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>
+			  <span class="mi">8</span>   <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>  <span class="mi">13</span>  <span class="mi">14</span>  <span class="mi">15</span>
+			 <span class="mi">16</span>  <span class="mi">17</span>  <span class="mi">18</span>  <span class="mi">19</span>  <span class="mi">20</span>  <span class="mi">21</span>  <span class="mi">22</span>  <span class="mi">23</span>
+			 <span class="mi">24</span>  <span class="mi">25</span>  <span class="mi">26</span>  <span class="mi">27</span>  <span class="mi">28</span>  <span class="mi">29</span>  <span class="mi">30</span>  <span class="mi">31</span>
+			 <span class="mi">32</span>  <span class="mi">33</span>  <span class="mi">34</span>  <span class="mi">35</span>  <span class="mi">36</span>  <span class="mi">37</span>  <span class="mi">38</span>  <span class="mi">39</span>
+			 <span class="mi">40</span>  <span class="mi">41</span>  <span class="mi">42</span>  <span class="mi">43</span>  <span class="mi">44</span>  <span class="mi">45</span>  <span class="mi">46</span>  <span class="mi">47</span>
+			 <span class="mi">48</span>  <span class="mi">49</span>  <span class="mi">50</span>  <span class="mi">51</span>  <span class="mi">52</span>  <span class="mi">53</span>  <span class="mi">54</span>  <span class="mi">55</span>
+			 <span class="mi">56</span>  <span class="mi">57</span>  <span class="mi">58</span>  <span class="mi">59</span>  <span class="mi">60</span>  <span class="mi">61</span>  <span class="mi">62</span>  <span class="mi">63</span>
+			 <span class="mi">64</span>  <span class="mi">65</span>  <span class="mi">66</span>  <span class="mi">67</span>  <span class="mi">68</span>  <span class="mi">69</span>  <span class="mi">70</span>  <span class="mi">71</span>
+			 <span class="mi">72</span>  <span class="mi">73</span>  <span class="mi">74</span>  <span class="mi">75</span>  <span class="mi">76</span>  <span class="mi">77</span>  <span class="mi">78</span>  <span class="mi">79</span>
+			 <span class="mi">80</span>  <span class="mi">81</span>  <span class="mi">82</span>  <span class="mi">83</span>  <span class="mi">84</span>  <span class="mi">85</span>  <span class="mi">86</span>  <span class="mi">87</span>
+			 <span class="mi">88</span>  <span class="mi">89</span>  <span class="mi">90</span>  <span class="mi">91</span>  <span class="mi">92</span>  <span class="mi">93</span>  <span class="mi">94</span>  <span class="mi">95</span>
+			 <span class="mi">96</span>  <span class="mi">97</span>  <span class="mi">98</span>  <span class="mi">99</span> <span class="mi">100</span> <span class="mi">101</span> <span class="mi">102</span> <span class="mi">103</span>
+			<span class="mi">104</span> <span class="mi">105</span> <span class="mi">106</span> <span class="mi">107</span> <span class="mi">108</span> <span class="mi">109</span> <span class="mi">110</span> <span class="mi">111</span>
+			<span class="mi">112</span> <span class="mi">113</span> <span class="mi">114</span> <span class="mi">115</span> <span class="mi">116</span> <span class="mi">117</span> <span class="mi">118</span> <span class="mi">119</span>
+			<span class="mi">120</span> <span class="mi">121</span> <span class="mi">122</span> <span class="mi">123</span> <span class="mi">124</span> <span class="mi">125</span> <span class="mi">126</span> <span class="mi">127</span>
+			<span class="mi">128</span> <span class="mi">129</span> <span class="mi">130</span> <span class="mi">131</span> <span class="mi">132</span> <span class="mi">133</span> <span class="mi">134</span> <span class="mi">135</span>
+			<span class="mi">136</span> <span class="mi">137</span> <span class="mi">138</span> <span class="mi">139</span> <span class="mi">140</span> <span class="mi">141</span> <span class="mi">142</span> <span class="mi">143</span>
+			<span class="mi">144</span> <span class="mi">145</span> <span class="mi">146</span> <span class="mi">147</span> <span class="mi">148</span> <span class="mi">149</span> <span class="mi">150</span> <span class="mi">151</span>
+			<span class="mi">152</span> <span class="mi">153</span> <span class="mi">154</span> <span class="mi">155</span> <span class="mi">156</span> <span class="mi">157</span> <span class="mi">158</span> <span class="mi">159</span>
+			<span class="mi">160</span> <span class="mi">161</span> <span class="mi">162</span> <span class="mi">163</span> <span class="mi">164</span> <span class="mi">165</span> <span class="mi">166</span> <span class="mi">167</span>
+			<span class="mi">168</span> <span class="mi">169</span> <span class="mi">170</span> <span class="mi">171</span> <span class="mi">172</span> <span class="mi">173</span> <span class="mi">174</span> <span class="mi">175</span>
+			<span class="mi">176</span> <span class="mi">177</span> <span class="mi">178</span> <span class="mi">179</span> <span class="mi">180</span> <span class="mi">181</span> <span class="mi">182</span> <span class="mi">183</span>
+			<span class="mi">184</span> <span class="mi">185</span> <span class="mi">186</span> <span class="mi">187</span> <span class="mi">188</span> <span class="mi">189</span> <span class="mi">190</span> <span class="mi">191</span>
+			<span class="mi">192</span> <span class="mi">193</span> <span class="mi">194</span> <span class="mi">195</span> <span class="mi">196</span> <span class="mi">197</span> <span class="mi">198</span> <span class="mi">199</span>
+			<span class="mi">200</span> <span class="mi">201</span> <span class="mi">202</span> <span class="mi">203</span> <span class="mi">204</span> <span class="mi">205</span> <span class="mi">206</span> <span class="mi">207</span>
+			<span class="mi">208</span> <span class="mi">209</span> <span class="mi">210</span> <span class="mi">211</span> <span class="mi">212</span> <span class="mi">213</span> <span class="mi">214</span> <span class="mi">215</span>
+			<span class="mi">216</span> <span class="mi">217</span> <span class="mi">218</span> <span class="mi">219</span> <span class="mi">220</span> <span class="mi">221</span> <span class="mi">222</span> <span class="mi">223</span>
+			<span class="mi">224</span> <span class="mi">225</span> <span class="mi">226</span> <span class="mi">227</span> <span class="mi">228</span> <span class="mi">229</span> <span class="mi">230</span> <span class="mi">231</span>
+			<span class="mi">232</span> <span class="mi">233</span> <span class="mi">234</span> <span class="mi">235</span> <span class="mi">236</span> <span class="mi">237</span> <span class="mi">238</span> <span class="mi">239</span>
+			<span class="mi">240</span> <span class="mi">241</span> <span class="mi">242</span> <span class="mi">243</span> <span class="mi">244</span> <span class="mi">245</span> <span class="mi">246</span> <span class="mi">247</span>
+			<span class="mi">248</span> <span class="mi">249</span> <span class="mi">250</span> <span class="mi">251</span> <span class="mi">252</span> <span class="mi">253</span> <span class="mi">254</span> <span class="mi">255</span><span class="o">&gt;</span><span class="p">;</span>
+		<span class="n">default</span><span class="o">-</span><span class="n">brightness</span><span class="o">-</span><span class="n">level</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">200</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Brief Description of Driving Power on Sequence<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h4>Kernel<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>writing Timing in the <em>panel-simple.c</em>, directly to the short string matching in <em>drivers/gpu/drm/panel/panel-simple.c</em> file has the following statement</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">const</span> <span class="n">struct</span> <span class="n">drm_display_mode</span> <span class="n">lg_lp079qx1_sp0v_mode</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="mi">200000</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">hdisplay</span> <span class="o">=</span> <span class="mi">1536</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">hsync_start</span> <span class="o">=</span> <span class="mi">1536</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">hsync_end</span> <span class="o">=</span> <span class="mi">1536</span> <span class="o">+</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">htotal</span> <span class="o">=</span> <span class="mi">1536</span> <span class="o">+</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">+</span> <span class="mi">48</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vdisplay</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vsync_start</span> <span class="o">=</span> <span class="mi">2048</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vsync_end</span> <span class="o">=</span> <span class="mi">2048</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vtotal</span> <span class="o">=</span> <span class="mi">2048</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vrefresh</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">flags</span> <span class="o">=</span> <span class="n">DRM_MODE_FLAG_NVSYNC</span> <span class="o">|</span> <span class="n">DRM_MODE_FLAG_NHSYNC</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">static</span> <span class="n">const</span> <span class="n">struct</span> <span class="n">panel_desc</span> <span class="n">lg_lp097qx1_spa1</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">lg_lp097qx1_spa1_mode</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">num_modes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">320</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">187</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="o">...</span> <span class="o">...</span>
+
+   <span class="n">static</span> <span class="n">const</span> <span class="n">struct</span> <span class="n">of_device_id</span> <span class="n">platform_of_match</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">{</span>
+    <span class="o">.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;simple-panel&quot;</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">NULL</span><span class="p">,</span>
+  <span class="p">},{</span>
+
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;lg,lp079qx1-sp0v&quot;</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">lg_lp079qx1_sp0v</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="o">/*</span> <span class="n">sentinel</span> <span class="o">*/</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>MODULE_DEVICE_TABLE(of, platform_of_match); The timing parameters are configured in the structure : <em>lg_lp079qx1_sp0v_mode</em>.</p>
+</div>
+<div class="section" id="uboot">
+<h4>Uboot<a class="headerlink" href="#uboot" title="Permalink to this headline">¶</a></h4>
+<p>The Timing is written in rockchip_panel.c, directly to the short string matching in <em>drivers/video/rockchip_panel.c</em> file has the following statement :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">const</span> <span class="n">struct</span> <span class="n">drm_display_mode</span> <span class="n">lg_lp079qx1_sp0v_mode</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="mi">200000</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">hdisplay</span> <span class="o">=</span> <span class="mi">1536</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">hsync_start</span> <span class="o">=</span> <span class="mi">1536</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">hsync_end</span> <span class="o">=</span> <span class="mi">1536</span> <span class="o">+</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">htotal</span> <span class="o">=</span> <span class="mi">1536</span> <span class="o">+</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">+</span> <span class="mi">48</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vdisplay</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vsync_start</span> <span class="o">=</span> <span class="mi">2048</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vsync_end</span> <span class="o">=</span> <span class="mi">2048</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vtotal</span> <span class="o">=</span> <span class="mi">2048</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">vrefresh</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">flags</span> <span class="o">=</span> <span class="n">DRM_MODE_FLAG_NVSYNC</span> <span class="o">|</span> <span class="n">DRM_MODE_FLAG_NHSYNC</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">static</span> <span class="n">const</span> <span class="n">struct</span> <span class="n">rockchip_panel</span> <span class="n">g_panel</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">{</span>
+    <span class="o">.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;lg,lp079qx1-sp0v&quot;</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">lg_lp079qx1_sp0v_mode</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;auo,b125han03&quot;</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">auo_b125han03_mode</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The timing parameters are configured in the structure:<em>lg_lp079qx1_sp0v_mode</em>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="driver_led.html" class="btn btn-neutral float-right" title="LED" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="driver_ir.html" class="btn btn-neutral" title="IR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_lcd.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:46 GMT -->
+</html>

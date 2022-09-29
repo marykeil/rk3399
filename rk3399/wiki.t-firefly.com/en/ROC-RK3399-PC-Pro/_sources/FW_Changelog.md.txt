@@ -1,0 +1,9 @@
+Firmware update log
+
+Firmware download page
+
+Linux
+
+ubuntu_18_04_Lxde_desktop
+
+ubuntu_18_04_minimal

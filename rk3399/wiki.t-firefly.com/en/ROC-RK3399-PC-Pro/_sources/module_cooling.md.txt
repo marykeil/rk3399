@@ -1,0 +1,36 @@
+Heat sink
+
+Aluminum heat sink
+
+Product parameters
+
+Adaptation: ROC-RK3399-PC Pro
+
+size: 43mm (L)* 39.5mm(W)*11mm(H)
+
+Real figure
+
+
+Installation
+
+
+Integral Cooling Fan
+
+Product Parameter
+
+Model: TFAN_55S_B
+
+Adapter: ROC-RK3399-PC Pro
+
+Size: 5.5±0.3mm * 55.5±0.3mm
+
+Voltage: 12V (10.8-13.2V)
+
+Max air flow: 5.8CFM
+
+Physical map
+
+
+Installation method
+
+

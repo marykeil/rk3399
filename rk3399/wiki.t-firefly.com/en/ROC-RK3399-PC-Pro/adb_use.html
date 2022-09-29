@@ -1,0 +1,956 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/adb_use.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:40 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. ADB use &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Compile environment to build" href="prepare_compile_android.html" />
+    <link rel="prev" title="6. Firefly Linux User Guide" href="firefly_linux_guide.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. ADB use</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preface">1.1. Preface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#network-the-adb">1.1.1. Network the ADB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adb-installation-under-windows">1.2. Adb Installation under Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adb-installation-on-ubuntu">1.3. ADB installation on Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frequently-used-adb-commands">1.4. Frequently-used ADB Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#connection-manage">1.4.1. Connection Manage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging">1.4.2. Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-commands-adb-shell">1.4.3. Running Commands (adb shell)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-details-of-system-adb-bugreport">1.4.3.1. Get Details of System (adb bugreport)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#root-permission">1.4.4. Root permission</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#application-manage">1.5. Application Manage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-application-adb-install">1.5.1. Install Application (adb install)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uninstall-application-adb-uninstall">1.5.2. Uninstall Application (adb uninstall)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commandline-help-adb-help">1.5.3. Commandline Help (adb help)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>1. ADB use</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/adb_use.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adb-use">
+<h1>1. ADB use<a class="headerlink" href="#adb-use" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="preface">
+<h2>1.1. Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h2>
+<p>ADB (the full name is the Android Debug Bridge) is the command-line debugging tool for Android, and it can complete a variety of functions, such as tracking the system logs, uploading and downloading the files, installing the applications, etc.</p>
+<p>Under normal circumstances, <code class="docutils literal notranslate"><span class="pre">adb</span></code> is enabled by default. If it is not enabled, please perform the following steps:</p>
+<ul class="simple">
+<li><p>ROC-RK3399-PC Pro Connect the device and host with Type-C data cable;</p></li>
+<li><p>Check connect to PC in the corresponding path according to the current Android version</p>
+<ul>
+<li><p>For Android 7.1 and Android 8.1, select setting &gt; USB, and then check connect to PC</p></li>
+<li><p>For Android 10.0, select setting &gt; connected devices, and then check connect to PC</p></li>
+</ul>
+</li>
+<li><p>Install the adb driver and commands based on your system.</p></li>
+</ul>
+<p>When the device status bar prompts <code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">debugging</span> <span class="pre">connected</span></code>, you can debug:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">adb</span> <span class="pre">devices</span> <span class="pre">adb</span> <span class="pre">shell</span></code> `</p>
+<div class="section" id="network-the-adb">
+<h3>1.1.1. Network the ADB<a class="headerlink" href="#network-the-adb" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Setting</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Developer</span> <span class="pre">Option</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ADB</span> <span class="pre">over</span> <span class="pre">network</span></code></p></li>
+</ul>
+<p>check the ROC-RK3399-PC Pro IP address, Use command under the PC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">connect</span> <span class="o">+</span> <span class="n">IP</span>
+<span class="n">adb</span> <span class="n">shell</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="adb-installation-under-windows">
+<h2>1.2. Adb Installation under Windows<a class="headerlink" href="#adb-installation-under-windows" title="Permalink to this headline">¶</a></h2>
+<p>First, please reference <a class="reference external" href="03-upgrade_firmware.html#windows">Install RK USB driver</a> to get the driver ready.</p>
+<p>Then go to <a class="reference external" href="http://www.t-firefly.com/share/index/index/id/6afafdf7c54b8eb95e81156d94e54db5.html">http://www.t-firefly.com/share/index/index/id/6afafdf7c54b8eb95e81156d94e54db5.html</a> to download <code class="docutils literal notranslate"><span class="pre">adb.zip</span></code>, uncompress it to <code class="docutils literal notranslate"><span class="pre">C:\adb</span></code> to ease later use.</p>
+<p>Open a cmd window, input:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">C</span><span class="p">:</span>\<span class="n">adb</span>
+<span class="n">adb</span> <span class="n">shell</span>
+</pre></div>
+</div>
+<p>If everything works, you have entered <code class="docutils literal notranslate"><span class="pre">adb</span> <span class="pre">shell</span></code>, and can run all kinds of commands available in device.</p>
+</div>
+<div class="section" id="adb-installation-on-ubuntu">
+<h2>1.3. ADB installation on Ubuntu<a class="headerlink" href="#adb-installation-on-ubuntu" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Install ADB:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">android</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="n">adb</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add device identity:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/.</span><span class="n">android</span>
+<span class="n">vi</span> <span class="o">~/.</span><span class="n">android</span><span class="o">/</span><span class="n">adb_usb</span><span class="o">.</span><span class="n">ini</span>
+<span class="c1"># append following line</span>
+<span class="mh">0x2207</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add udev rule:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">udev</span><span class="o">/</span><span class="n">rules</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">51</span><span class="o">-</span><span class="n">android</span><span class="o">.</span><span class="n">rules</span>
+<span class="c1"># append following line:</span>
+<span class="n">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idVendor</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;2207&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;0666&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Replug the USB cable, or run the following command to make the udev rule work:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">udevadm</span> <span class="n">control</span> <span class="o">--</span><span class="n">reload</span><span class="o">-</span><span class="n">rules</span>
+<span class="n">sudo</span> <span class="n">udevadm</span> <span class="n">trigger</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Restart adb daemon:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">adb</span> <span class="n">kill</span><span class="o">-</span><span class="n">server</span>
+<span class="n">adb</span> <span class="n">start</span><span class="o">-</span><span class="n">server</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="frequently-used-adb-commands">
+<h2>1.4. Frequently-used ADB Commands<a class="headerlink" href="#frequently-used-adb-commands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="connection-manage">
+<h3>1.4.1. Connection Manage<a class="headerlink" href="#connection-manage" title="Permalink to this headline">¶</a></h3>
+<p>List all the connected devices:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">devices</span>
+</pre></div>
+</div>
+<p>If there are multiple devices connected, the device serial number is needed to distinguish:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">ANDROID_SERIAL</span><span class="o">=&lt;</span><span class="n">device</span> <span class="n">serial</span> <span class="n">number</span><span class="o">&gt;</span>
+<span class="n">adb</span> <span class="n">shell</span> <span class="n">ls</span>
+</pre></div>
+</div>
+<p>ADB can also use the TCP/IP network to connect to device:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restart ADB on the device side and listen at TCP port 5555.</span>
+<span class="n">adb</span> <span class="n">tcpip</span> <span class="mi">5555</span>
+<span class="c1"># Now, the Type-C cable can be disconnected.</span>
+<span class="c1"># Connect to the device, whose IP is 192.168.1.100 here.</span>
+<span class="n">adb</span> <span class="n">connect</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.100</span><span class="p">:</span><span class="mi">5555</span>
+<span class="c1"># Disconnect the device</span>
+<span class="n">adb</span> <span class="n">disconnect</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.100</span><span class="p">:</span><span class="mi">5555</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging">
+<h3>1.4.2. Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h3>
+<p><strong>Get System Log (adb logcat)</strong></p>
+<ul class="simple">
+<li><p>Usage</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">logcat</span> <span class="p">[</span><span class="n">Options</span><span class="p">]</span> <span class="p">[</span><span class="n">Label</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># View all logs.</span>
+<span class="n">adb</span> <span class="n">logcat</span>
+<span class="c1"># Show only part of the logs.</span>
+<span class="n">adb</span> <span class="n">logcat</span> <span class="o">-</span><span class="n">s</span> <span class="n">WifiStateMachine</span> <span class="n">StateMachine</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-commands-adb-shell">
+<h3>1.4.3. Running Commands (adb shell)<a class="headerlink" href="#running-commands-adb-shell" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-details-of-system-adb-bugreport">
+<h4>1.4.3.1. Get Details of System (adb bugreport)<a class="headerlink" href="#get-details-of-system-adb-bugreport" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">adb</span> <span class="pre">bugreport</span></code> is used for bug report, which contains lots of useful information about system.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">bugreport</span>
+<span class="c1"># Save to host, then open it with text editor to view ADB</span>
+<span class="n">adb</span> <span class="n">bugreport</span> <span class="o">&gt;</span><span class="n">bugreport</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="root-permission">
+<h3>1.4.4. Root permission<a class="headerlink" href="#root-permission" title="Permalink to this headline">¶</a></h3>
+<p>If TARGET_BUILD_VARIANT is in userdebug mode, you need to run it to get root permission:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">root</span>
+</pre></div>
+</div>
+<p>Switch ADB’s device side to root mode so ADB remount and other commands that require root can succeed.</p>
+</div>
+</div>
+<div class="section" id="application-manage">
+<h2>1.5. Application Manage<a class="headerlink" href="#application-manage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-application-adb-install">
+<h3>1.5.1. Install Application (adb install)<a class="headerlink" href="#install-application-adb-install" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Usage:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">install</span> <span class="p">[</span><span class="n">Options</span><span class="p">]</span> <span class="n">Application</span><span class="o">.</span><span class="n">apk</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Options incldue:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">l</span> <span class="n">forward</span><span class="o">-</span><span class="n">lock</span>
+<span class="o">-</span><span class="n">r</span> <span class="n">Reinstall</span> <span class="n">application</span><span class="p">,</span> <span class="n">keeping</span> <span class="n">previous</span> <span class="n">data</span>
+<span class="o">-</span><span class="n">s</span> <span class="n">Install</span> <span class="n">to</span> <span class="n">SD</span> <span class="n">card</span><span class="p">,</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">internal</span> <span class="n">storage</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install facebook.apk</span>
+<span class="n">adb</span> <span class="n">install</span> <span class="n">facebook</span><span class="o">.</span><span class="n">apk</span>
+<span class="c1"># Upgrade twitter.apk</span>
+<span class="n">adb</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">twitter</span><span class="o">.</span><span class="n">apk</span>
+</pre></div>
+</div>
+<p>If installation is successful, it will prompt “Success”; otherwise, it will fail with following messages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">INSTALL_FAILED_ALREADY_EXISTS</span><span class="p">:</span> <span class="n">You</span> <span class="n">need</span> <span class="n">to</span> <span class="n">reinstall</span> <span class="k">with</span> <span class="n">the</span> <span class="o">-</span><span class="n">r</span> <span class="n">parameter</span> <span class="n">at</span> <span class="n">this</span> <span class="n">point</span><span class="o">.</span>
+<span class="o">*</span> <span class="n">INSTALL_FAILED_SIGNATURE_ERROR</span><span class="p">:</span> <span class="n">The</span> <span class="n">applied</span> <span class="n">signatures</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">the</span> <span class="n">same</span><span class="p">,</span> <span class="ow">and</span> <span class="n">may</span> <span class="n">be</span> <span class="n">due</span> <span class="n">to</span> <span class="n">differences</span> <span class="n">between</span> <span class="n">the</span> <span class="n">release</span> <span class="ow">and</span> <span class="n">debug</span> <span class="n">signatures</span><span class="o">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">are</span> <span class="n">sure</span> <span class="n">that</span> <span class="n">the</span> <span class="n">APK</span> <span class="n">file</span> <span class="n">signature</span> <span class="ow">is</span> <span class="n">ok</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">uninstall</span> <span class="n">the</span> <span class="n">old</span> <span class="n">application</span> <span class="n">by</span> <span class="n">using</span> <span class="n">the</span> <span class="p">[</span><span class="n">adb</span> <span class="n">uninstall</span><span class="p">](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">t</span><span class="o">-</span><span class="n">firefly</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">upload</span><span class="o">/</span><span class="c1">#adb_uninstall) command.Then install again.</span>
+<span class="o">*</span> <span class="n">INSTALL_FAILED_INSUFFICIENT_STORAGE</span><span class="p">:</span> <span class="n">Insufficient</span> <span class="n">storage</span> <span class="n">space</span><span class="p">,</span> <span class="n">you</span> <span class="n">need</span> <span class="n">to</span> <span class="n">check</span> <span class="n">the</span> <span class="n">device</span> <span class="n">storage</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="uninstall-application-adb-uninstall">
+<h3>1.5.2. Uninstall Application (adb uninstall)<a class="headerlink" href="#uninstall-application-adb-uninstall" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Usage:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">uninstall</span> <span class="n">Application</span> <span class="n">package</span> <span class="n">name</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">uninstall</span> <span class="n">com</span><span class="o">.</span><span class="n">android</span><span class="o">.</span><span class="n">chrome</span>
+</pre></div>
+</div>
+<p>The package name of application can be listed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">shell</span> <span class="n">pm</span> <span class="nb">list</span> <span class="n">packages</span> <span class="o">-</span><span class="n">f</span>
+</pre></div>
+</div>
+<p>The running result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>⋯
+
+package:/system/app/Bluetooth.apk=com.android.bluetooth
+
+⋯
+</pre></div>
+</div>
+<p>The apk file is ahead，and the follows is the corresponding package name.</p>
+</div>
+<div class="section" id="commandline-help-adb-help">
+<h3>1.5.3. Commandline Help (adb help)<a class="headerlink" href="#commandline-help-adb-help" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Android</span> <span class="n">Debug</span> <span class="n">Bridge</span> <span class="n">version</span> <span class="mf">1.0</span><span class="o">.</span><span class="mi">31</span>
+
+ <span class="o">-</span><span class="n">a</span>                            <span class="o">-</span> <span class="n">directs</span> <span class="n">adb</span> <span class="n">to</span> <span class="n">listen</span> <span class="n">on</span> <span class="nb">all</span> <span class="n">interfaces</span> <span class="k">for</span> <span class="n">a</span> <span class="n">connection</span>
+ <span class="o">-</span><span class="n">d</span>                            <span class="o">-</span> <span class="n">directs</span> <span class="n">command</span> <span class="n">to</span> <span class="n">the</span> <span class="n">only</span> <span class="n">connected</span> <span class="n">USB</span> <span class="n">device</span>
+                                 <span class="n">returns</span> <span class="n">an</span> <span class="n">error</span> <span class="k">if</span> <span class="n">more</span> <span class="n">than</span> <span class="n">one</span> <span class="n">USB</span> <span class="n">device</span> <span class="ow">is</span> <span class="n">present</span><span class="o">.</span>
+ <span class="o">-</span><span class="n">e</span>                            <span class="o">-</span> <span class="n">directs</span> <span class="n">command</span> <span class="n">to</span> <span class="n">the</span> <span class="n">only</span> <span class="n">running</span> <span class="n">emulator</span><span class="o">.</span>
+                                 <span class="n">returns</span> <span class="n">an</span> <span class="n">error</span> <span class="k">if</span> <span class="n">more</span> <span class="n">than</span> <span class="n">one</span> <span class="n">emulator</span> <span class="ow">is</span> <span class="n">running</span><span class="o">.</span>
+ <span class="o">-</span><span class="n">s</span> <span class="o">&lt;</span><span class="n">specific</span> <span class="n">device</span><span class="o">&gt;</span>          <span class="o">-</span> <span class="n">directs</span> <span class="n">command</span> <span class="n">to</span> <span class="n">the</span> <span class="n">device</span> <span class="ow">or</span> <span class="n">emulator</span> <span class="k">with</span> <span class="n">the</span> <span class="n">given</span>
+                                 <span class="n">serial</span> <span class="n">number</span> <span class="ow">or</span> <span class="n">qualifier</span><span class="o">.</span> <span class="n">Overrides</span> <span class="n">ANDROID_SERIAL</span>
+                                 <span class="n">environment</span> <span class="n">variable</span><span class="o">.</span>
+ <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">product</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">path</span><span class="o">&gt;</span>     <span class="o">-</span> <span class="n">simple</span> <span class="n">product</span> <span class="n">name</span> <span class="n">like</span> <span class="s1">&#39;sooner&#39;</span><span class="p">,</span> <span class="ow">or</span>
+                                 <span class="n">a</span> <span class="n">relative</span><span class="o">/</span><span class="n">absolute</span> <span class="n">path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">product</span>
+                                 <span class="n">out</span> <span class="n">directory</span> <span class="n">like</span> <span class="s1">&#39;out/target/product/sooner&#39;</span><span class="o">.</span>
+                                 <span class="n">If</span> <span class="o">-</span><span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">the</span> <span class="n">ANDROID_PRODUCT_OUT</span>
+                                 <span class="n">environment</span> <span class="n">variable</span> <span class="ow">is</span> <span class="n">used</span><span class="p">,</span> <span class="n">which</span> <span class="n">must</span>
+                                 <span class="n">be</span> <span class="n">an</span> <span class="n">absolute</span> <span class="n">path</span><span class="o">.</span>
+ <span class="o">-</span><span class="n">H</span>                            <span class="o">-</span> <span class="n">Name</span> <span class="n">of</span> <span class="n">adb</span> <span class="n">server</span> <span class="n">host</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">localhost</span><span class="p">)</span>
+ <span class="o">-</span><span class="n">P</span>                            <span class="o">-</span> <span class="n">Port</span> <span class="n">of</span> <span class="n">adb</span> <span class="n">server</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">5037</span><span class="p">)</span>
+ <span class="n">devices</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span><span class="p">]</span>                  <span class="o">-</span> <span class="nb">list</span> <span class="nb">all</span> <span class="n">connected</span> <span class="n">devices</span>
+                                 <span class="p">(</span><span class="s1">&#39;-l&#39;</span> <span class="n">will</span> <span class="n">also</span> <span class="nb">list</span> <span class="n">device</span> <span class="n">qualifiers</span><span class="p">)</span>
+ <span class="n">connect</span> <span class="o">&lt;</span><span class="n">host</span><span class="o">&gt;</span><span class="p">[:</span><span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">]</span>       <span class="o">-</span> <span class="n">connect</span> <span class="n">to</span> <span class="n">a</span> <span class="n">device</span> <span class="n">via</span> <span class="n">TCP</span><span class="o">/</span><span class="n">IP</span>
+                                 <span class="n">Port</span> <span class="mi">5555</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">by</span> <span class="n">default</span> <span class="k">if</span> <span class="n">no</span> <span class="n">port</span> <span class="n">number</span> <span class="ow">is</span> <span class="n">specified</span><span class="o">.</span>
+ <span class="n">disconnect</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">host</span><span class="o">&gt;</span><span class="p">[:</span><span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">]]</span>  <span class="o">-</span> <span class="n">disconnect</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">TCP</span><span class="o">/</span><span class="n">IP</span> <span class="n">device</span><span class="o">.</span>
+                                 <span class="n">Port</span> <span class="mi">5555</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">by</span> <span class="n">default</span> <span class="k">if</span> <span class="n">no</span> <span class="n">port</span> <span class="n">number</span> <span class="ow">is</span> <span class="n">specified</span><span class="o">.</span>
+                                 <span class="n">Using</span> <span class="n">this</span> <span class="n">command</span> <span class="k">with</span> <span class="n">no</span> <span class="n">additional</span> <span class="n">arguments</span>
+                                 <span class="n">will</span> <span class="n">disconnect</span> <span class="kn">from</span> <span class="nn">all</span> <span class="n">connected</span> <span class="n">TCP</span><span class="o">/</span><span class="n">IP</span> <span class="n">devices</span><span class="o">.</span>
+
+<span class="n">device</span> <span class="n">commands</span><span class="p">:</span>
+  <span class="n">adb</span> <span class="n">push</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">local</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span>
+                               <span class="o">-</span> <span class="n">copy</span> <span class="n">file</span><span class="o">/</span><span class="nb">dir</span> <span class="n">to</span> <span class="n">device</span>
+                                 <span class="p">(</span><span class="s1">&#39;-p&#39;</span> <span class="n">to</span> <span class="n">display</span> <span class="n">the</span> <span class="n">transfer</span> <span class="n">progress</span><span class="p">)</span>
+  <span class="n">adb</span> <span class="n">pull</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">local</span><span class="o">&gt;</span><span class="p">]</span>
+                               <span class="o">-</span> <span class="n">copy</span> <span class="n">file</span><span class="o">/</span><span class="nb">dir</span> <span class="kn">from</span> <span class="nn">device</span>
+                                 <span class="p">(</span><span class="s1">&#39;-p&#39;</span> <span class="n">to</span> <span class="n">display</span> <span class="n">the</span> <span class="n">transfer</span> <span class="n">progress</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="s1">&#39;-a&#39;</span> <span class="n">means</span> <span class="n">copy</span> <span class="n">timestamp</span> <span class="ow">and</span> <span class="n">mode</span><span class="p">)</span>
+  <span class="n">adb</span> <span class="n">sync</span> <span class="p">[</span> <span class="o">&lt;</span><span class="n">directory</span><span class="o">&gt;</span> <span class="p">]</span>     <span class="o">-</span> <span class="n">copy</span> <span class="n">host</span><span class="o">-&gt;</span><span class="n">device</span> <span class="n">only</span> <span class="k">if</span> <span class="n">changed</span>
+                                 <span class="p">(</span><span class="o">-</span><span class="n">l</span> <span class="n">means</span> <span class="nb">list</span> <span class="n">but</span> <span class="n">don</span><span class="s1">&#39;t copy)</span>
+                                 <span class="p">(</span><span class="n">see</span> <span class="s1">&#39;adb help all&#39;</span><span class="p">)</span>
+  <span class="n">adb</span> <span class="n">shell</span>                    <span class="o">-</span> <span class="n">run</span> <span class="n">remote</span> <span class="n">shell</span> <span class="n">interactively</span>
+  <span class="n">adb</span> <span class="n">shell</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span>          <span class="o">-</span> <span class="n">run</span> <span class="n">remote</span> <span class="n">shell</span> <span class="n">command</span>
+  <span class="n">adb</span> <span class="n">emu</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span>            <span class="o">-</span> <span class="n">run</span> <span class="n">emulator</span> <span class="n">console</span> <span class="n">command</span>
+  <span class="n">adb</span> <span class="n">logcat</span> <span class="p">[</span> <span class="o">&lt;</span><span class="nb">filter</span><span class="o">-</span><span class="n">spec</span><span class="o">&gt;</span> <span class="p">]</span> <span class="o">-</span> <span class="n">View</span> <span class="n">device</span> <span class="n">log</span>
+  <span class="n">adb</span> <span class="n">forward</span> <span class="o">--</span><span class="nb">list</span>           <span class="o">-</span> <span class="nb">list</span> <span class="nb">all</span> <span class="n">forward</span> <span class="n">socket</span> <span class="n">connections</span><span class="o">.</span>
+                                 <span class="n">the</span> <span class="nb">format</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">lines</span> <span class="k">with</span> <span class="n">the</span> <span class="n">following</span> <span class="nb">format</span><span class="p">:</span>
+                                    <span class="o">&lt;</span><span class="n">serial</span><span class="o">&gt;</span> <span class="s2">&quot; &quot;</span> <span class="o">&lt;</span><span class="n">local</span><span class="o">&gt;</span> <span class="s2">&quot; &quot;</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="n">adb</span> <span class="n">forward</span> <span class="o">&lt;</span><span class="n">local</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">forward</span> <span class="n">socket</span> <span class="n">connections</span>
+                                 <span class="n">forward</span> <span class="n">specs</span> <span class="n">are</span> <span class="n">one</span> <span class="n">of</span><span class="p">:</span>
+                                   <span class="n">tcp</span><span class="p">:</span><span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>
+                                   <span class="n">localabstract</span><span class="p">:</span><span class="o">&lt;</span><span class="n">unix</span> <span class="n">domain</span> <span class="n">socket</span> <span class="n">name</span><span class="o">&gt;</span>
+                                   <span class="n">localreserved</span><span class="p">:</span><span class="o">&lt;</span><span class="n">unix</span> <span class="n">domain</span> <span class="n">socket</span> <span class="n">name</span><span class="o">&gt;</span>
+                                   <span class="n">localfilesystem</span><span class="p">:</span><span class="o">&lt;</span><span class="n">unix</span> <span class="n">domain</span> <span class="n">socket</span> <span class="n">name</span><span class="o">&gt;</span>
+                                   <span class="n">dev</span><span class="p">:</span><span class="o">&lt;</span><span class="n">character</span> <span class="n">device</span> <span class="n">name</span><span class="o">&gt;</span>
+                                   <span class="n">jdwp</span><span class="p">:</span><span class="o">&lt;</span><span class="n">process</span> <span class="n">pid</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">remote</span> <span class="n">only</span><span class="p">)</span>
+  <span class="n">adb</span> <span class="n">forward</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">rebind</span> <span class="o">&lt;</span><span class="n">local</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span>
+                               <span class="o">-</span> <span class="n">same</span> <span class="k">as</span> <span class="s1">&#39;adb forward &lt;local&gt; &lt;remote&gt;&#39;</span> <span class="n">but</span> <span class="n">fails</span>
+                                 <span class="k">if</span> <span class="o">&lt;</span><span class="n">local</span><span class="o">&gt;</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">forwarded</span>
+  <span class="n">adb</span> <span class="n">forward</span> <span class="o">--</span><span class="n">remove</span> <span class="o">&lt;</span><span class="n">local</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">remove</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">forward</span> <span class="n">socket</span> <span class="n">connection</span>
+  <span class="n">adb</span> <span class="n">forward</span> <span class="o">--</span><span class="n">remove</span><span class="o">-</span><span class="nb">all</span>     <span class="o">-</span> <span class="n">remove</span> <span class="nb">all</span> <span class="n">forward</span> <span class="n">socket</span> <span class="n">connections</span>
+  <span class="n">adb</span> <span class="n">jdwp</span>                     <span class="o">-</span> <span class="nb">list</span> <span class="n">PIDs</span> <span class="n">of</span> <span class="n">processes</span> <span class="n">hosting</span> <span class="n">a</span> <span class="n">JDWP</span> <span class="n">transport</span>
+  <span class="n">adb</span> <span class="n">install</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">algo</span> <span class="o">&lt;</span><span class="n">algorithm</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">key</span> <span class="o">&lt;</span><span class="nb">hex</span><span class="o">-</span><span class="n">encoded</span> <span class="n">key</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">iv</span> <span class="o">&lt;</span><span class="nb">hex</span><span class="o">-</span><span class="n">encoded</span> <span class="n">iv</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span>
+                               <span class="o">-</span> <span class="n">push</span> <span class="n">this</span> <span class="n">package</span> <span class="n">file</span> <span class="n">to</span> <span class="n">the</span> <span class="n">device</span> <span class="ow">and</span> <span class="n">install</span> <span class="n">it</span>
+                                 <span class="p">(</span><span class="s1">&#39;-l&#39;</span> <span class="n">means</span> <span class="n">forward</span><span class="o">-</span><span class="n">lock</span> <span class="n">the</span> <span class="n">app</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="s1">&#39;-r&#39;</span> <span class="n">means</span> <span class="n">reinstall</span> <span class="n">the</span> <span class="n">app</span><span class="p">,</span> <span class="n">keeping</span> <span class="n">its</span> <span class="n">data</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="s1">&#39;-d&#39;</span> <span class="n">means</span> <span class="n">allow</span> <span class="n">version</span> <span class="n">code</span> <span class="n">downgrade</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="s1">&#39;-s&#39;</span> <span class="n">means</span> <span class="n">install</span> <span class="n">on</span> <span class="n">SD</span> <span class="n">card</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">internal</span> <span class="n">storage</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="s1">&#39;--algo&#39;</span><span class="p">,</span> <span class="s1">&#39;--key&#39;</span><span class="p">,</span> <span class="ow">and</span> <span class="s1">&#39;--iv&#39;</span> <span class="n">mean</span> <span class="n">the</span> <span class="n">file</span> <span class="ow">is</span> <span class="n">encrypted</span> <span class="n">already</span><span class="p">)</span>
+  <span class="n">adb</span> <span class="n">uninstall</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">package</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">remove</span> <span class="n">this</span> <span class="n">app</span> <span class="n">package</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">device</span>
+                                 <span class="p">(</span><span class="s1">&#39;-k&#39;</span> <span class="n">means</span> <span class="n">keep</span> <span class="n">the</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">cache</span> <span class="n">directories</span><span class="p">)</span>
+  <span class="n">adb</span> <span class="n">bugreport</span>                <span class="o">-</span> <span class="k">return</span> <span class="nb">all</span> <span class="n">information</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">device</span>
+                                 <span class="n">that</span> <span class="n">should</span> <span class="n">be</span> <span class="n">included</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">bug</span> <span class="n">report</span><span class="o">.</span>
+
+<span class="n">adb</span> <span class="n">backup</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">apk</span><span class="o">|-</span><span class="n">noapk</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">obb</span><span class="o">|-</span><span class="n">noobb</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">shared</span><span class="o">|-</span><span class="n">noshared</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="nb">all</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">system</span><span class="o">|-</span><span class="n">nosystem</span><span class="p">]</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">packages</span><span class="o">...&gt;</span><span class="p">]</span>
+                               <span class="o">-</span> <span class="n">write</span> <span class="n">an</span> <span class="n">archive</span> <span class="n">of</span> <span class="n">the</span> <span class="n">device</span><span class="s1">&#39;s data to &lt;file&gt;.</span>
+                                 <span class="n">If</span> <span class="n">no</span> <span class="o">-</span><span class="n">f</span> <span class="n">option</span> <span class="ow">is</span> <span class="n">supplied</span> <span class="n">then</span> <span class="n">the</span> <span class="n">data</span> <span class="ow">is</span> <span class="n">written</span>
+                                 <span class="n">to</span> <span class="s2">&quot;backup.ab&quot;</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">current</span> <span class="n">directory</span><span class="o">.</span>
+                                 <span class="p">(</span><span class="o">-</span><span class="n">apk</span><span class="o">|-</span><span class="n">noapk</span> <span class="n">enable</span><span class="o">/</span><span class="n">disable</span> <span class="n">backup</span> <span class="n">of</span> <span class="n">the</span> <span class="o">.</span><span class="n">apks</span> <span class="n">themselves</span>
+                                    <span class="ow">in</span> <span class="n">the</span> <span class="n">archive</span><span class="p">;</span> <span class="n">the</span> <span class="n">default</span> <span class="ow">is</span> <span class="n">noapk</span><span class="o">.</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="o">-</span><span class="n">obb</span><span class="o">|-</span><span class="n">noobb</span> <span class="n">enable</span><span class="o">/</span><span class="n">disable</span> <span class="n">backup</span> <span class="n">of</span> <span class="nb">any</span> <span class="n">installed</span> <span class="n">apk</span> <span class="n">expansion</span>
+                                    <span class="p">(</span><span class="n">aka</span> <span class="o">.</span><span class="n">obb</span><span class="p">)</span> <span class="n">files</span> <span class="n">associated</span> <span class="k">with</span> <span class="n">each</span> <span class="n">application</span><span class="p">;</span> <span class="n">the</span> <span class="n">default</span>
+                                    <span class="ow">is</span> <span class="n">noobb</span><span class="o">.</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="o">-</span><span class="n">shared</span><span class="o">|-</span><span class="n">noshared</span> <span class="n">enable</span><span class="o">/</span><span class="n">disable</span> <span class="n">backup</span> <span class="n">of</span> <span class="n">the</span> <span class="n">device</span><span class="s1">&#39;s</span>
+                                    <span class="n">shared</span> <span class="n">storage</span> <span class="o">/</span> <span class="n">SD</span> <span class="n">card</span> <span class="n">contents</span><span class="p">;</span> <span class="n">the</span> <span class="n">default</span> <span class="ow">is</span> <span class="n">noshared</span><span class="o">.</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="o">-</span><span class="nb">all</span> <span class="n">means</span> <span class="n">to</span> <span class="n">back</span> <span class="n">up</span> <span class="nb">all</span> <span class="n">installed</span> <span class="n">applications</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="o">-</span><span class="n">system</span><span class="o">|-</span><span class="n">nosystem</span> <span class="n">toggles</span> <span class="n">whether</span> <span class="o">-</span><span class="nb">all</span> <span class="n">automatically</span> <span class="n">includes</span>
+                                    <span class="n">system</span> <span class="n">applications</span><span class="p">;</span> <span class="n">the</span> <span class="n">default</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">include</span> <span class="n">system</span> <span class="n">apps</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="o">&lt;</span><span class="n">packages</span><span class="o">...&gt;</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">applications</span> <span class="n">to</span> <span class="n">be</span> <span class="n">backed</span> <span class="n">up</span><span class="o">.</span>  <span class="n">If</span>
+                                    <span class="n">the</span> <span class="o">-</span><span class="nb">all</span> <span class="ow">or</span> <span class="o">-</span><span class="n">shared</span> <span class="n">flags</span> <span class="n">are</span> <span class="n">passed</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">package</span>
+                                    <span class="nb">list</span> <span class="ow">is</span> <span class="n">optional</span><span class="o">.</span>  <span class="n">Applications</span> <span class="n">explicitly</span> <span class="n">given</span> <span class="n">on</span> <span class="n">the</span>
+                                    <span class="n">command</span> <span class="n">line</span> <span class="n">will</span> <span class="n">be</span> <span class="n">included</span> <span class="n">even</span> <span class="k">if</span> <span class="o">-</span><span class="n">nosystem</span> <span class="n">would</span>
+                                    <span class="n">ordinarily</span> <span class="n">cause</span> <span class="n">them</span> <span class="n">to</span> <span class="n">be</span> <span class="n">omitted</span><span class="o">.</span><span class="p">)</span>
+
+<span class="n">adb</span> <span class="n">restore</span> <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span>           <span class="o">-</span> <span class="n">restore</span> <span class="n">device</span> <span class="n">contents</span> <span class="kn">from</span> <span class="nn">the</span> <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span> <span class="n">backup</span> <span class="n">archive</span>
+
+<span class="n">adb</span> <span class="n">help</span>                     <span class="o">-</span> <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span>
+  <span class="n">adb</span> <span class="n">version</span>                  <span class="o">-</span> <span class="n">show</span> <span class="n">version</span> <span class="n">num</span>
+
+<span class="n">scripting</span><span class="p">:</span>
+  <span class="n">adb</span> <span class="n">wait</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">device</span>          <span class="o">-</span> <span class="n">block</span> <span class="n">until</span> <span class="n">device</span> <span class="ow">is</span> <span class="n">online</span>
+  <span class="n">adb</span> <span class="n">start</span><span class="o">-</span><span class="n">server</span>             <span class="o">-</span> <span class="n">ensure</span> <span class="n">that</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">server</span> <span class="n">running</span>
+  <span class="n">adb</span> <span class="n">kill</span><span class="o">-</span><span class="n">server</span>              <span class="o">-</span> <span class="n">kill</span> <span class="n">the</span> <span class="n">server</span> <span class="k">if</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">running</span>
+  <span class="n">adb</span> <span class="n">get</span><span class="o">-</span><span class="n">state</span>                <span class="o">-</span> <span class="n">prints</span><span class="p">:</span> <span class="n">offline</span> <span class="o">|</span> <span class="n">bootloader</span> <span class="o">|</span> <span class="n">device</span>
+  <span class="n">adb</span> <span class="n">get</span><span class="o">-</span><span class="n">serialno</span>             <span class="o">-</span> <span class="n">prints</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">serial</span><span class="o">-</span><span class="n">number</span><span class="o">&gt;</span>
+  <span class="n">adb</span> <span class="n">get</span><span class="o">-</span><span class="n">devpath</span>              <span class="o">-</span> <span class="n">prints</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">device</span><span class="o">-</span><span class="n">path</span><span class="o">&gt;</span>
+  <span class="n">adb</span> <span class="n">status</span><span class="o">-</span><span class="n">window</span>            <span class="o">-</span> <span class="n">continuously</span> <span class="nb">print</span> <span class="n">device</span> <span class="n">status</span> <span class="k">for</span> <span class="n">a</span> <span class="n">specified</span> <span class="n">device</span>
+  <span class="n">adb</span> <span class="n">remount</span>                  <span class="o">-</span> <span class="n">remounts</span> <span class="n">the</span> <span class="o">/</span><span class="n">system</span> <span class="n">partition</span> <span class="n">on</span> <span class="n">the</span> <span class="n">device</span> <span class="n">read</span><span class="o">-</span><span class="n">write</span>
+  <span class="n">adb</span> <span class="n">reboot</span> <span class="p">[</span><span class="n">bootloader</span><span class="o">|</span><span class="n">recovery</span><span class="p">]</span> <span class="o">-</span> <span class="n">reboots</span> <span class="n">the</span> <span class="n">device</span><span class="p">,</span> <span class="n">optionally</span> <span class="n">into</span> <span class="n">the</span> <span class="n">bootloader</span> <span class="ow">or</span> <span class="n">recovery</span> <span class="n">program</span>
+  <span class="n">adb</span> <span class="n">reboot</span><span class="o">-</span><span class="n">bootloader</span>        <span class="o">-</span> <span class="n">reboots</span> <span class="n">the</span> <span class="n">device</span> <span class="n">into</span> <span class="n">the</span> <span class="n">bootloader</span>
+  <span class="n">adb</span> <span class="n">root</span>                     <span class="o">-</span> <span class="n">restarts</span> <span class="n">the</span> <span class="n">adbd</span> <span class="n">daemon</span> <span class="k">with</span> <span class="n">root</span> <span class="n">permissions</span>
+  <span class="n">adb</span> <span class="n">usb</span>                      <span class="o">-</span> <span class="n">restarts</span> <span class="n">the</span> <span class="n">adbd</span> <span class="n">daemon</span> <span class="n">listening</span> <span class="n">on</span> <span class="n">USB</span>
+  <span class="n">adb</span> <span class="n">tcpip</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>             <span class="o">-</span> <span class="n">restarts</span> <span class="n">the</span> <span class="n">adbd</span> <span class="n">daemon</span> <span class="n">listening</span> <span class="n">on</span> <span class="n">TCP</span> <span class="n">on</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">port</span>
+<span class="n">networking</span><span class="p">:</span>
+  <span class="n">adb</span> <span class="n">ppp</span> <span class="o">&lt;</span><span class="n">tty</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">parameters</span><span class="p">]</span>   <span class="o">-</span> <span class="n">Run</span> <span class="n">PPP</span> <span class="n">over</span> <span class="n">USB</span><span class="o">.</span>
+ <span class="n">Note</span><span class="p">:</span> <span class="n">you</span> <span class="n">should</span> <span class="ow">not</span> <span class="n">automatically</span> <span class="n">start</span> <span class="n">a</span> <span class="n">PPP</span> <span class="n">connection</span><span class="o">.</span>
+ <span class="o">&lt;</span><span class="n">tty</span><span class="o">&gt;</span> <span class="n">refers</span> <span class="n">to</span> <span class="n">the</span> <span class="n">tty</span> <span class="k">for</span> <span class="n">PPP</span> <span class="n">stream</span><span class="o">.</span> <span class="n">Eg</span><span class="o">.</span> <span class="n">dev</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">omap_csmi_tty1</span>
+ <span class="p">[</span><span class="n">parameters</span><span class="p">]</span> <span class="o">-</span> <span class="n">Eg</span><span class="o">.</span> <span class="n">defaultroute</span> <span class="n">debug</span> <span class="n">dump</span> <span class="n">local</span> <span class="n">notty</span> <span class="n">usepeerdns</span>
+
+<span class="n">adb</span> <span class="n">sync</span> <span class="n">notes</span><span class="p">:</span> <span class="n">adb</span> <span class="n">sync</span> <span class="p">[</span> <span class="o">&lt;</span><span class="n">directory</span><span class="o">&gt;</span> <span class="p">]</span>
+  <span class="o">&lt;</span><span class="n">localdir</span><span class="o">&gt;</span> <span class="n">can</span> <span class="n">be</span> <span class="n">interpreted</span> <span class="ow">in</span> <span class="n">several</span> <span class="n">ways</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="n">If</span> <span class="o">&lt;</span><span class="n">directory</span><span class="o">&gt;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">both</span> <span class="o">/</span><span class="n">system</span> <span class="ow">and</span> <span class="o">/</span><span class="n">data</span> <span class="n">partitions</span> <span class="n">will</span> <span class="n">be</span> <span class="n">updated</span><span class="o">.</span>
+
+<span class="o">-</span> <span class="n">If</span> <span class="n">it</span> <span class="ow">is</span> <span class="s2">&quot;system&quot;</span> <span class="ow">or</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">only</span> <span class="n">the</span> <span class="n">corresponding</span> <span class="n">partition</span>
+    <span class="ow">is</span> <span class="n">updated</span><span class="o">.</span>
+
+<span class="n">environmental</span> <span class="n">variables</span><span class="p">:</span>
+  <span class="n">ADB_TRACE</span>                    <span class="o">-</span> <span class="n">Print</span> <span class="n">debug</span> <span class="n">information</span><span class="o">.</span> <span class="n">A</span> <span class="n">comma</span> <span class="n">separated</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">values</span>
+                                 <span class="mi">1</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">,</span> <span class="n">adb</span><span class="p">,</span> <span class="n">sockets</span><span class="p">,</span> <span class="n">packets</span><span class="p">,</span> <span class="n">rwx</span><span class="p">,</span> <span class="n">usb</span><span class="p">,</span> <span class="n">sync</span><span class="p">,</span> <span class="n">sysdeps</span><span class="p">,</span> <span class="n">transport</span><span class="p">,</span> <span class="n">jdwp</span>
+  <span class="n">ANDROID_SERIAL</span>               <span class="o">-</span> <span class="n">The</span> <span class="n">serial</span> <span class="n">number</span> <span class="n">to</span> <span class="n">connect</span> <span class="n">to</span><span class="o">.</span> <span class="o">-</span><span class="n">s</span> <span class="n">takes</span> <span class="n">priority</span> <span class="n">over</span> <span class="n">this</span> <span class="k">if</span> <span class="n">given</span><span class="o">.</span>
+  <span class="n">ANDROID_LOG_TAGS</span>             <span class="o">-</span> <span class="n">When</span> <span class="n">used</span> <span class="k">with</span> <span class="n">the</span> <span class="n">logcat</span> <span class="n">option</span><span class="p">,</span> <span class="n">only</span> <span class="n">these</span> <span class="n">debug</span> <span class="n">tags</span> <span class="n">are</span> <span class="n">printed</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="prepare_compile_android.html" class="btn btn-neutral float-right" title="2. Compile environment to build" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="firefly_linux_guide.html" class="btn btn-neutral" title="6. Firefly Linux User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/adb_use.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:40 GMT -->
+</html>

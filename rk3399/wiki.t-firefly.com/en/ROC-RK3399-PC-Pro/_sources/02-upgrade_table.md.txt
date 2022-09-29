@@ -1,0 +1,40 @@
+Instructions for writing with USB cable (important)
+
+ROC-RK3399-PC Pro The Android system is installed by default at the
+factory. Due to system characteristics, when the motherboard with
+Android7.1  system is installed to write other firmware that is not
+the same version, some pre-processing is required, otherwise it will
+cause the firmware to be burned failure.
+
+
+After the following pre-operation processing, the machine should be in
+the maskrom state as shown in the figure below, otherwise the pre-
+operation will not succeed.
+
+
+
+If the machine is currently in the maskrom state, no pre-processing is
+required and any version of the firmware can be burned directly.
+
+
+
+<font size=3>1.Programming tool (download the corresponding upgrade
+tool version according to the table below) </font>
+
+Linux_Upgrade_Tool
+
+upgrade_tool_xxx (version number)<font color = # ff0000 size = 2>
+(Note: Industry version must be used 2.58 or> download and burn the
+above version)</font>
+
+<font size=3>2.Firmware</font>
+
+Ubuntu： <br />The Ubuntu firmware released by Firefly uses the GPT
+partition format to manage the boot media. The early firmware that
+uses the MBR partition format has been discontinued.
+
+Android 7.1: <br /> Android7.1 firmware version is  industry version
+(mainly maintenance).
+
+Before the Upgrade Firmware,** Please read the following table
+carefully before writing: **

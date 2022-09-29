@@ -1,0 +1,737 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/compile_android7.1_firmware.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:28:50 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compile Android7.1 firmware &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Compile Android7.1 firmware</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/compile_android7.1_firmware.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p><strong>Download compilation instructions:</strong>
+At present, the Android7.1 version does not do major maintenance. Please compile and select the Android7.1 industry version<font color="#dd0000">(Main maintenance)</font>. This version is more widely used in the fields of industry and tablets and boxes. It has a stable performance and has been verified by mass production. This version As the main maintenance version of our company, it is applicable to all models of our RK3399 system.</p>
+<div class="section" id="compile-android7-1-firmware">
+<h1>Compile Android7.1 firmware<a class="headerlink" href="#compile-android7-1-firmware" title="Permalink to this headline">¶</a></h1>
+<p><strong>The Android SDK source package is relatively large, and the Android7.1 source package can be obtained as follows:</strong><a class="reference external" href="">Android7.1 SDK</a></p>
+<p>After downloading, verify the MD5 code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$md5sum ~/firefly_rk3399_android7.1_git_20211220.7z.001
+$md5sum ~/firefly_rk3399_android7.1_git_20211220.7z.002
+$md5sum ~/firefly_rk3399_android7.1_git_20211220.7z.003
+
+90145747b33ad6834cd065b594f6687f  firefly_rk3399_android7.1_git_20211220.7z.001
+6f28a1d66b1d168a89bfd3a7923775f8  firefly_rk3399_android7.1_git_20211220.7z.002
+dc4d87ba8574900eed84f60f9cbe3646  firefly_rk3399_android7.1_git_20211220.7z.003
+</pre></div>
+</div>
+<p>After confirming that it is correct, you can unzip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span> <span class="n">Pro</span>
+<span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span> <span class="n">Pro</span>
+<span class="mi">7</span><span class="n">z</span> <span class="n">x</span> <span class="o">~/</span><span class="n">firefly_rk3399_android7</span><span class="o">.</span><span class="mi">1</span><span class="n">_git_20211220</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span><span class="o">.</span><span class="mi">001</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">o</span><span class="o">.</span>
+<span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Update</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#1.Enter root dir</span>
+<span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span> <span class="n">Pro</span>
+
+<span class="c1">#2. pull bundle.git first</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gitlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">TeeFirefly</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">nougat</span><span class="o">-</span><span class="n">bundle</span><span class="o">.</span><span class="n">git</span> <span class="o">.</span><span class="n">bundle</span>
+
+<span class="c1"># 3.If clone fail, get bundle package from [Android7.1 SDK]</span>
+<span class="c1"># The decompression instructions are as follows:</span>
+
+<span class="mi">7</span><span class="n">z</span> <span class="n">x</span> <span class="n">rk3399</span><span class="o">-</span><span class="n">nougat</span><span class="o">-</span><span class="n">bundle</span><span class="o">-</span><span class="mf">20190612.7</span><span class="n">z</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">o</span><span class="o">.</span> <span class="o">&amp;&amp;</span> <span class="n">mv</span> <span class="n">rk3399</span><span class="o">-</span><span class="n">nougat</span><span class="o">-</span><span class="n">bundle</span><span class="o">/</span> <span class="o">.</span><span class="n">bundle</span><span class="o">/</span>
+
+<span class="c1"># 4.Update the SDK, and subsequent updates do not need to pull the remote warehouse again, just execute the following command</span>
+
+<span class="o">.</span><span class="n">bundle</span><span class="o">/</span><span class="n">update</span>
+
+<span class="c1"># 5.Follow the prompts to update the content to FETCH_HEAD, synchronize FETCH_HEAD to the firefly branch</span>
+<span class="n">git</span> <span class="n">rebase</span> <span class="n">FETCH_HEAD</span>
+</pre></div>
+</div>
+<div class="section" id="roc-rk3399-pc-pro-product-compilation-method">
+<h2>ROC-RK3399-PC Pro Product compilation method<a class="headerlink" href="#roc-rk3399-pc-pro-product-compilation-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hdmi-display-compilation">
+<h3>HDMI display compilation<a class="headerlink" href="#hdmi-display-compilation" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">FFTools</span><span class="o">/</span><span class="n">make</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">d</span> <span class="n">rk3399</span><span class="o">-</span><span class="n">roc</span><span class="o">-</span><span class="n">pc</span> <span class="o">-</span><span class="n">j8</span> <span class="o">-</span><span class="n">l</span> <span class="n">ROC_RK3399_PC</span><span class="o">-</span><span class="n">userdebug</span>
+<span class="o">./</span><span class="n">FFTools</span><span class="o">/</span><span class="n">mkupdate</span><span class="o">/</span><span class="n">mkupdate</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">l</span> <span class="n">ROC_RK3399_PC</span><span class="o">-</span><span class="n">userdebug</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="manual-compilation-roc-rk3399-pc-pro">
+<h2>Manual compilation ROC-RK3399-PC Pro<a class="headerlink" href="#manual-compilation-roc-rk3399-pc-pro" title="Permalink to this headline">¶</a></h2>
+<p>Before compiling, execute the following command to configure environment variables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile the kernel:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span> <span class="n">Pro</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span>
+<span class="n">make</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm64</span> <span class="n">firefly_defconfig</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j8</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm64</span> <span class="n">rk3399</span><span class="o">-</span><span class="n">roc</span><span class="o">-</span><span class="n">pc</span><span class="o">.</span><span class="n">img</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile U-boot:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span> <span class="n">Pro</span><span class="o">/</span><span class="n">u</span><span class="o">-</span><span class="n">boot</span><span class="o">/</span>
+<span class="n">make</span> <span class="n">rk3399_box_defconfig</span>
+<span class="n">make</span> <span class="n">ARCHV</span><span class="o">=</span><span class="n">aarch64</span> <span class="o">-</span><span class="n">j8</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile Android:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span> <span class="n">Pro</span><span class="o">/</span>
+<span class="n">source</span> <span class="n">build</span><span class="o">/</span><span class="n">envsetup</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">lunch</span> <span class="n">rk3399_roc_pc_plus</span><span class="o">-</span><span class="n">userdebug</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j8</span>
+<span class="o">./</span><span class="n">mkimage</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile the kernel separately：</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span><span class="o">-</span><span class="n">Pro</span><span class="o">/</span>
+<span class="o">./</span><span class="n">FFTools</span><span class="o">/</span><span class="n">make</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">k</span> <span class="o">-</span><span class="n">j8</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile the uboot separately：</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span><span class="o">-</span><span class="n">Pro</span><span class="o">/</span>
+<span class="o">./</span><span class="n">FFTools</span><span class="o">/</span><span class="n">make</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">u</span> <span class="o">-</span><span class="n">j8</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile Android upper layer separately：</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span><span class="o">-</span><span class="n">Pro</span><span class="o">/</span>
+<span class="o">./</span><span class="n">FFTools</span><span class="o">/</span><span class="n">make</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">j8</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile ubooot, kernel, Android at the same time：</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">proj</span><span class="o">/</span><span class="n">ROC</span><span class="o">-</span><span class="n">RK3399</span><span class="o">-</span><span class="n">PC</span><span class="o">-</span><span class="n">Pro</span><span class="o">/</span>
+<span class="o">./</span><span class="n">FFTools</span><span class="o">/</span><span class="n">make</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">j8</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="package-into-a-unified-firmware">
+<h2>Package into a unified firmware<a class="headerlink" href="#package-into-a-unified-firmware" title="Permalink to this headline">¶</a></h2>
+<p>After compiling, execute the following command first, then use Firefly official script to package into a unified SD card firmware, execute the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">FFTools</span><span class="o">/</span><span class="n">mkupdate</span><span class="o">/</span><span class="n">mkupdate</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">l</span> <span class="n">rk3399_roc_pc_plus</span><span class="o">-</span><span class="n">userdebug</span>
+</pre></div>
+</div>
+<p>According to different -l XXX-userdebug parameters, the packaged unified firmware will be stored in different directories (rockdev/image-XXX/): product name XXX_XXX_date XXX.img</p>
+<p>Packing the unified firmware <code class="docutils literal notranslate"><span class="pre">update.img</span></code> under Windows is also very simple. Copy the compiled files to the <code class="docutils literal notranslate"><span class="pre">rockdev/Image</span></code> directory of AndroidTool, and then run the <code class="docutils literal notranslate"><span class="pre">mkupdate.bat</span></code> batch file under the <code class="docutils literal notranslate"><span class="pre">rockdev</span></code> directory. Create <code class="docutils literal notranslate"><span class="pre">update.img</span></code> and store it in the <code class="docutils literal notranslate"><span class="pre">rockdev/Image</span></code> directory.</p>
+</div>
+<div class="section" id="generate-firmware-for-tf-card-startup">
+<h2>Generate firmware for tf card startup<a class="headerlink" href="#generate-firmware-for-tf-card-startup" title="Permalink to this headline">¶</a></h2>
+<p>After compiling, execute the following command first, then use Firefly official script to package into a unified SD card firmware, execute the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mkimage</span> <span class="n">sdboot</span>
+<span class="o">./</span><span class="n">FFTools</span><span class="o">/</span><span class="n">mkupdate</span><span class="o">/</span><span class="n">mkupdate</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">l</span> <span class="n">rk3399_roc_pc_plus</span><span class="o">-</span><span class="n">userdebug</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="flash-partition-image">
+<h2>Flash partition image<a class="headerlink" href="#flash-partition-image" title="Permalink to this headline">¶</a></h2>
+<p>When compiling, executing ./mkimage.sh will repackage boot.img and system.img, and copy other related image files to the directory rockdev/Image-roc_3399_pc/. The following lists the image files used by general firmware:</p>
+<ul class="simple">
+<li><p>boot.img: Android’s initial file image, responsible for initializing and loading the system partition.</p></li>
+<li><p>kernel.img: kernel image.</p></li>
+<li><p>misc.img: misc partition image, responsible for starting mode switching and parameter transfer in emergency mode.</p></li>
+<li><p>parameter.txt: the partition information of emmc</p></li>
+<li><p>recovery.img: emergency mode image.</p></li>
+<li><p>resource.img: resource image, including boot image and kernel device tree information.</p></li>
+<li><p>system.img: Android system partition image, ext4 file system format.</p></li>
+<li><p>trust.img: files related to wake-up from sleep</p></li>
+<li><p>rk3399_loader_v1.08.106.bin: Loader file</p></li>
+<li><p>uboot.img: uboot file</p></li>
+</ul>
+<p>Please refer to <a class="reference internal" href="03-upgrade_firmware.html"><span class="doc">“Upgrade Firmware”</span></a> to burn the partition image file.</p>
+<p>If you are using a Windows system, copy the above image file to the <code class="docutils literal notranslate"><span class="pre">rockdev/Image</span></code> directory of AndroidTool (firmware upgrade tool under Windows), and then refer to the upgrade document to burn the partition image. This has the advantage of using the default Just configure it without modifying the path of the file.</p>
+<p>update.img facilitates the release of firmware for end users to upgrade the system. It is more convenient to use partition image during development.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/compile_android7.1_firmware.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:28:50 GMT -->
+</html>

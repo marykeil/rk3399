@@ -1,0 +1,1510 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/buildroot_develop.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:28:43 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Buildroot Development Manual &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Buildroot Development Manual</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/buildroot_develop.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="buildroot-development-manual">
+<h1>Buildroot Development Manual<a class="headerlink" href="#buildroot-development-manual" title="Permalink to this headline">¶</a></h1>
+<p>Buildroot is a framework for building embedded Linux systems on the Linux platform. The entire Buildroot is composed of a Makefile (*.mk) script and a Kconfig (Config.in) configuration file. You can compile a complete Linux system software (including boot, kernel, rootfs, and various libraries and applications in rootfs) that can be directly flashed to the machine through the buildroot configuration and menuconfig modification, just like compiling the Linux kernel.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="buildroot_compile.html"><span class="doc">“Compile Buildroot firmware”</span></a></p></li>
+<li><p><a class="reference external" href="https://buildroot.org/">Buildroot official website</a></p></li>
+<li><p><a class="reference external" href="https://buildroot.org/downloads/manual/manual.html">Buildroot Development Manual</a></p></li>
+</ul>
+<div class="section" id="directory-structure">
+<h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>buildroot/
+├── arch                <span class="c1"># Construction and configuration files of CPU architecture</span>
+├── board               <span class="c1"># Documents related to specific boards</span>
+├── boot                <span class="c1"># Construction and configuration files of Bootloaders</span>
+├── build
+├── CHANGES             <span class="c1"># Buildroot modification log</span>
+├── Config.in
+├── Config.in.legacy
+├── configs             <span class="c1"># Buildroot configuration file of the specific board</span>
+├── COPYING
+├── DEVELOPERS
+├── dl                  <span class="c1"># Downloaded programs, source code compressed packages, patches, etc.</span>
+├── docs                <span class="c1"># Documentation</span>
+├── fs                  <span class="c1"># Construction and configuration files of various filesystems</span>
+├── linux               <span class="c1"># Construction and configuration files of Linux</span>
+├── Makefile
+├── Makefile.legacy
+├── output              <span class="c1"># Compile output directory</span>
+├── package             <span class="c1"># Construction and configuration files of all packages</span>
+├── README              <span class="c1"># Simple instructions for Buildroot</span>
+├── support             <span class="c1"># Scripts and configuration files that provide functional support for Bulidroot</span>
+├── system              <span class="c1"># Construction and configuration files of making root filesystem</span>
+├── toolchain           <span class="c1"># Construction and configuration files of cross-compilation toolchain</span>
+└── utils               <span class="c1"># Utilities</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Select the default profile:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enter the SDK root directory</span>
+<span class="nb">cd</span> path/to/SDK/
+<span class="c1"># Select configuration file</span>
+<span class="c1"># `configs/rockchip_rk3399_defconfig`</span>
+<span class="nb">source</span> envsetup.sh rockchip_rk3399
+</pre></div>
+</div>
+<p>After the execution is completed, a compilation output directory, <code class="docutils literal notranslate"><span class="pre">output/rockchip_rk3399</span></code> will be generated, and subsequent operations of <code class="docutils literal notranslate"><span class="pre">make</span></code> can be executed in this directory.</p>
+<div class="section" id="configure-package">
+<h3>Configure package<a class="headerlink" href="#configure-package" title="Permalink to this headline">¶</a></h3>
+<p>Open the configuration interface:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make menuconfig
+</pre></div>
+</div>
+<p><img alt="_images/Buildroot_menuconfig.png" src="_images/Buildroot_menuconfig.png" /></p>
+<p>We can add or cut some tools in the configuration interface to customize system functions as required. Take adding <code class="docutils literal notranslate"><span class="pre">qt53d</span></code> as an example:</p>
+<p>Enter <code class="docutils literal notranslate"><span class="pre">/</span></code> to enter the search interface, enter the content you want to find <code class="docutils literal notranslate"><span class="pre">qt53d</span></code>, and press Enter to search:</p>
+<p><img alt="_images/Buildroot_serach_qt53d.png" src="_images/Buildroot_serach_qt53d.png" /></p>
+<p><img alt="_images/Buildroot_qt53d.png" src="_images/Buildroot_qt53d.png" /></p>
+<p>Select <code class="docutils literal notranslate"><span class="pre">1</span></code> to jump to the corresponding page, press the space to select the configuration:</p>
+<p><img alt="_images/Buildroot_select_qt53d.png" src="_images/Buildroot_select_qt53d.png" /></p>
+<p>After the configuration is completed, move to <code class="docutils literal notranslate"><span class="pre">Save</span></code> and press Enter to save to <code class="docutils literal notranslate"><span class="pre">.config</span></code>; move to <code class="docutils literal notranslate"><span class="pre">Exit</span></code> and press Enter to exit.</p>
+<p><img alt="_images/Buildroot_Save-Exit.png" src="_images/Buildroot_Save-Exit.png" /></p>
+<p>Save the configuration file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make savedefconfig
+</pre></div>
+</div>
+<p>Save the changes to the configuration file <code class="docutils literal notranslate"><span class="pre">configs/rockchip_rk3399_defconfig</span></code>.</p>
+</div>
+<div class="section" id="configure-busybox">
+<h3>Configure Busybox<a class="headerlink" href="#configure-busybox" title="Permalink to this headline">¶</a></h3>
+<p>Open the configuration interface and configure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make busybox-menuconfig
+</pre></div>
+</div>
+<p><img alt="_images/Buildroot_busybox-menuconfig.png" src="_images/Buildroot_busybox-menuconfig.png" /></p>
+<p>After the configuration is complete, move to <code class="docutils literal notranslate"><span class="pre">Exit</span></code> and press Enter to exit, select <code class="docutils literal notranslate"><span class="pre">Yes</span></code> in the pop-up window and save it to <code class="docutils literal notranslate"><span class="pre">.config</span></code>.</p>
+<p><img alt="_images/Buildroot_busybox-save.png" src="_images/Buildroot_busybox-save.png" /></p>
+<p>Save the configuration file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make busybox-update-config
+</pre></div>
+</div>
+<p>Save the changes to the configuration file <code class="docutils literal notranslate"><span class="pre">board/rockchip/common/base/busybox.config</span></code>.</p>
+</div>
+</div>
+<div class="section" id="compile">
+<h2>Compile<a class="headerlink" href="#compile" title="Permalink to this headline">¶</a></h2>
+<p>After configuring Buildroot, run <code class="docutils literal notranslate"><span class="pre">make</span></code> directly to compile.</p>
+<div class="section" id="compilation-instructions">
+<h3>Compilation instructions<a class="headerlink" href="#compilation-instructions" title="Permalink to this headline">¶</a></h3>
+<p>When you run <code class="docutils literal notranslate"><span class="pre">make</span></code> to compile, the following process will be executed:</p>
+<ol class="simple">
+<li><p>Download the source code;</p></li>
+<li><p>Configure, compile and install the cross-compilation toolchain;</p></li>
+<li><p>Configure, compile and install the selected software package;</p></li>
+<li><p>Generate the root filesystem according to the selected format;</p></li>
+</ol>
+<p>More usages of <code class="docutils literal notranslate"><span class="pre">make</span></code> can be obtained through <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code>.</p>
+</div>
+<div class="section" id="compile-the-package">
+<h3>Compile the package<a class="headerlink" href="#compile-the-package" title="Permalink to this headline">¶</a></h3>
+<p>We can execute <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&lt;package&gt;</span></code> to compile a package separately. The compilation of the software package mainly includes the process of downloading, decompressing, patching, configuring, compiling, and installing. For details, please refer to <code class="docutils literal notranslate"><span class="pre">package/pkg-generic.mk</span></code>.</p>
+<ul>
+<li><p>Download</p>
+<p>Buildroot will automatically obtain the corresponding software packages from the Internet according to the configuration <code class="docutils literal notranslate"><span class="pre">package/&lt;package&gt;/&lt;package&gt;.mk</span></code>, including some third-party libraries, plug-ins, utilities, etc., and place them in the <code class="docutils literal notranslate"><span class="pre">dl/</span></code> directory.</p>
+</li>
+<li><p>Unzip</p>
+<p>The package will be decompressed in the <code class="docutils literal notranslate"><span class="pre">output/rockchip_rk3399/build/&lt;package&gt;-&lt;version&gt;</span></code> directory.</p>
+</li>
+<li><p>Patch</p>
+<p>Patches are placed in the <code class="docutils literal notranslate"><span class="pre">package/&lt;packgae&gt;/</span></code> directory, and Buildroot will apply the corresponding patches after decompressing the package. If you want to modify the source code, you can modify it by patching.</p>
+</li>
+<li><p>Configure</p></li>
+<li><p>Compile</p></li>
+<li><p>Install</p>
+<p>After the compilation is completed, the required compilation files will be copied to the <code class="docutils literal notranslate"><span class="pre">output/rockchip_rk3399/target/</span></code> directory.</p>
+</li>
+</ul>
+<p>For a certain package, we can call a certain step in the package construction through <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&lt;package&gt;-&lt;target&gt;</span></code>, as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Package-specific:
+  &lt;pkg&gt;                  - Build and install &lt;pkg&gt; and all its dependencies
+  &lt;pkg&gt;-source           - Only download the <span class="nb">source</span> files <span class="k">for</span> &lt;pkg&gt;
+  &lt;pkg&gt;-extract          - Extract &lt;pkg&gt; sources
+  &lt;pkg&gt;-patch            - Apply patches to &lt;pkg&gt;
+  &lt;pkg&gt;-depends          - Build &lt;pkg&gt;<span class="s1">&#39;s dependencies</span>
+<span class="s1">  &lt;pkg&gt;-configure        - Build &lt;pkg&gt; up to the configure step</span>
+<span class="s1">  &lt;pkg&gt;-build            - Build &lt;pkg&gt; up to the build step</span>
+<span class="s1">  &lt;pkg&gt;-graph-depends    - Generate a graph of &lt;pkg&gt;&#39;</span>s dependencies
+  &lt;pkg&gt;-dirclean         - Remove &lt;pkg&gt; build directory
+  &lt;pkg&gt;-reconfigure      - Restart the build from the configure step
+  &lt;pkg&gt;-rebuild          - Restart the build from the build step
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="output-directory">
+<h2>Output directory<a class="headerlink" href="#output-directory" title="Permalink to this headline">¶</a></h2>
+<p>After the compilation is complete, a subdirectory will be generated in the compilation output directory <code class="docutils literal notranslate"><span class="pre">output/rockchip_rk3399</span></code> as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">build/</span></code> contains all source files, including the required host tools and selected packages for Buildroot. This directory contains all package source code.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">host/</span></code> Tools required for host-side compilation include cross-compilation tools.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">images/</span></code> contains a compressed root filesystem image file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staging/</span></code> This directory is similar to the directory structure of the filesystem. It contains all the header files and libraries generated by the compiler, as well as other development files, but they are not tailored and are too large to be used for the target filesystem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target/</span></code> contains the complete root filesystem. Compared to <code class="docutils literal notranslate"><span class="pre">staging/</span></code>, it has no development files, no header files, and the binary files are <code class="docutils literal notranslate"><span class="pre">strip</span></code> processed.</p></li>
+</ul>
+</div>
+<div class="section" id="cross-compilation-tool">
+<h2>Cross-compilation tool<a class="headerlink" href="#cross-compilation-tool" title="Permalink to this headline">¶</a></h2>
+<p>After Buildroot is compiled, it will generate a cross-compilation tool in the <code class="docutils literal notranslate"><span class="pre">output/rockchip_rk3399/host/</span></code> directory, which we can use to compile the target program.</p>
+<ul class="simple">
+<li><p>Cross-compilation tool directory</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">output/rockchip_rk3399/host/bin/</span></code></p>
+<ul class="simple">
+<li><p>Compile example hello.c</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+         <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.../host/bin/arm-buildroot-linux-gnueabihf-gcc hello.c -o hello
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Run</p></li>
+</ul>
+<p>Copy the executable program <code class="docutils literal notranslate"><span class="pre">hello</span></code> to the device, run <code class="docutils literal notranslate"><span class="pre">./hello</span></code>, you will see the printed message <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World!</span></code>.</p>
+</div>
+<div class="section" id="rebuild">
+<h2>Rebuild<a class="headerlink" href="#rebuild" title="Permalink to this headline">¶</a></h2>
+<p>For specific instructions on rebuilding, you can check the document <code class="docutils literal notranslate"><span class="pre">buildroot/docs/manual/rebuilding-packages.txt</span></code>.</p>
+<div class="section" id="rebuild-the-package">
+<h3>Rebuild the package<a class="headerlink" href="#rebuild-the-package" title="Permalink to this headline">¶</a></h3>
+<p>During the development process, if the source code of a certain package is modified, Buildroot will not recompile the package. It can be operated as follows:</p>
+<ul class="simple">
+<li><p>Method one</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make &lt;package&gt;-rebuild
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Method two</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Delete the compiled output directory of the package</span>
+rm -rf output/rockchip_rk3399/build/&lt;package&gt;-&lt;version&gt;
+<span class="c1"># Compile</span>
+make &lt;package&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="full-rebuild">
+<h3>Full Rebuild<a class="headerlink" href="#full-rebuild" title="Permalink to this headline">¶</a></h3>
+<p>Buildroot does not attempt to detect what parts of the system should be rebuilt when the system configuration is changed through +make menuconfig+, +make xconfig+, or one of the other configuration tools. In some cases, Buildroot should rebuild the entire system, in some cases, only a specific subset of packages. But detecting this in a completely reliable manner is very difficult, and therefore the Buildroot developers have decided to simply not attempt to do this.</p>
+<div class="section" id="when-a-full-rebuild-is-necessary">
+<h4>When a full rebuild is necessary<a class="headerlink" href="#when-a-full-rebuild-is-necessary" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>When the target architecture configuration is changed, a complete rebuild is needed;</p></li>
+<li><p>When the toolchain configuration is changed, a complete rebuild generally is needed;</p></li>
+<li><p>When an additional package is added to the configuration, a full rebuild is not necessarily needed;</p></li>
+<li><p>When a package is removed from the configuration, buildroot does not do anything special. it does not remove the files installed by this package from the target root filesystem or from the toolchain <em>sysroot</em>. a full rebuild is needed to get rid of this package;</p></li>
+<li><p>When the sub-options of a package are changed, the package is not automatically rebuilt;</p></li>
+<li><p>When a change to the root filesystem skeleton is made, a full rebuild is needed;</p></li>
+</ul>
+<p>Generally speaking, when you’re facing a build error and you’re unsure of the potential consequences of the configuration changes you’ve made, do a full rebuild. Specific instructions can be found in the document <code class="docutils literal notranslate"><span class="pre">rebuilding-packages.txt</span></code>.</p>
+</div>
+<div class="section" id="id1">
+<h4>Full rebuild<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Method one</p></li>
+</ul>
+<p>Directly delete the compilation output directory, and then re-configure and compile.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm -rf output/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Method two</p></li>
+</ul>
+<p>Executing the following command will delete the compilation output and recompile.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make clean all
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="add-local-source-package">
+<h2>Add local source package<a class="headerlink" href="#add-local-source-package" title="Permalink to this headline">¶</a></h2>
+<p>During the development process, the built-in software package of Buildroot may not meet our needs sometimes, so we need to add a custom software package. Buildroot supports packages in a variety of formats, including generic-package, cmake-package, autotools-package, etc. We take generic-package as an example.</p>
+<ul class="simple">
+<li><p>Create a project directory</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> path/to/SDK/
+mkdir buildroot/package/rockchip/firefly_demo/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create Config.in</p></li>
+</ul>
+<p>Add Config.in under <code class="docutils literal notranslate"><span class="pre">firefly_demo/</span></code>:</p>
+<div class="highlight-Kconfig notranslate"><div class="highlight"><pre><span></span><span class="k">config</span> BR2_PACKAGE_FIREFLY_DEMO
+        <span class="nb">bool</span> <span class="s2">&quot;Simple Firefly Demo&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create firefly_demo.mk</p></li>
+</ul>
+<p>Add firefly_demo.mk under <code class="docutils literal notranslate"><span class="pre">firefly_demo/</span></code>:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">##################################################</span>
+<span class="c">###########</span>
+<span class="c">#</span>
+<span class="c">### firefly_demo</span>
+<span class="c">#</span>
+<span class="c">##################################################</span>
+<span class="c">###########</span>
+<span class="cp">ifeq ($(BR2_PACKAGE_FIREFLY_DEMO), y)</span>
+
+        FIREFLY_DEMO_VERSION:<span class="o">=</span><span class="m">1</span>.0.0
+        <span class="nv">FIREFLY_DEMO_SITE</span><span class="o">=</span><span class="k">$(</span>TOPDIR<span class="k">)</span>/../external/firefly_demo/src
+        <span class="nv">FIREFLY_DEMO_SITE_METHOD</span><span class="o">=</span><span class="nb">local</span>
+
+<span class="cp">define FIREFLY_DEMO_BUILD_CMDS</span>
+        <span class="k">$(</span>TARGET_MAKE_ENV<span class="k">)</span> <span class="k">$(</span>MAKE<span class="k">)</span> <span class="nv">CC</span><span class="o">=</span><span class="k">$(</span>TARGET_CC<span class="k">)</span> <span class="nv">CXX</span><span class="o">=</span><span class="k">$(</span>TARGET_CXX<span class="k">)</span> -C <span class="k">$(</span>@D<span class="k">)</span>
+<span class="cp">endef</span>
+
+<span class="cp">define FIREFLY_DEMO_CLEAN_CMDS</span>
+        <span class="k">$(</span>TARGET_MAKE_ENV<span class="k">)</span> <span class="k">$(</span>MAKE<span class="k">)</span> -C <span class="k">$(</span>@D<span class="k">)</span> clean
+<span class="cp">endef</span>
+
+<span class="cp">define FIREFLY_DEMO_INSTALL_TARGET_CMDS</span>
+        <span class="k">$(</span>TARGET_MAKE_ENV<span class="k">)</span> <span class="k">$(</span>MAKE<span class="k">)</span> -C <span class="k">$(</span>@D<span class="k">)</span> install
+<span class="cp">endef</span>
+
+<span class="cp">define FIREFLY_DEMO_UNINSTALL_TARGET_CMDS</span>
+        <span class="k">$(</span>TARGET_MAKE_ENV<span class="k">)</span> <span class="k">$(</span>MAKE<span class="k">)</span> -C <span class="k">$(</span>@D<span class="k">)</span> uninstall
+<span class="cp">endef</span>
+
+<span class="k">$(</span><span class="nv">eval</span> <span class="k">$(</span><span class="nv">generic-package</span><span class="k">))</span>
+<span class="cp">endif</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create source code directory</p></li>
+</ul>
+<p>The source code directory <code class="docutils literal notranslate"><span class="pre">external/firefly_demo/src</span></code> has been specified in the above Makefile.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> path/to/SDK/
+mkdir external/firefly_demo/src
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Write source code firefly_demo.c</p></li>
+</ul>
+<p>Add firefly_demo.c under <code class="docutils literal notranslate"><span class="pre">firefly_demo/src/</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Write Makefile</p></li>
+</ul>
+<p>Add Makefile under <code class="docutils literal notranslate"><span class="pre">firefly_demo/src/</span></code>:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">DEPS</span> <span class="o">=</span>
+<span class="nv">OBJ</span> <span class="o">=</span> firefly_demo.o
+<span class="nv">CFLAGS</span> <span class="o">=</span>
+<span class="nf">%.o</span><span class="o">:</span> %.<span class="n">c</span> <span class="k">$(</span><span class="nv">DEPS</span><span class="k">)</span>
+        <span class="k">$(</span>CC<span class="k">)</span> -c -o <span class="nv">$@</span> $&lt; <span class="k">$(</span>CFLAGS<span class="k">)</span>
+
+<span class="nf">firefly_demo</span><span class="o">:</span> <span class="k">$(</span><span class="nv">OBJ</span><span class="k">)</span>
+        <span class="k">$(</span>CXX<span class="k">)</span> -o <span class="nv">$@</span> $^ <span class="k">$(</span>CFLAGS<span class="k">)</span>
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span>
+<span class="nf">clean</span><span class="o">:</span>
+        rm -f *.o *~ firefly_demo
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">install</span>
+<span class="nf">install</span><span class="o">:</span>
+        cp -f firefly_demo <span class="k">$(</span>TARGET_DIR<span class="k">)</span>/usr/bin/
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">uninstall</span>
+<span class="nf">uninstall</span><span class="o">:</span>
+        rm -f <span class="k">$(</span>TARGET_DIR<span class="k">)</span>/usr/bin/firefly_demo
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Modify the upper Config.in</p></li>
+</ul>
+<p>Add a line at the end of <code class="docutils literal notranslate"><span class="pre">buildroot/package/rockchip/Config.in</span></code>:</p>
+<div class="highlight-Kconfig notranslate"><div class="highlight"><pre><span></span><span class="k">source</span> <span class="s2">&quot;package/rockchip/firefly_demo/Config.in&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Select package</p></li>
+</ul>
+<p>Open the configuration menu <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">menuconfig</span></code>, find firefly_demo and select the configuration.</p>
+<ul class="simple">
+<li><p>Compile</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compile firefly_demo</span>
+make firefly_demo
+<span class="c1"># Package into the root filesystem</span>
+make
+<span class="c1"># If you modify the source code, recompile the package</span>
+make firefly_demo-rebuild
+</pre></div>
+</div>
+</div>
+<div class="section" id="rootfs-overlay">
+<h2>rootfs-overlay<a class="headerlink" href="#rootfs-overlay" title="Permalink to this headline">¶</a></h2>
+<p>rootfs-overly is a pretty good feature, it can overwrite the specified file to a directory after the target filesystem is compiled. In this way, we can easily add or modify some files to the root filesystem.</p>
+<p>Suppose we want to add the file <code class="docutils literal notranslate"><span class="pre">overlay-test</span></code> under the <code class="docutils literal notranslate"><span class="pre">/etc/</span></code> directory of the root filesystem, we can do as follows:</p>
+<ul class="simple">
+<li><p>Set rootfs-overlay root directory</p></li>
+</ul>
+<p>Open the configuration menu <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">menuconfig</span></code>, and add the root directory for coverage by setting the <code class="docutils literal notranslate"><span class="pre">BR2_ROOTFS_OVERLAY</span></code> option. For rk3399, the directory <code class="docutils literal notranslate"><span class="pre">board/rockchip/rk3399/fs-overlay/</span></code> has been added by default.</p>
+<ul class="simple">
+<li><p>Add files to the coverage directory</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> buildroot/board/rockchip/rk3399/fs-overlay/
+mkdir etc/
+touch etc/overlay-test
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Compile</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Download the root filesystem</p></li>
+</ul>
+<p>Download the compiled root filesystem <code class="docutils literal notranslate"><span class="pre">output/rockchip_rk3399/images/rootfs.ext2</span></code> to the device. Start the device, you can see that the file <code class="docutils literal notranslate"><span class="pre">/etc/overlay-test</span></code> has been added.</p>
+<p>You can also check the <code class="docutils literal notranslate"><span class="pre">target/</span></code> directory to verify whether the addition is successful:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls buildroot/output/rockchip_rk3399/target/etc/overlay-test
+</pre></div>
+</div>
+</div>
+<div class="section" id="cross-compile-qt-5-12-2">
+<h2>Cross compile Qt-5.12.2<a class="headerlink" href="#cross-compile-qt-5-12-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cross-compilation-toolchain">
+<h3>Cross-compilation toolchain<a class="headerlink" href="#cross-compilation-toolchain" title="Permalink to this headline">¶</a></h3>
+<p>Firefly has extracted Buildroot’s cross-compilation toolchain. Users can directly use this toolchain to develop Qt applications on Buildroot without downloading and compiling SDK code.</p>
+<p>The toolchain supports plugins such as EGLFS, LinuxFB, and Wayland.</p>
+<p>Use environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Host: x86-64 / Ubuntu <span class="m">16</span>.04/18.04
+Devices: Firefly RK3399 RK3288 PX30 .. / Buildroot
+</pre></div>
+</div>
+<div class="section" id="download">
+<h4>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h4>
+<p>For 32-bit chips, such as rk3288, download firefly-qt-5.12.2-arm.tar.gz; for other 64-bit chips, such as rk3399, download firefly-qt-5.12.2-aarch64.tar.gz.</p>
+<p><a class="reference external" href="https://drive.google.com/drive/folders/1FDBe84CHUhsBVmvWwg2ihYgWk7Hb127v?usp=sharing">Download link</a></p>
+<p>The following will take firefly-qt-5.12.2-aarch64.tar.gz as an example.</p>
+</div>
+<div class="section" id="directory">
+<h4>Directory<a class="headerlink" href="#directory" title="Permalink to this headline">¶</a></h4>
+<p>Unzip the downloaded compressed package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -zxvf firefly-qt-5.12.2-aarch64.tar.gz
+</pre></div>
+</div>
+<p>Directory Structure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firefly-qt-5.12.2-aarch64/
+├── aarch64.tar.gz <span class="c1"># Library files, plugins, etc. for devices</span>
+├── demo
+│ └── mainwindow <span class="c1"># demo program</span>
+├── firefly-qt-5.12.2-aarch64 <span class="c1"># Cross-compilation toolchain</span>
+└── ReadMe <span class="c1"># Instructions for use</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configure-cross-compilation-environment">
+<h3>Configure cross-compilation environment<a class="headerlink" href="#configure-cross-compilation-environment" title="Permalink to this headline">¶</a></h3>
+<p>Copy the toolchain to the specified directory of the host:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> firefly-qt-5.12.2-aarch64/
+<span class="c1"># The directory `/opt/` cannot be modified</span>
+cp -rdf firefly-qt-5.12.2-aarch64 /opt/
+</pre></div>
+</div>
+<p>If the copy fails, modify the directory permissions first, and then perform the above operations:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo chmod <span class="m">777</span> /opt/
+</pre></div>
+</div>
+<div class="section" id="cross-compilation">
+<h4>Cross compilation<a class="headerlink" href="#cross-compilation" title="Permalink to this headline">¶</a></h4>
+<p>Take the demo program as an example, run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> demo/mainwindow/
+/opt/firefly-qt-5.12.2-aarch64/host/bin/qmake
+make
+</pre></div>
+</div>
+<p>After the compilation is complete, the executable program <code class="docutils literal notranslate"><span class="pre">demo/mainwindow/mainwindow</span></code> will be generated.</p>
+</div>
+</div>
+<div class="section" id="configure-the-operating-environment">
+<h3>Configure the operating environment<a class="headerlink" href="#configure-the-operating-environment" title="Permalink to this headline">¶</a></h3>
+<p>Use a U disk to copy aarch64.tar to the device:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp /media/usb0/aarch64.tar /userdata/
+</pre></div>
+</div>
+<p>Unzip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /userdata/
+tar -xvf aarch64.tar
+</pre></div>
+</div>
+<p>Copy the file to the corresponding directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> aarch64/
+cp -rdf usr/lib/* /usr/lib/
+cp -rdf usr/qml/* /usr/qml/
+cp usr/bin/gdbserver /usr/bin/
+</pre></div>
+</div>
+<div class="section" id="run-the-program">
+<h4>Run the program<a class="headerlink" href="#run-the-program" title="Permalink to this headline">¶</a></h4>
+<p>Copy the compiled executable program mainwindow to the device.</p>
+<p>The default board runs the Wayland desktop environment, which runs as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set environment variables</span>
+<span class="nb">export</span> <span class="nv">XDG_RUNTIME_DIR</span><span class="o">=</span>/tmp/.xdg
+<span class="c1"># Run</span>
+./mainwindow -platform wayland
+</pre></div>
+</div>
+<p>Run with eglfs plugin:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exit Wayland desktop environment</span>
+/etc/init.d/S50launcher stop
+<span class="c1"># Run</span>
+./mainwindow -platform eglfs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="qt-creator">
+<h3>Qt Creator<a class="headerlink" href="#qt-creator" title="Permalink to this headline">¶</a></h3>
+<p>The following describes the instructions for using Qt Creator. Before the operation, please configure the cross-compilation environment and running environment according to the previous steps.</p>
+<div class="section" id="installation">
+<h4>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h4>
+<p>Enter <a class="reference external" href="https://download.qt.io/archive/qt/5.12/5.12.2/">Qt official download page</a>, download qt-opensource-linux-x64-5.12.2.run, after the download is complete, run installation.</p>
+</div>
+<div class="section" id="id2">
+<h4>Configuration<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>After the installation is complete, start Qt Creator, open the menu <code class="docutils literal notranslate"><span class="pre">Tools</span> <span class="pre">-&gt;</span> <span class="pre">Options</span></code>, find Kits.</p>
+<ul>
+<li><p>Config Qt Versions</p>
+<p>qmake: <code class="docutils literal notranslate"><span class="pre">/opt/firefly-qt-5.12.2-aarch64/host/bin/qmake</span></code></p>
+</li>
+</ul>
+<p><img alt="_images/Qt-config-Versions.png" src="_images/Qt-config-Versions.png" /></p>
+<ul>
+<li><p>Config Compilers</p>
+<p>g++: <code class="docutils literal notranslate"><span class="pre">/opt/firefly-qt-5.12.2-aarch64/host/bin/aarch64-buildroot-linux-gnu-g++</span></code></p>
+<p>gcc: <code class="docutils literal notranslate"><span class="pre">/opt/firefly-qt-5.12.2-aarch64/host/bin/aarch64-buildroot-linux-gnu-gcc</span></code></p>
+</li>
+</ul>
+<p><img alt="_images/Qt-config-Compilers_1.png" src="_images/Qt-config-Compilers_1.png" /></p>
+<p><img alt="_images/Qt-config-Compilers_2.png" src="_images/Qt-config-Compilers_2.png" /></p>
+<p>To facilitate debugging, configure Debuggers and Devices for online debugging:</p>
+<ul>
+<li><p>Config Debuggers</p>
+<p>gdb: <code class="docutils literal notranslate"><span class="pre">/opt/firefly-qt-5.12.2-aarch64/host/bin/aarch64-buildroot-linux-gnu-gdb</span></code></p>
+</li>
+</ul>
+<p><img alt="_images/Qt-config-Debuggers.png" src="_images/Qt-config-Debuggers.png" /></p>
+<ul class="simple">
+<li><p>Config Devices</p></li>
+</ul>
+<p>Set the device’s IP, username(root) and password(rockchip). To facilitate debugging, you can set a static IP on the device.</p>
+<p><img alt="_images/Qt-config-Devices.png" src="_images/Qt-config-Devices.png" /></p>
+<ul class="simple">
+<li><p>Config Kits</p></li>
+</ul>
+<p>Add the previously set configuration items to Kits.</p>
+<p><img alt="_images/Qt-config-Kits.png" src="_images/Qt-config-Kits.png" /></p>
+</div>
+<div class="section" id="compile-and-run">
+<h4>Compile and run<a class="headerlink" href="#compile-and-run" title="Permalink to this headline">¶</a></h4>
+<p>Open the demo program, <code class="docutils literal notranslate"><span class="pre">Welcome</span> <span class="pre">-&gt;</span> <span class="pre">Open</span> <span class="pre">Project</span></code>, select the Kits you want to use:</p>
+<p><img alt="_images/Qt-Choose-Kit.png" src="_images/Qt-Choose-Kit.png" /></p>
+<p>Then open <code class="docutils literal notranslate"><span class="pre">Projects</span> <span class="pre">-&gt;</span> <span class="pre">Run</span></code>, configure the command line parameters, here is set to <code class="docutils literal notranslate"><span class="pre">-platform</span> <span class="pre">wayland</span></code>:</p>
+<p><img alt="_images/Qt-command_line_arguments.png" src="_images/Qt-command_line_arguments.png" /></p>
+<p>Configure environment variables, namely <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">XDG_RUNTIME_DIR=/tmp/.xdg</span></code>:</p>
+<p><img alt="_images/Qt-set-environment.png" src="_images/Qt-set-environment.png" /></p>
+<p>Compile and run:</p>
+<p>Click <code class="docutils literal notranslate"><span class="pre">Build</span></code> to cross-compile the Qt program; click <code class="docutils literal notranslate"><span class="pre">Run</span></code> or <code class="docutils literal notranslate"><span class="pre">Debug</span></code> to run or debug the program on the device. When you want to run the program again, remember to manually click <code class="docutils literal notranslate"><span class="pre">Stop</span></code> to close the running program.</p>
+<p><img alt="_images/Qt-Compile.png" src="_images/Qt-Compile.png" /></p>
+<p>The build directory is in <code class="docutils literal notranslate"><span class="pre">demo/build-mainwindow-qt_5_12_2_aarch64-Debug</span></code></p>
+</div>
+</div>
+</div>
+<div class="section" id="desktop-application">
+<h2>Desktop application<a class="headerlink" href="#desktop-application" title="Permalink to this headline">¶</a></h2>
+<p>The officially released Buildroot firmware supports the Wayland desktop environment and some Qt applications by default, as shown below:</p>
+<p><img alt="_images/Buildroot_Desktop.png" src="_images/Buildroot_Desktop.png" /></p>
+<p>These Qt applications provide some basic functions, such as camera preview, file manager, multimedia player, WiFi connection, etc.</p>
+</div>
+<div class="section" id="user-and-password">
+<h2>User and password<a class="headerlink" href="#user-and-password" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>User: root</p></li>
+<li><p>Password: rockchip</p></li>
+</ul>
+</div>
+<div class="section" id="wifi-connection">
+<h2>WiFi connection<a class="headerlink" href="#wifi-connection" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># wifi_start.sh wifi-ssid password</span>
+wifi_start.sh wifi-test <span class="m">12345678</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="audio-video-playback">
+<h2>Audio/Video playback<a class="headerlink" href="#audio-video-playback" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Play wav</span>
+aplay test.wav
+gstwavplay.sh test.wav
+
+<span class="c1"># Play mp3</span>
+mp3play.sh test.mp3
+gstmp3play.sh test.mp3
+
+<span class="c1"># Play mp4</span>
+gstmp4play.sh test.mp4
+gstvideoplay.sh test.mp4
+</pre></div>
+</div>
+</div>
+<div class="section" id="ssh">
+<h2>SSH<a class="headerlink" href="#ssh" title="Permalink to this headline">¶</a></h2>
+<p>Buildroot already supports SSH service by default.</p>
+<ul class="simple">
+<li><p>ssh login device</p></li>
+</ul>
+<p>Let the device be online, execute the login command on the PC:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># User: root; Password: rockchip</span>
+<span class="c1"># IP: 192.168.27.129</span>
+~$ ssh root@192.168.27.129
+The authenticity of host <span class="s1">&#39;192.168.27.129 (192.168.27.129)&#39;</span> can<span class="s1">&#39;t be established.</span>
+<span class="s1">ECDSA key fingerprint is SHA256:+NwFawDiU0EwLHRFrIA/7snmlMc9ZfN6Nxa5vUSC7Pg.</span>
+<span class="s1">Are you sure you want to continue connecting (yes/no)? yes</span>
+<span class="s1">Warning: Permanently added &#39;</span><span class="m">192</span>.168.27.129<span class="s1">&#39; (ECDSA) to the list of known hosts.</span>
+<span class="s1">root@192.168.27.129&#39;</span>s password:
+<span class="o">[</span>root@rk3399:~<span class="o">]</span><span class="c1">#</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>scp</p></li>
+</ul>
+<p>Execute the command on the PC to copy the file to the device:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ scp ./file root@192.168.27.129:/
+root@192.168.27.129&#39;s password:
+file                            100% 154 0.2KB/s 00:00
+</pre></div>
+</div>
+</div>
+<div class="section" id="mipi-camera-ov13850">
+<h2>MIPI Camera (OV13850)<a class="headerlink" href="#mipi-camera-ov13850" title="Permalink to this headline">¶</a></h2>
+<p>Check whether the ISP driver is loaded successfully, you can see the following device information after success:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>root@firefly:~# grep <span class="s1">&#39;&#39;</span> /sys/class/video4linux/video*/name
+/sys/class/video4linux/video0/name:rkisp1_mainpath
+/sys/class/video4linux/video1/name:rkisp1_selfpath
+/sys/class/video4linux/video2/name:rkisp1_dmapath
+/sys/class/video4linux/video3/name:rkisp1-statistics
+/sys/class/video4linux/video4/name:rkisp1-input-params
+
+root@firefly:~# ls /dev/video*
+video0  video1  video2  video3 video4
+</pre></div>
+</div>
+<p>Check whether the OV13850 device is successfully registered, you can see the following print if successful:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>root@firefly:~# dmesg <span class="p">|</span>grep <span class="m">13850</span>
+<span class="o">[</span>    <span class="m">3</span>.911130<span class="o">]</span> ov13850 <span class="m">3</span>-0010: driver version: <span class="m">00</span>.01.03
+<span class="o">[</span>    <span class="m">3</span>.911168<span class="o">]</span> ov13850 <span class="m">3</span>-0010: GPIO lookup <span class="k">for</span> consumer reset
+<span class="o">[</span>    <span class="m">3</span>.911171<span class="o">]</span> ov13850 <span class="m">3</span>-0010: using device tree <span class="k">for</span> GPIO lookup
+<span class="o">[</span>    <span class="m">3</span>.911187<span class="o">]</span> of_get_named_gpiod_flags: parsed <span class="s1">&#39;reset-gpios&#39;</span> property of node <span class="s1">&#39;/i2c@ff150000/ov13850@10[0]&#39;</span> - status <span class="o">(</span><span class="m">0</span><span class="o">)</span>
+<span class="o">[</span>    <span class="m">3</span>.911370<span class="o">]</span> ov13850 <span class="m">3</span>-0010: could not get default pinstate
+<span class="o">[</span>    <span class="m">3</span>.911373<span class="o">]</span> ov13850 <span class="m">3</span>-0010: could not get sleep pinstate
+<span class="o">[</span>    <span class="m">3</span>.911376<span class="o">]</span> ov13850 <span class="m">3</span>-0010: GPIO lookup <span class="k">for</span> consumer pwdn
+<span class="o">[</span>    <span class="m">3</span>.911379<span class="o">]</span> ov13850 <span class="m">3</span>-0010: using device tree <span class="k">for</span> GPIO lookup
+<span class="o">[</span>    <span class="m">3</span>.911403<span class="o">]</span> of_get_named_gpiod_flags: parsed <span class="s1">&#39;pwdn-gpios&#39;</span> property of node <span class="s1">&#39;/i2c@ff150000/ov13850@10[0]&#39;</span> - status <span class="o">(</span><span class="m">0</span><span class="o">)</span>
+<span class="c1"># Successfully obtain device ID</span>
+<span class="o">[</span>    <span class="m">3</span>.914401<span class="o">]</span> ov13850 <span class="m">3</span>-0010: Detected OV00d850 sensor, REVISION 0xb2
+</pre></div>
+</div>
+<p>Preview:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gst-launch-1.0 v4l2src <span class="nv">device</span><span class="o">=</span>/dev/video0 ! video/x-raw,format<span class="o">=</span>NV12,width<span class="o">=</span><span class="m">640</span>,height<span class="o">=</span><span class="m">480</span>, <span class="nv">framerate</span><span class="o">=</span><span class="m">30</span>/1 ! videoconvert ! kmssink <span class="p">&amp;</span>
+<span class="c1"># Or</span>
+<span class="nb">export</span> <span class="nv">XDG_RUNTIME_DIR</span><span class="o">=</span>/tmp/.xdg
+gst-launch-1.0 v4l2src <span class="nv">device</span><span class="o">=</span>/dev/video0 ! video/x-raw,format<span class="o">=</span>NV12,width<span class="o">=</span><span class="m">640</span>,height<span class="o">=</span><span class="m">480</span>, <span class="nv">framerate</span><span class="o">=</span><span class="m">30</span>/1 ! videoconvert ! waylandsink <span class="p">&amp;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="external-storage-device">
+<h2>External storage device<a class="headerlink" href="#external-storage-device" title="Permalink to this headline">¶</a></h2>
+<p>Buildroot supports automatic mounting of external storage devices:</p>
+<p>U disk mount path: <code class="docutils literal notranslate"><span class="pre">/udisk</span></code></p>
+<p>TF card mounting path: <code class="docutils literal notranslate"><span class="pre">/sdcard</span></code></p>
+</div>
+<div class="section" id="reset">
+<h2>Reset<a class="headerlink" href="#reset" title="Permalink to this headline">¶</a></h2>
+<p>Buildroot supports restoring factory settings. Run <code class="docutils literal notranslate"><span class="pre">update</span></code> directly or add the <code class="docutils literal notranslate"><span class="pre">factory/reset</span></code> parameter to enter recovery to restore factory settings.</p>
+<p><strong>Note: This factory setting means that it is restored to the initial state after the last firmware upgrade of the device.</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>update
+<span class="c1"># Or</span>
+update factory / update reset
+</pre></div>
+</div>
+</div>
+<div class="section" id="upgrade-firmware">
+<h2>Upgrade firmware<a class="headerlink" href="#upgrade-firmware" title="Permalink to this headline">¶</a></h2>
+<p>Buildroot supports upgrading firmware from external storage devices. The following is the upgrade process description.</p>
+<ul class="simple">
+<li><p>Make upgrade firmware</p></li>
+</ul>
+<p>Follow the normal firmware compilation process to make the firmware for upgrade. <a class="reference internal" href="buildroot_compile.html"><span class="doc">Build Buildroot Firmware</span></a></p>
+<p>It is not necessary to upgrade the firmware in all partitions. You can modify the <code class="docutils literal notranslate"><span class="pre">package-file</span></code> file to remove the partitions that are not to be upgraded, which can reduce the size of the upgrade package.</p>
+<p>For example, modify the file <code class="docutils literal notranslate"><span class="pre">tools/linux/Linux_Pack_Firmware/rockdev/rk3399-package-file</span></code>, change the relative path of <code class="docutils literal notranslate"><span class="pre">rootfs</span></code> to <code class="docutils literal notranslate"><span class="pre">RESERVED</span></code>, so that the root filesystem will not be packaged, that is, the root filesystem partition will not be upgraded.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># name          relative path</span>
+<span class="c1">#</span>
+<span class="c1">#hwdef          hwdef</span>
+package-file    package-file
+bootloader      image/miniloaderall.bin
+parameter       image/parameter.txt
+trust           image/trust.img
+uboot           image/uboot.img
+misc            image/misc.img
+boot            image/boot.img
+recovery        image/recovery.img
+rootfs          RESERVED
+oem             image/oem.img
+userdata:grow   image/userdata.img
+backup          RESERVED
+</pre></div>
+</div>
+<p>Copy the prepared upgrade firmware to the U disk, TF card, or the <code class="docutils literal notranslate"><span class="pre">/userdata/</span></code> directory of the device, and rename it to <code class="docutils literal notranslate"><span class="pre">update.img</span></code>.</p>
+<p><strong>Note:</strong> If the upgrade firmware is placed in the <code class="docutils literal notranslate"><span class="pre">/userdata/</span></code> directory of the device, do not package <code class="docutils literal notranslate"><span class="pre">userdata.img</span></code>, and change <code class="docutils literal notranslate"><span class="pre">image/userdata.img</span></code> to <code class="docutils literal notranslate"><span class="pre">RESERVED</span></code>.</p>
+<ul class="simple">
+<li><p>Upgrade</p></li>
+</ul>
+<p>Start the device, execute the upgrade command on the command line, <code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">ota</span> <span class="pre">path/to/update.img</span></code>, the device will enter recovery to upgrade.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># U Disk</span>
+update ota /udisk/update.img
+<span class="c1"># TF card</span>
+update ota /sdcard/update.img
+<span class="c1"># /userdata/</span>
+update ota /userdata/udpate.img
+</pre></div>
+</div>
+<p>Wait for the upgrade to complete. After the upgrade is successful, the device will reboot into the system.</p>
+</div>
+<div class="section" id="firmwareota">
+<h2>FirmwareOta<a class="headerlink" href="#firmwareota" title="Permalink to this headline">¶</a></h2>
+<p>Firmwareota is a Qt desktop application that supports downloading firmware from the Internet for upgrades. The following are instructions for use.</p>
+<div class="section" id="add-desktop-application">
+<h3>Add desktop application<a class="headerlink" href="#add-desktop-application" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Download</p></li>
+</ul>
+<p><a class="reference external" href="https://drive.google.com/drive/folders/1Lc9azHpsBLWH82sIcdLgLMIdWGofaCkr?usp=sharing">Download link</a></p>
+<ul class="simple">
+<li><p>Unzip</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -zxvf firmwareota.tar.gz
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>According to the directory, copy the files to the device</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>└── usr
+    ├── bin
+    │   └── firmwareota
+    └── share
+        ├── applications
+        │   └── firmwareota.desktop
+        └── icon
+            └── icon_firmwareota.png
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Restart desktop</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/init.d/S50launcher stop
+/etc/init.d/S50launcher start
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Start up</p></li>
+</ul>
+<p>After the setting is complete, you can start the application on the desktop.</p>
+<p><img alt="_images/Buildroot_firmwareota.png" src="_images/Buildroot_firmwareota.png" /></p>
+</div>
+<div class="section" id="set-download-address">
+<h3>Set download address<a class="headerlink" href="#set-download-address" title="Permalink to this headline">¶</a></h3>
+<p>The program will download the list file <code class="docutils literal notranslate"><span class="pre">ota_list</span></code> through the default Http address, and parse the list file to obtain the firmware download link.</p>
+<p>List file format, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firmware_name_1
+http://192.168.2.11:8000/firmware_name_1
+firmware_name_2
+http://192.168.2.11:8000/firmware_name_2
+...
+</pre></div>
+</div>
+<p>We can add the file <code class="docutils literal notranslate"><span class="pre">/userdata/list_url</span></code> to set the download address of the specified list file, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://192.168.2.11:8000/ota_list
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="weston">
+<h2>Weston<a class="headerlink" href="#weston" title="Permalink to this headline">¶</a></h2>
+<p>We can customize the display by configuring Weston, some of the settings are explained below.</p>
+<div class="section" id="status-bar">
+<h3>Status Bar<a class="headerlink" href="#status-bar" title="Permalink to this headline">¶</a></h3>
+<p>Weston supports setting the background color and position of the status bar in the shell section of the weston.ini configuration file, as well as setting quick launch programs in the launcher section, such as:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[shell]</span>
+<span class="c1"># The color format is ARGB8888</span>
+<span class="na">panel-color</span><span class="o">=</span><span class="s">0xff002244</span>
+<span class="c1"># top|bottom|left|right|none</span>
+<span class="na">panel-position</span><span class="o">=</span><span class="s">bottom</span>
+
+<span class="k">[launcher]</span>
+<span class="na">icon</span><span class="o">=</span><span class="s">/usr/share/weston/terminal.png</span>
+<span class="na">path</span><span class="o">=</span><span class="s">/usr/bin/weston-terminal</span>
+
+<span class="k">[launcher]</span>
+<span class="c1"># Icon path</span>
+<span class="na">icon</span><span class="o">=</span><span class="s">/usr/share/weston/icon_flower.png</span>
+<span class="c1"># Quick start command</span>
+<span class="na">path</span><span class="o">=</span><span class="s">/usr/bin/qsetting</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="background">
+<h3>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
+<p>Weston supports setting background patterns and colors in the shell section of the weston.ini configuration file, such as:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[shell]</span>
+<span class="c1"># Background pattern (wallpaper) absolute path</span>
+<span class="na">background-image</span><span class="o">=</span><span class="s">/usr/share/weston/background.png</span>
+<span class="c1"># scale|scale-crop|tile</span>
+<span class="na">background-type</span><span class="o">=</span><span class="s">scale</span>
+<span class="c1"># The color format is ARGB8888, which will take effect when the background pattern is not set</span>
+<span class="na">background-color</span><span class="o">=</span><span class="s">0xff002244</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="standby-and-lock-screen">
+<h3>Standby and lock screen<a class="headerlink" href="#standby-and-lock-screen" title="Permalink to this headline">¶</a></h3>
+<p>Weston’s timeout standby time can be configured in the startup parameters or in the core section of weston.ini, such as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/init.d/S50launcher</span>
+     start<span class="o">)</span>
+         ...
+         <span class="c1"># 0 is to prohibit standby, the unit is second</span>
+         weston --tty<span class="o">=</span><span class="m">2</span> -B<span class="o">=</span>drm-backend.so --idle-time<span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[core]</span>
+<span class="c1"># Set to enter the standby state after 5 seconds of inactivity</span>
+<span class="na">idle-time</span><span class="o">=</span><span class="s">5</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="display-color-format">
+<h3>Display color format<a class="headerlink" href="#display-color-format" title="Permalink to this headline">¶</a></h3>
+<p>The current default display format of Weston in Buildroot SDK is ARGB8888. For some low-performance platforms, it can be configured as RGB565 in the core section of weston.ini, such as:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[core]</span>
+<span class="c1"># xrgb8888|rgb565|xrgb2101010</span>
+<span class="na">gbm-format</span><span class="o">=</span><span class="s">rgb565</span>
+</pre></div>
+</div>
+<p>You can also configure the display format of each screen separately in the output section of weston.ini, such as:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[output]</span>
+<span class="c1"># The name of output can be viewed /sys/class/drm/card0-name</span>
+<span class="na">name</span><span class="o">=</span><span class="s">LVDS-1</span>
+<span class="c1"># xrgb8888|rgb565|xrgb2101010</span>
+<span class="na">gbm-format</span><span class="o">=</span><span class="s">rgb565</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="screen-orientation">
+<h3>Screen orientation<a class="headerlink" href="#screen-orientation" title="Permalink to this headline">¶</a></h3>
+<p>Weston’s screen display direction can be configured in the output section of weston.ini, such as:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[output]</span>
+<span class="na">name</span><span class="o">=</span><span class="s">LVDS-1</span>
+<span class="c1"># normal|90|180|270|flipped|flipped-90|flipped-180|flipped-270</span>
+<span class="na">transform</span><span class="o">=</span><span class="s">180</span>
+</pre></div>
+</div>
+<p>If you need to dynamically configure the screen orientation, you can use a dynamic configuration file, such as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;output:all:rotate90&quot;</span>&gt; /tmp/.weston_drm.conf <span class="c1"># All screens are rotated 90 degrees</span>
+<span class="nb">echo</span> <span class="s2">&quot;output:eDP-1:rotate180&quot;</span>&gt; /tmp/.weston_drm.conf <span class="c1"># eDP-1 rotate 180 degrees</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="resolution-and-scaling">
+<h3>Resolution and scaling<a class="headerlink" href="#resolution-and-scaling" title="Permalink to this headline">¶</a></h3>
+<p>The screen resolution and scaling of Weston can be configured in the output section of weston.ini, such as:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[output]</span>
+<span class="na">name</span><span class="o">=</span><span class="s">HDMI-A-1</span>
+<span class="c1"># Need to be an effective resolution supported by the screen</span>
+<span class="na">mode</span><span class="o">=</span><span class="s">1920x1080</span>
+<span class="c1"># Must be an integer multiple</span>
+<span class="na">scale</span><span class="o">=</span><span class="s">2</span>
+</pre></div>
+</div>
+<p>If you need to dynamically configure resolution and scaling, you can use dynamic configuration files, such as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;output:HDMI-A-1:mode=800x600&quot;</span>&gt; /tmp/.weston_drm.conf <span class="c1"># Modify the resolution of HDMI-A-1 to 800x600</span>
+</pre></div>
+</div>
+<p>You need to rely on RGA acceleration when scaling in this way.</p>
+</div>
+<div class="section" id="freeze-screen">
+<h3>Freeze screen<a class="headerlink" href="#freeze-screen" title="Permalink to this headline">¶</a></h3>
+<p>When Weston was started, there was a black screen for a short period switching between the boot logo and the UI display. If you need to prevent a black screen, you can temporarily freeze the Weston screen content through the following dynamic configuration file methods:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/init.d/S50launcher</span>
+     start<span class="o">)</span>
+         ...
+         <span class="nb">export</span> <span class="nv">WESTON_FREEZE_DISPLAY</span><span class="o">=</span>/tmp/.weston_freeze <span class="c1"># Set the path of the special configuration file</span>
+         touch /tmp/.weston_freeze <span class="c1"># Freeze display</span>
+         weston --tty<span class="o">=</span><span class="m">2</span> -B<span class="o">=</span>drm-backend.so --idle-time<span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+         ...
+         sleep <span class="m">1</span> <span class="o">&amp;&amp;</span> rm /tmp/.weston_freeze<span class="p">&amp;</span> <span class="c1"># Thaw in 1 second</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multi-screen">
+<h3>Multi-screen<a class="headerlink" href="#multi-screen" title="Permalink to this headline">¶</a></h3>
+<p>The Weston of the Buildroot SDK supports functions such as multi-screen same-different display and hot-plugging. The distinction between different display screens is based on the drm name (obtained via /sys/class/drm/card0-name), and the relevant configuration is set through environment variables, such as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/init.d/S50launcher</span>
+
+    start<span class="o">)</span>
+        ...
+        <span class="nb">export</span> <span class="nv">WESTON_DRM_PRIMARY</span><span class="o">=</span>HDMI-A-1 <span class="c1"># Specify the main display as HDMI-A-1</span>
+        <span class="nb">export</span> <span class="nv">WESTON_DRM_MIRROR</span><span class="o">=</span><span class="m">1</span> <span class="c1"># Use mirror mode (multiple screens at the same display), if you don’t set this environment variable, it will be a different display</span>
+        <span class="nb">export</span> <span class="nv">WESTON_DRM_KEEP_RATIO</span><span class="o">=</span><span class="m">1</span> <span class="c1"># The zoom maintains the aspect ratio in the mirror mode. If this variable is not set, the full screen is forced</span>
+        <span class="nb">export</span> <span class="nv">WESTON_DRM_PREFER_EXTERNAL</span><span class="o">=</span><span class="m">1</span> <span class="c1"># The built-in display is automatically turned off when the external display is connected</span>
+        <span class="nb">export</span> <span class="nv">WESTON_DRM_PREFER_EXTERNAL_DUAL</span><span class="o">=</span><span class="m">1</span> <span class="c1"># When the external display is connected, the first external display is the main display by default</span>
+        weston --tty<span class="o">=</span><span class="m">2</span> -B<span class="o">=</span>drm-backend.so --idle-time<span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>When zooming the display content in the mirror mode, you need to rely on RGA acceleration.</p>
+<p>At the same time, it is also supported to individually disable specific screens in the output section of weston.ini:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[output]</span>
+<span class="na">name</span><span class="o">=</span><span class="s">LVDS-1</span>
+<span class="na">mode</span><span class="o">=</span><span class="s">off</span>
+<span class="c1"># off|current|preferred|&lt;WIDTHxHEIGHT@RATE&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="input-device-related">
+<h3>Input device related<a class="headerlink" href="#input-device-related" title="Permalink to this headline">¶</a></h3>
+<p>Weston service requires at least one input device by default. If there is no input device, special settings in the core section of weston.ini are required:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/xdg/weston/weston.ini</span>
+
+<span class="k">[core]</span>
+<span class="na">require-input</span><span class="o">=</span><span class="s">false</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/buildroot_develop.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:28:49 GMT -->
+</html>

@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_gpio.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:43 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GPIO &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="I2C" href="driver_i2c.html" />
+    <link rel="prev" title="ADC" href="driver_adc.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GPIO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-output">input Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupt">Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reuse">Reuse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#io-domain">IO-Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-method">Debugging method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#io-instruction">IO instruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-debug-interface">GPIO debug interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#faqs">FAQs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#q1-how-to-switch-the-mux-value-of-pin-to-normal-gpio">Q1: How to switch the MUX value of PIN to normal GPIO?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q2-why-is-the-value-i-read-out-with-the-io-instruction-is-0x00000000">Q2: Why is the value I read out with the IO instruction is 0x00000000?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q3-how-to-check-if-the-voltage-of-the-pin-pin-is-wrong">Q3: How to check if the voltage of the PIN pin is wrong?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q4-what-is-the-difference-between-gpio-set-value-and-gpio-direction-output">Q4: What is the difference between gpio_set_value() and gpio_direction_output()?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>GPIO</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/driver_gpio.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gpio">
+<h1>GPIO<a class="headerlink" href="#gpio" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>GPIO, full name General-Purpose Input/Output (General-Purpose Input/Output), is a general-purpose pin that can be dynamically configured and controlled during software operation. RK3399 has 5 groups of GPIO banks: GPIO0~GPIO4, and each group is distinguished by numbers A0~A7, B0~B7, C0~C7, D0~D7. The initial state of all GPIOs after power-on is input mode, which can be set as pull-up or pull-down by software, or as interrupt pin. The drive strength is programmable. In addition to general input and output functions, each GPIO port may also have other multiplexing functions, such as GPIO2_A2, which can be used as the following functions:</p>
+<ul class="simple">
+<li><p>GPIO2_A2</p></li>
+<li><p>GIF_D2</p></li>
+</ul>
+<p>The drive current, pull-up and pull-down of each GPIO port and the initial state after reset are different. For details, please refer to the chapter “Chapter 10 GPIO” in the “RK3399 Specification”. The GPIO driver of RK3399 is implemented in the following pinctrl file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">pinctrl</span><span class="o">/</span><span class="n">pinctrl</span><span class="o">-</span><span class="n">rockchip</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
+</div>
+<p>The core is to fill the GPIO bank method and parameters, and call gpiochip_add to register to the kernel.</p>
+<p>This article uses the two general GPIO ports TP_RST (GPIO0_B4) and LCD_RST (GPIO4_D5) as examples to write a simple operation GPIO port driver. The path in the SDK is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">gpio</span><span class="o">/</span><span class="n">gpio</span><span class="o">-</span><span class="n">firefly</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
+</div>
+<p>The following takes this driver as an example to introduce the operation of GPIO.</p>
+</div>
+<div class="section" id="input-output">
+<h2>input Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h2>
+<p>First add the resource description of the driver in the DTS file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">demo</span><span class="o">.</span><span class="n">dtsi</span>
+<span class="n">gpio_demo</span><span class="p">:</span> <span class="n">gpio_demo</span> <span class="p">{</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;firefly,rk3399-gpio&quot;</span><span class="p">;</span>
+            <span class="n">firefly</span><span class="o">-</span><span class="n">gpio</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">12</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>          <span class="o">/*</span> <span class="n">GPIO0_B4</span> <span class="o">*/</span>
+            <span class="n">firefly</span><span class="o">-</span><span class="n">irq</span><span class="o">-</span><span class="n">gpio</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio4</span> <span class="mi">29</span> <span class="n">IRQ_TYPE_EDGE_RISING</span><span class="o">&gt;</span><span class="p">;</span>  <span class="o">/*</span> <span class="n">GPIO4_D5</span> <span class="o">*/</span>
+            <span class="p">};</span>
+</pre></div>
+</div>
+<p>Here defines a pin as a general output and input port:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">firefly</span><span class="o">-</span><span class="n">gpio</span> <span class="n">GPIO0_B4</span>
+</pre></div>
+</div>
+<p>The description of the pins of ROC-RK3399-PC-Pro dts is different from that of Firefly-RK3288. GPIO0_B4 is described as: &lt;&amp;gpio0 12 GPIO_ACTIVE_HIGH&gt;, where 12 is derived from: 8+4=12, where 8 is because GPIO0_B4 belongs to group B of GPIO0 , If it is group A, it is 0, if it is group C, it is 16, if it is group D, it is 24, and then recursively, and 4 is because of the 4 after B4.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_HIGH</span></code> means high level is active, if you want low level to be active, you can change it to: <code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_LOW</span></code>, this attribute will be read by the driver.</p>
+<p>Then analyze the resources added by DTS in the probe function, the code is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>static int firefly_gpio_probe(struct platform_device *pdev)
+{
+	int ret;
+    	int gpio;
+    	enum of_gpio_flags flag;
+	struct firefly_gpio_info *gpio_info;
+    	struct device_node *firefly_gpio_node = pdev-&gt;dev.of_node;
+
+	printk(&quot;Firefly GPIO Test Program Probe\n&quot;);
+   	gpio_info = devm_kzalloc(&amp;pdev-&gt;dev,sizeof(struct firefly_gpio_info *), GFP_KERNEL);
+   	if (!gpio_info) {
+        return -ENOMEM;
+        }
+	gpio = of_get_named_gpio_flags(firefly_gpio_node, &quot;firefly-gpio&quot;, 0, &amp;flag);
+	if (!gpio_is_valid(gpio)) {
+    	printk(&quot;firefly-gpio: %d is invalid\n&quot;, gpio); return -ENODEV;
+        }
+	if (gpio_request(gpio, &quot;firefly-gpio&quot;)) {
+        printk(&quot;gpio %d request failed!\n&quot;, gpio);
+        gpio_free(gpio);
+        return -ENODEV;
+        }
+	gpio_info-&gt;firefly_gpio = gpio;
+    	gpio_info-&gt;gpio_enable_value = (flag == OF_GPIO_ACTIVE_LOW) ? 0:1;
+   	gpio_direction_output(gpio_info-&gt;firefly_gpio, gpio_info-&gt;gpio_enable_value);
+    	printk(&quot;Firefly gpio putout\n&quot;);
+    ...
+}
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">of_get_named_gpio_flags</span></code> reads the GPIO configuration numbers and flags of <code class="docutils literal notranslate"><span class="pre">firefly-gpio</span></code> and <code class="docutils literal notranslate"><span class="pre">firefly-irq-gpio</span></code> from the device tree, <code class="docutils literal notranslate"><span class="pre">gpio_is_valid</span></code> judges whether the GPIO number is valid, and <code class="docutils literal notranslate"><span class="pre">gpio_request</span></code> applies to occupy the GPIO. If there is an error in the initialization process, you need to call <code class="docutils literal notranslate"><span class="pre">gpio_free</span></code> to release the previously applied and successful GPIO. Call <code class="docutils literal notranslate"><span class="pre">gpio_direction_output</span></code> in the driver to set the output high or low level. Here the default output is the active level <code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_HIGH</span></code> obtained from DTS, which is high level. If the drive works normally, you can use a multimeter to measure the corresponding The pin should be high. In practice, if you want to read GPIO, you need to set it to input mode first, and then read the value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">val</span><span class="p">;</span>
+<span class="n">gpio_direction_input</span><span class="p">(</span><span class="n">your_gpio</span><span class="p">);</span>
+<span class="n">val</span> <span class="o">=</span> <span class="n">gpio_get_value</span><span class="p">(</span><span class="n">your_gpio</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The following are commonly used GPIO API definitions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;linux/gpio.h&gt;</span>
+<span class="c1">#include &lt;linux/of_gpio.h&gt;</span>
+
+<span class="n">enum</span> <span class="n">of_gpio_flags</span> <span class="p">{</span>
+     <span class="n">OF_GPIO_ACTIVE_LOW</span> <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="nb">int</span> <span class="n">of_get_named_gpio_flags</span><span class="p">(</span><span class="n">struct</span> <span class="n">device_node</span> <span class="o">*</span><span class="n">np</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">propname</span><span class="p">,</span>
+<span class="nb">int</span> <span class="n">index</span><span class="p">,</span> <span class="n">enum</span> <span class="n">of_gpio_flags</span> <span class="o">*</span><span class="n">flags</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">gpio_is_valid</span><span class="p">(</span><span class="nb">int</span> <span class="n">gpio</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">gpio_request</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">gpio</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">label</span><span class="p">);</span>
+<span class="n">void</span> <span class="n">gpio_free</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">gpio</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">gpio_direction_input</span><span class="p">(</span><span class="nb">int</span> <span class="n">gpio</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">gpio_direction_output</span><span class="p">(</span><span class="nb">int</span> <span class="n">gpio</span><span class="p">,</span> <span class="nb">int</span> <span class="n">v</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interrupt">
+<h2>Interrupt<a class="headerlink" href="#interrupt" title="Permalink to this headline">¶</a></h2>
+<p>The Firefly example program also contains an interrupt pin. The interrupt usage of the GPIO port is similar to the input and output of GPIO. First, add the resource description of the driver in the DTS file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm64</span><span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">dts</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">-</span><span class="n">firefly</span><span class="o">-</span><span class="n">port</span><span class="o">.</span><span class="n">dtsi</span>
+<span class="n">gpio</span> <span class="p">{</span>
+	<span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;firefly-gpio&quot;</span><span class="p">;</span>
+	<span class="n">firefly</span><span class="o">-</span><span class="n">irq</span><span class="o">-</span><span class="n">gpio</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio4</span> <span class="mi">29</span> <span class="n">IRQ_TYPE_EDGE_RISING</span><span class="o">&gt;</span><span class="p">;</span>  <span class="o">/*</span> <span class="n">GPIO4_D5</span> <span class="o">*/</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>IRQ_TYPE_EDGE_RISING 表示中断由上升沿触发，当该引脚接收到上升沿信号时可以触发中断函数。 这里还可以配置成如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IRQ_TYPE_NONE</span>			<span class="o">//</span><span class="n">Default</span> <span class="n">value</span><span class="p">,</span> <span class="n">no</span> <span class="n">defined</span> <span class="n">interrupt</span> <span class="n">trigger</span> <span class="nb">type</span>
+<span class="n">IRQ_TYPE_EDGE_RISING</span>	<span class="o">//</span><span class="n">Rising</span> <span class="n">edge</span> <span class="n">trigger</span>
+<span class="n">IRQ_TYPE_EDGE_FALLING</span>	<span class="o">//</span><span class="n">Falling</span> <span class="n">edge</span> <span class="n">trigger</span>
+<span class="n">IRQ_TYPE_EDGE_BOTH</span>		<span class="o">//</span><span class="n">Trigger</span> <span class="n">on</span> <span class="n">both</span> <span class="n">rising</span> <span class="ow">and</span> <span class="n">falling</span> <span class="n">edges</span>
+<span class="n">IRQ_TYPE_LEVEL_HIGH</span>		<span class="o">//</span><span class="n">High</span> <span class="n">level</span> <span class="n">trigger</span>
+<span class="n">IRQ_TYPE_LEVEL_LOW</span>		<span class="o">//</span><span class="n">Low</span> <span class="n">level</span> <span class="n">trigger</span>
+</pre></div>
+</div>
+<p>Then analyze the resources added by DTS in the probe function, and then apply for interrupted registration, the code is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="nb">int</span> <span class="n">firefly_gpio_probe</span><span class="p">(</span><span class="n">struct</span> <span class="n">platform_device</span> <span class="o">*</span><span class="n">pdev</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nb">int</span> <span class="n">ret</span><span class="p">;</span>
+   	<span class="nb">int</span> <span class="n">gpio</span><span class="p">;</span>
+   	<span class="n">enum</span> <span class="n">of_gpio_flags</span> <span class="n">flag</span><span class="p">;</span>
+    	<span class="n">struct</span> <span class="n">firefly_gpio_info</span> <span class="o">*</span><span class="n">gpio_info</span><span class="p">;</span>
+    	<span class="n">struct</span> <span class="n">device_node</span> <span class="o">*</span><span class="n">firefly_gpio_node</span> <span class="o">=</span> <span class="n">pdev</span><span class="o">-&gt;</span><span class="n">dev</span><span class="o">.</span><span class="n">of_node</span><span class="p">;</span>
+    	<span class="o">...</span>
+
+    	<span class="n">gpio_info</span><span class="o">-&gt;</span><span class="n">firefly_irq_gpio</span> <span class="o">=</span> <span class="n">gpio</span><span class="p">;</span>
+    	<span class="n">gpio_info</span><span class="o">-&gt;</span><span class="n">firefly_irq_mode</span> <span class="o">=</span> <span class="n">flag</span><span class="p">;</span>
+   	<span class="n">gpio_info</span><span class="o">-&gt;</span><span class="n">firefly_irq</span> <span class="o">=</span> <span class="n">gpio_to_irq</span><span class="p">(</span><span class="n">gpio_info</span><span class="o">-&gt;</span><span class="n">firefly_irq_gpio</span><span class="p">);</span>
+   	<span class="k">if</span> <span class="p">(</span><span class="n">gpio_info</span><span class="o">-&gt;</span><span class="n">firefly_irq</span><span class="p">)</span> <span class="p">{</span>
+       		<span class="k">if</span> <span class="p">(</span><span class="n">gpio_request</span><span class="p">(</span><span class="n">gpio</span><span class="p">,</span> <span class="s2">&quot;firefly-irq-gpio&quot;</span><span class="p">))</span> <span class="p">{</span>
+          	<span class="n">printk</span><span class="p">(</span><span class="s2">&quot;gpio </span><span class="si">%d</span><span class="s2"> request failed!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">gpio</span><span class="p">);</span> <span class="n">gpio_free</span><span class="p">(</span><span class="n">gpio</span><span class="p">);</span> <span class="k">return</span> <span class="n">IRQ_NONE</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">request_irq</span><span class="p">(</span><span class="n">gpio_info</span><span class="o">-&gt;</span><span class="n">firefly_irq</span><span class="p">,</span> <span class="n">firefly_gpio_irq</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="s2">&quot;firefly-gpio&quot;</span><span class="p">,</span> <span class="n">gpio_info</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">free_irq</span><span class="p">(</span><span class="n">gpio_info</span><span class="o">-&gt;</span><span class="n">firefly_irq</span><span class="p">,</span> <span class="n">gpio_info</span><span class="p">);</span>
+           <span class="n">dev_err</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pdev</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="s2">&quot;Failed to request IRQ: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+    	<span class="p">}</span>
+    	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">static</span> <span class="n">irqreturn_t</span> <span class="n">firefly_gpio_irq</span><span class="p">(</span><span class="nb">int</span> <span class="n">irq</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">dev_id</span><span class="p">)</span> <span class="o">//</span><span class="n">中断函数</span>
+<span class="p">{</span>
+   	<span class="n">printk</span><span class="p">(</span><span class="s2">&quot;Enter firefly gpio irq test program!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    	<span class="k">return</span> <span class="n">IRQ_HANDLED</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Call <code class="docutils literal notranslate"><span class="pre">gpio_to_irq</span></code> to convert the PIN value of the GPIO to the corresponding IRQ value, call <code class="docutils literal notranslate"><span class="pre">gpio_request</span></code> to apply for the IO port, call <code class="docutils literal notranslate"><span class="pre">request_irq</span></code> to apply for an interrupt, if it fails, call <code class="docutils literal notranslate"><span class="pre">free_irq</span></code> to release, in this function <code class="docutils literal notranslate"><span class="pre">gpio_info-firefly_irq</span></code> Is the hardware interrupt number to be applied for, <code class="docutils literal notranslate"><span class="pre">firefly_gpio_irq</span></code> is the interrupt function, <code class="docutils literal notranslate"><span class="pre">gpio_info-&gt;firefly_irq_mode</span></code> is the attribute of interrupt processing, <code class="docutils literal notranslate"><span class="pre">firefly-gpio</span></code> is the name of the device driver, and <code class="docutils literal notranslate"><span class="pre">gpio_info</span></code> is the <code class="docutils literal notranslate"><span class="pre">device</span></code> structure of the device. It is used when registering shared interrupts.</p>
+</div>
+<div class="section" id="reuse">
+<h2>Reuse<a class="headerlink" href="#reuse" title="Permalink to this headline">¶</a></h2>
+<p>How to define which functions of GPIO can be reused, and how to switch functions at runtime? Take I2C4 as an example for a brief introduction.</p>
+<p>Checking the specification table shows that the functions of I2C4_SDA and I2C4_SCL are defined as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Pad</span><span class="c1"># 	                 func0 	         func1</span>
+<span class="n">I2C4_SDA</span><span class="o">/</span><span class="n">GPIO1_B3</span> 	<span class="n">gpio1b3</span> 	<span class="n">i2c4_sda</span>
+<span class="n">I2C4_SCL</span><span class="o">/</span><span class="n">GPIO1_B4</span> 	<span class="n">gpio1b4</span> 	<span class="n">i2c4_scl</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">kernel/arch/arm64/boot/dts/rockchip/rk3399.dtsi</span></code> there are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i2c4</span><span class="p">:</span> <span class="n">i2c</span><span class="nd">@ff3d0000</span><span class="p">{</span>
+	<span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;rockchip,rk3399-i2c&quot;</span><span class="p">;</span>
+	<span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x0</span> <span class="mh">0xff3d0000</span> <span class="mh">0x0</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="n">clocks</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">pmucru</span> <span class="n">SCLK_I2C4_PMU</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;&amp;</span><span class="n">pmucru</span> <span class="n">PCLK_I2C4_PMU</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="n">clock</span><span class="o">-</span><span class="n">names</span> <span class="o">=</span> <span class="s2">&quot;i2c&quot;</span><span class="p">,</span> <span class="s2">&quot;pclk&quot;</span><span class="p">;</span>
+	<span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">GIC_SPI</span> <span class="mi">56</span> <span class="n">IRQ_TYPE_LEVEL_HIGH</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="n">pinctrl</span><span class="o">-</span><span class="n">names</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;gpio&quot;</span><span class="p">;</span>
+	<span class="n">pinctrl</span><span class="o">-</span><span class="mi">0</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">i2c4_xfer</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="n">pinctrl</span><span class="o">-</span><span class="mi">1</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">i2c4_gpio</span><span class="o">&gt;</span><span class="p">;</span>   <span class="o">//</span><span class="n">此处源码未添加</span>
+	<span class="c1">#address-cells = &lt;1&gt;;</span>
+	<span class="c1">#size-cells = &lt;0&gt;;</span>
+	<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Related to multiplexing control is the attribute at the beginning of <code class="docutils literal notranslate"><span class="pre">pinctrl-</span></code>:</p>
+<ul class="simple">
+<li><p>pinctrl-names defines a list of state names: default (i2c function) and gpio two states.</p></li>
+<li><p>pinctrl-0 defines the pinctrl that needs to be set in state 0 (ie default): &amp;i2c4_xfer</p></li>
+<li><p>pinctrl-1 defines the pinctrl that needs to be set in state 1 (i.e. gpio): &amp;i2c4_gpio</p></li>
+</ul>
+<p>These pinctrls are defined in <code class="docutils literal notranslate"><span class="pre">kernel/arch/arm64/boot/dts/rockchip/rk3399.dtsi</span></code> as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pinctrl</span><span class="p">:</span> <span class="n">pinctrl</span> <span class="p">{</span>
+	<span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;rockchip,rk3399-pinctrl&quot;</span><span class="p">;</span>
+	<span class="n">rockchip</span><span class="p">,</span><span class="n">grf</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">grf</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="n">rockchip</span><span class="p">,</span><span class="n">pmu</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">pmugrf</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="c1">#address-cells = &lt;0x2&gt;;</span>
+	<span class="c1">#size-cells = &lt;0x2&gt;;</span>
+	<span class="n">ranges</span><span class="p">;</span>
+	<span class="n">i2c4</span><span class="p">{</span>
+    		<span class="n">i2c4_xfer</span><span class="p">:</span> <span class="n">i2c4</span><span class="o">-</span><span class="n">xfer</span><span class="p">{</span>
+    			<span class="n">rockchip</span><span class="p">,</span><span class="n">pins</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">12</span> <span class="n">RK_FUNC_1</span> <span class="o">&amp;</span><span class="n">pcfg_pull_none</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">11</span> <span class="n">RK_FUNC_1</span> <span class="o">&amp;</span><span class="n">pcfg_pull_none</span><span class="o">&gt;</span><span class="p">;</span>
+        	<span class="p">};</span>
+		<span class="n">i2c4_gpio</span><span class="p">:</span> <span class="n">i2c4</span><span class="o">-</span><span class="n">gpio</span> <span class="p">{</span>
+			<span class="n">rockchip</span><span class="p">,</span><span class="n">pins</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">12</span> <span class="n">RK_FUNC_GPIO</span> <span class="o">&amp;</span><span class="n">pcfg_pull_none</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">11</span> <span class="n">RK_FUNC_GPIO</span> <span class="o">&amp;</span><span class="n">pcfg_pull_none</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>RK_FUNC_1,RK_FUNC_GPIO 的定义在 <code class="docutils literal notranslate"><span class="pre">kernel/include/dt-bindings/pinctrl/rk.h</span></code> 中：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="c1">#define RK_FUNC_GPIO    0</span>
+ <span class="c1">#define RK_FUNC_1   1</span>
+ <span class="c1">#define RK_FUNC_2   2</span>
+ <span class="c1">#define RK_FUNC_3   3</span>
+ <span class="c1">#define RK_FUNC_4   4</span>
+ <span class="c1">#define RK_FUNC_5   5</span>
+ <span class="c1">#define RK_FUNC_6   6</span>
+ <span class="c1">#define RK_FUNC_7   7</span>
+</pre></div>
+</div>
+<p>In addition, values like “1 11” and “1 12” have coding rules. The coding method is the same as that described in the previous section “Input and Output”. “1 11” represents GPIO1_B3, and “1 12” represents GPIO1_B4.</p>
+<p>When multiplexing, if you select <code class="docutils literal notranslate"><span class="pre">default</span></code> (i.e. i2c function), the system will apply the pinctrl i2c4_xfer, and finally switch the two pins GPIO1_B3 and GPIO1_B4 to the corresponding i2c function; and if <code class="docutils literal notranslate"><span class="pre">gpio</span></code> is selected, the system will apply The i2c4_gpio pinctrl restores the GPIO1_B3 and GPIO1_B4 pins to GPIO functions.</p>
+<p>Let’s take a look at how the i2c driver <code class="docutils literal notranslate"><span class="pre">kernel/drivers/i2c/busses/i2c-rockchip.c</span></code> switches multiplexing functions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>static int rockchip_i2c_probe(struct platform_device *pdev)
+{
+	struct rockchip_i2c *i2c = NULL; struct resource *res;
+    	struct device_node *np = pdev-&gt;dev.of_node; int ret;//
+    	 ...
+    	i2c-&gt;sda_gpio = of_get_gpio(np, 0);
+   	 if (!gpio_is_valid(i2c-&gt;sda_gpio)) {
+		dev_err(&amp;pdev-&gt;dev, &quot;sda gpio is invalid\n&quot;);
+		return -EINVAL;
+        }
+	ret = devm_gpio_request(&amp;pdev-&gt;dev, i2c-&gt;sda_gpio, dev_name(&amp;i2c-&gt;adap.dev));
+	if (ret) {
+    		dev_err(&amp;pdev-&gt;dev, &quot;failed to request sda gpio\n&quot;);
+		return ret;
+	}
+	i2c-&gt;scl_gpio = of_get_gpio(np, 1);
+	if (!gpio_is_valid(i2c-&gt;scl_gpio)) {
+		dev_err(&amp;pdev-&gt;dev, &quot;scl gpio is invalid\n&quot;);
+		return -EINVAL;
+	}
+	ret = devm_gpio_request(&amp;pdev-&gt;dev, i2c-&gt;scl_gpio, dev_name(&amp;i2c-&gt;adap.dev));
+	if (ret) {
+		dev_err(&amp;pdev-&gt;dev, &quot;failed to request scl gpio\n&quot;);
+		return ret;
+	}
+	i2c-&gt;gpio_state = pinctrl_lookup_state(i2c-&gt;dev-&gt;pins-&gt;p, &quot;gpio&quot;);
+	if (IS_ERR(i2c-&gt;gpio_state)) {
+		dev_err(&amp;pdev-&gt;dev, &quot;no gpio pinctrl state\n&quot;);
+		return PTR_ERR(i2c-&gt;gpio_state);
+    	}
+	pinctrl_select_state(i2c-&gt;dev-&gt;pins-&gt;p, i2c-&gt;gpio_state);
+	gpio_direction_input(i2c-&gt;sda_gpio);
+	gpio_direction_input(i2c-&gt;scl_gpio);
+	pinctrl_select_state(i2c-&gt;dev-&gt;pins-&gt;p, i2c-&gt;dev-&gt;pins-&gt;default_state);
+	...
+}
+</pre></div>
+</div>
+<p>The first is to call of_get_gpio to take out the gpios of the i2c4 node in the device tree, which belongs to the two defined gpio:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio1</span> <span class="n">GPIO_B3</span> <span class="n">GPIO_ACTIVE_LOW</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;&amp;</span><span class="n">gpio1</span> <span class="n">GPIO_B4</span> <span class="n">GPIO_ACTIVE_LOW</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Then devm_gpio_request is called to apply for gpio, and then pinctrl_lookup_state is called to find the gpio state, and the default state <code class="docutils literal notranslate"><span class="pre">default</span></code> has been saved by the framework to i2c-&gt;dev-pins-&gt;default_state.</p>
+<p>Finally, call pinctrl_select_state to select the <code class="docutils literal notranslate"><span class="pre">default</span></code> or <code class="docutils literal notranslate"><span class="pre">gpio</span></code> function.</p>
+<p>The following are commonly used multiplexing API definitions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;linux/pinctrl/consumer.h&gt;</span>
+<span class="n">struct</span> <span class="n">device</span> <span class="p">{</span>
+	<span class="o">//...</span>
+	<span class="c1">#ifdef CONFIG_PINCTRL</span>
+	<span class="n">struct</span> <span class="n">dev_pin_info</span>	<span class="o">*</span><span class="n">pins</span><span class="p">;</span>
+	<span class="c1">#endif</span>
+	<span class="o">//...</span>
+<span class="p">};</span>
+<span class="n">struct</span> <span class="n">dev_pin_info</span> <span class="p">{</span>
+    	<span class="n">struct</span> <span class="n">pinctrl</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+    	<span class="n">struct</span> <span class="n">pinctrl_state</span> <span class="o">*</span><span class="n">default_state</span><span class="p">;</span>
+<span class="c1">#ifdef CONFIG_PM</span>
+   	<span class="n">struct</span> <span class="n">pinctrl_state</span> <span class="o">*</span><span class="n">sleep_state</span><span class="p">;</span>
+   	<span class="n">struct</span> <span class="n">pinctrl_state</span> <span class="o">*</span><span class="n">idle_state</span><span class="p">;</span>
+<span class="c1">#endif</span>
+<span class="p">};</span>
+<span class="n">struct</span> <span class="n">pinctrl_state</span> <span class="o">*</span> <span class="n">pinctrl_lookup_state</span><span class="p">(</span><span class="n">struct</span> <span class="n">pinctrl</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">pinctrl_select_state</span><span class="p">(</span><span class="n">struct</span> <span class="n">pinctrl</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="n">struct</span> <span class="n">pinctrl_state</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="io-domain">
+<h2>IO-Domain<a class="headerlink" href="#io-domain" title="Permalink to this headline">¶</a></h2>
+<p>In a complex system-on-chip (SOC), designers generally divide the power supply of the system into multiple independent blocks, which are called Power Domains. This has many advantages, such as:</p>
+<ul class="simple">
+<li><p>The voltage domain is uniformly configured on the DTS node of the IO-Domain, and each driver does not need to be configured once, which is easy to manage;</p></li>
+<li><p>In accordance with the Upstream approach, it is more convenient if you need Upstream in the future;</p></li>
+<li><p>The IO-Domain driver supports dynamic adjustment of the voltage domain during operation. For example, a certain Regulator of the PMIC can dynamically switch between 1.8v and 3.3v. Once the Regulator voltage changes, the IO-Domain driver will be notified to reset the voltage domain.</p></li>
+</ul>
+<p>ROC-RK3399-PC Pro 原理图上的 Power Domain Map 表以及配置如下表所示：</p>
+<p><img alt="_images/gpio_power_domain.jpg" src="_images/gpio_power_domain.jpg" /></p>
+<p>Through the schematic diagram of RK3399 SDK, we can see that the voltage domain of bt656-supply is connected to vcc18_dvp, and vcc_io is from VLDO1 of PMIC RK808;</p>
+<p>You can find vcc1v8_dvp in DTS, set bt656-supply = &lt;&amp;vcc18_dvp&gt;.</p>
+<p>The configuration of other circuits is similar. It should be noted that if it is another PMIC, the Regulator used is different. The actual circuit conditions are the standard.</p>
+</div>
+<div class="section" id="debugging-method">
+<h2>Debugging method<a class="headerlink" href="#debugging-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="io-instruction">
+<h3>IO instruction<a class="headerlink" href="#io-instruction" title="Permalink to this headline">¶</a></h3>
+<p>A very useful tool for GPIO debugging is the IO command. The Android system of ROC-RK3399-PC Pro has built-in IO commands by default. Using IO commands, you can read or write the status of each IO port in real time. Here is a brief introduction The use of IO instructions. First check the help of IO instruction:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#io --help
+Unknown option: ?
+Raw memory i/o utility - $Revision: 1.5 $
+
+io -v -1|2|4 -r|w [-l &lt;len&gt;] [-f &lt;file&gt;] &lt;addr&gt; [&lt;value&gt;]
+
+   -v         Verbose, asks for confirmation
+   -1|2|4     Sets memory access size in bytes (default byte)
+   -l &lt;len&gt;   Length in bytes of area to access (defaults to
+              one access, or whole file length)
+   -r|w       Read from or Write to memory (default read)
+   -f &lt;file&gt;  File to write on memory read, or
+              to read on memory write
+   &lt;addr&gt;     The memory address to access
+   &lt;val&gt;      The value to write (implies -w)
+
+Examples:
+   io 0x1000                  Reads one byte from 0x1000
+   io 0x1000 0x12             Writes 0x12 to location 0x1000
+   io -2 -l 8 0x1000          Reads 8 words from 0x1000
+   io -r -f dmp -l 100 200    Reads 100 bytes from addr 200 to file
+   io -w -f img 0x10000       Writes the whole of file to memory
+
+Note access size (-1|2|4) does not apply to file based accesses.
+</pre></div>
+</div>
+<p>As you can see from the help, if you want to read or write a register, you can use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">io</span> <span class="o">-</span><span class="mi">4</span> <span class="o">-</span><span class="n">r</span> <span class="mh">0x1000</span> <span class="o">//</span><span class="n">Read</span> <span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="mi">4</span><span class="o">-</span><span class="n">bit</span> <span class="n">register</span> <span class="n">starting</span> <span class="kn">from</span> <span class="mh">0x1000</span>
+<span class="n">io</span> <span class="o">-</span><span class="mi">4</span> <span class="o">-</span><span class="n">w</span> <span class="mh">0x1000</span> <span class="o">//</span><span class="n">Write</span> <span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="mi">4</span><span class="o">-</span><span class="n">bit</span> <span class="n">register</span> <span class="kn">from</span> <span class="mh">0x1000</span>
+</pre></div>
+</div>
+<p>Use example:</p>
+<ul class="simple">
+<li><p>View the multiplexing of GPIO1_B3 pins</p></li>
+<li><p>From the datasheet of the master control, the base address of the register corresponding to GPIO1 is: 0xff320000</p></li>
+<li><p>The offset of GPIO1B_IOMUX found from the datasheet of the master control is: 0x00014</p></li>
+<li><p>The address of the iomux register of GPIO1_B3 is: base address (Operational Base) + offset (offset)=0xff320000+0x00014=0xff320014</p></li>
+<li><p>Use the following command to check the multiplexing of GPIO1_B3:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># io -4 -r 0xff320014</span>
+<span class="n">ff320014</span><span class="p">:</span>  <span class="mi">0000816</span><span class="n">a</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Find [7:6] from the datasheet:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpio1b3_sel</span>
+<span class="n">GPIO1B</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">iomux</span> <span class="n">select</span>
+<span class="mi">2</span><span class="s1">&#39;b00: gpio</span>
+<span class="mi">2</span><span class="s1">&#39;b01: i2c4sensor_sda</span>
+<span class="mi">2</span><span class="s1">&#39;b10: reserved</span>
+<span class="mi">2</span><span class="s1">&#39;b11: reserved</span>
+</pre></div>
+</div>
+<p>Therefore, it can be determined that the GPIO is multiplexed as i2c4sensor_sda.</p>
+<ul class="simple">
+<li><p>If you want to reuse as GPIO, you can use the following command settings:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># io -4 -w 0xff320014 0x0000812a</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gpio-debug-interface">
+<h3>GPIO debug interface<a class="headerlink" href="#gpio-debug-interface" title="Permalink to this headline">¶</a></h3>
+<p>The purpose of the Debugfs file system is to provide developers with more kernel data to facilitate debugging. Here GPIO debugging can also use the Debugfs file system to get more kernel information. The interface of GPIO in the Debugfs file system is <code class="docutils literal notranslate"><span class="pre">/sys/kernel/debug/gpio</span></code>, the information of this interface can be read like this:</p>
+</div>
+</div>
+<div class="section" id="faqs">
+<h2>FAQs<a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q1-how-to-switch-the-mux-value-of-pin-to-normal-gpio">
+<h3>Q1: How to switch the MUX value of PIN to normal GPIO?<a class="headerlink" href="#q1-how-to-switch-the-mux-value-of-pin-to-normal-gpio" title="Permalink to this headline">¶</a></h3>
+<p>A1: When using GPIO request, the MUX value of the PIN will be forcibly switched to GPIO, so when using the PIN pin as a GPIO function, make sure that the PIN pin is not used by other modules.</p>
+</div>
+<div class="section" id="q2-why-is-the-value-i-read-out-with-the-io-instruction-is-0x00000000">
+<h3>Q2: Why is the value I read out with the IO instruction is 0x00000000?<a class="headerlink" href="#q2-why-is-the-value-i-read-out-with-the-io-instruction-is-0x00000000" title="Permalink to this headline">¶</a></h3>
+<p>A2: If you use the IO command to read the register of a GPIO, the value read is abnormal, such as 0x00000000 or 0xffffffff, etc., please confirm whether the CLK of the GPIO is turned off. The CLK of the GPIO is controlled by the CRU. You can read the datasheet Next, use the CRU_CLKGATE_CON* register to check whether the CLK is turned on. If it is not turned on, you can use the io command to set the corresponding register to turn on the corresponding CLK. After turning on the CLK, you should be able to read the correct register value.</p>
+</div>
+<div class="section" id="q3-how-to-check-if-the-voltage-of-the-pin-pin-is-wrong">
+<h3>Q3: How to check if the voltage of the PIN pin is wrong?<a class="headerlink" href="#q3-how-to-check-if-the-voltage-of-the-pin-pin-is-wrong" title="Permalink to this headline">¶</a></h3>
+<p>A3: When measuring the voltage of the PIN pin is incorrect, if external factors are excluded, you can confirm whether the IO voltage source where the PIN is located is correct and whether the IO-Domain configuration is correct.</p>
+</div>
+<div class="section" id="q4-what-is-the-difference-between-gpio-set-value-and-gpio-direction-output">
+<h3>Q4: What is the difference between gpio_set_value() and gpio_direction_output()?<a class="headerlink" href="#q4-what-is-the-difference-between-gpio-set-value-and-gpio-direction-output" title="Permalink to this headline">¶</a></h3>
+<p>A4: If you do not dynamically switch input and output when using this GPIO, it is recommended to set the GPIO output direction at the beginning, and use the gpio_set_value() interface when pulling it up and pulling it down later. It is not recommended to use gpio_direction_output() because of the gpio_direction_output interface There is a mutex lock inside, there will be an error exception when calling the interrupt context, and compared to gpio_set_value, gpio_direction_output does more and is wasteful.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="driver_i2c.html" class="btn btn-neutral float-right" title="I2C" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="driver_adc.html" class="btn btn-neutral" title="ADC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/driver_gpio.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:43 GMT -->
+</html>

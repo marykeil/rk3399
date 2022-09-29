@@ -1,0 +1,784 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/debug.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:30 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Serial debug &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Introduction to updating firmware" href="01-bootmode.html" />
+    <link rel="prev" title="Introduction" href="started.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Serial debug</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#buy-adapter">Buy Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-connection">Hardware Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parameter-setting">Parameter Setting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-serial-on-windows">Use serial on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-driver">Install Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-software">Install Software</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-serial-debug-on-ubuntu">Use serial debug on Ubuntu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-minicom">Install minicom</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux_compile_gpt.html">1. Compile Ubuntu firmware(GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href="./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+               
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Serial debug</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/debug.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="serial-debug">
+<h1>Serial debug<a class="headerlink" href="#serial-debug" title="Permalink to this headline">¶</a></h1>
+<p>If you are doing U-Boot or kernel development, the USB serial adapter (short for USB to serial TTL adapter) is very useful for checking the system startup log, especially when there is no graphical desktop display.</p>
+<div class="section" id="buy-adapter">
+<h2>Buy Adapter<a class="headerlink" href="#buy-adapter" title="Permalink to this headline">¶</a></h2>
+<p>There are many USB adapter to serial port on the shop, divided by chip, there are the following:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="center">Serial port</th>
+<th align="center">Maximum baud rate</th>
+<th align="center">Is it recommended</th>
+<th align="center">Evaluation</th>
+<th align="center">Purchase link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-12605442688.14.aa5e1e8srwECg&amp;id=546045713700">CP2104</a></td>
+<td align="center">2Mbps</td>
+<td align="center">Yes</td>
+<td align="center">Support high baud rate communication, good stability and durability</td>
+<td align="center"><a href="https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-12605442688.14.aa5e1e8srwECg&amp;id=546045713700">点击购买</a></td>
+</tr>
+<tr>
+<td align="center">CH340</td>
+<td align="center">2Mbps</td>
+<td align="center">No</td>
+<td align="center">Firefly and many customers have found in actual use that the actual baud rate of many CH340s on the market cannot reach 1.5Mbps, which causes a lot of trouble in the development process</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PL2303</td>
+<td align="center">1.2Mbps</td>
+<td align="center">No</td>
+<td align="center">The maximum baud rate is less than 1.5Mbps</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table><p><font color=#ff0000><strong>Note:</strong> The default baud rate of ROC-RK3399-PC Pro is 1500000, some USB to serial chip baud rate can not reach 1500000. The same chip may have different series, so be sure to confirm whether to support before purchasing.</font></p>
+</div>
+<div class="section" id="hardware-connection">
+<h2>Hardware Connection<a class="headerlink" href="#hardware-connection" title="Permalink to this headline">¶</a></h2>
+<p>Serial port to USB adapter, there are four pins:</p>
+<ul class="simple">
+<li><p>3.3V Power, no need to connect.</p></li>
+<li><p>GND，Ground, connect to GND pin of the board.</p></li>
+<li><p>TXD，Transmit，connect to TX pin of the board.</p></li>
+<li><p>RXD，Receive, connect to RX pin of the board.</p></li>
+</ul>
+<p><strong>Note:</strong> If you encounter the problem that TX and RX cannot input and output when using other serial adapters, you can try to exchange TX and RX connections.</p>
+<p>ROC-RK3399-PC Pro serial port connection diagram:</p>
+<p><img alt="_images/debug_connection.en.jpg" src="_images/debug_connection.en.jpg" /></p>
+</div>
+<div class="section" id="parameter-setting">
+<h2>Parameter Setting<a class="headerlink" href="#parameter-setting" title="Permalink to this headline">¶</a></h2>
+<p>ROC-RK3399-PC Pro use the following serial parameters:</p>
+<ul class="simple">
+<li><p>Baud rate: 1500000</p></li>
+<li><p>Data bit: 8</p></li>
+<li><p>Stop bit: 1</p></li>
+<li><p>Parity check: none</p></li>
+<li><p>Flow control: none</p></li>
+</ul>
+</div>
+<div class="section" id="use-serial-on-windows">
+<h2>Use serial on Windows<a class="headerlink" href="#use-serial-on-windows" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-driver">
+<h3>Install Driver<a class="headerlink" href="#install-driver" title="Permalink to this headline">¶</a></h3>
+<p>Download driver and install:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sparks.gogo.co.nz/ch340.html">CH340</a></p></li>
+<li><p><a class="reference external" href="http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41">PL2303</a></p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers">CP210X</a></p></li>
+</ul>
+<p>If you can’t use PL2303 normally on Win8, use 3.3.5.122 or older version of the old driver, please refer to <a class="reference external" href="https://blog.csdn.net/ropai/article/details/19619951">This article</a>. Please find drivers with version 3.3.5.122 or before.</p>
+<p>If you install the CP210X driver from the official website on the Windows system, you can set the serial port baud rate to 1500000 using tools such as PUTTY or SecureCRT. If you cannot set the baud rate or it is invalid, you can download the <a class="reference external" href="http://www.t-firefly.com/share/index/index/id/a2e8f25f3d53992bf3e04f45b0e6c8e8.html">old version driver</a>.</p>
+<p>After the adapter is inserted, the system will prompt for the discovery of new hardware and initialization, and then the corresponding COM port can be found in the device manager:</p>
+<p><img alt="_images/debug_find_com.jpg" src="_images/debug_find_com.jpg" /></p>
+</div>
+<div class="section" id="install-software">
+<h3>Install Software<a class="headerlink" href="#install-software" title="Permalink to this headline">¶</a></h3>
+<p>Putty or SecureCRT is generally used on Windows. Among them, we recommend using the free version of MobaXterm. This is a powerful terminal software. Here we will introduce how to use MobaXterm.</p>
+<p><a class="reference external" href="https://mobaxterm.mobatek.net/">Download MobaXterm</a>：</p>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">session</span></code> to <code class="docutils literal notranslate"><span class="pre">Serial</span></code>.</p></li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">Serial</span> <span class="pre">port</span></code> to the COM port found in the device manager.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">Speed</span> <span class="pre">(bsp)</span></code> to 1500000.</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">OK</span></code> button.</p></li>
+</ul>
+<p><img alt="_images/debug_set_MobaXterm1.PNG" src="_images/debug_set_MobaXterm1.png" />
+<img alt="_images/debug_set_MobaXterm2.PNG" src="_images/debug_set_MobaXterm2.png" /></p>
+</div>
+</div>
+<div class="section" id="use-serial-debug-on-ubuntu">
+<h2>Use serial debug on Ubuntu<a class="headerlink" href="#use-serial-debug-on-ubuntu" title="Permalink to this headline">¶</a></h2>
+<p>There are many options available on Ubuntu:</p>
+<ul class="simple">
+<li><p>minicom</p></li>
+<li><p>picocom</p></li>
+<li><p>kermit</p></li>
+</ul>
+<p>The following shows how to use minicom.</p>
+<div class="section" id="install-minicom">
+<h3>Install minicom<a class="headerlink" href="#install-minicom" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">minicom</span>
+</pre></div>
+</div>
+<p>To connect the serial port line, see what the serial port device file is. The following example is <code class="docutils literal notranslate"><span class="pre">/dev/ttyusb0</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls /dev/ttyUSB*
+/dev/ttyUSB0
+</pre></div>
+</div>
+<p>Run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo minicom
+Welcome to minicom 2.7
+OPTIONS: I18n
+Compiled on Jan  1 2014, 17:13:19.
+Port /dev/ttyUSB0, 15:57:00
+Press CTRL-A Z for help on special keys
+</pre></div>
+</div>
+<p>Based on the above tips: Press <code class="docutils literal notranslate"><span class="pre">Ctrl-a</span></code> and then press <code class="docutils literal notranslate"><span class="pre">Z</span></code> again to bring up the help menu.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+-------------------------------------------------------------------+</span>
+<span class="o">|</span>                      <span class="n">Minicom</span> <span class="n">Command</span> <span class="n">Summary</span>                      <span class="o">|</span>
+<span class="o">|</span>                                                                   <span class="o">|</span>
+<span class="o">|</span>              <span class="n">Commands</span> <span class="n">can</span> <span class="n">be</span> <span class="n">called</span> <span class="n">by</span> <span class="n">CTRL</span><span class="o">-</span><span class="n">A</span>                     <span class="o">|</span>
+<span class="o">|</span>                                                                   <span class="o">|</span>
+<span class="o">|</span>               <span class="n">Main</span> <span class="n">Functions</span>                  <span class="n">Other</span> <span class="n">Functions</span>     <span class="o">|</span>
+<span class="o">|</span>                                                                   <span class="o">|</span>
+<span class="o">|</span> <span class="n">Dialing</span> <span class="n">directory</span><span class="o">..</span><span class="n">D</span>  <span class="n">run</span> <span class="n">script</span> <span class="p">(</span><span class="n">Go</span><span class="p">)</span><span class="o">....</span><span class="n">G</span> <span class="o">|</span> <span class="n">Clear</span> <span class="n">Screen</span><span class="o">.......</span><span class="n">C</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Send</span> <span class="n">files</span><span class="o">.........</span><span class="n">S</span>  <span class="n">Receive</span> <span class="n">files</span><span class="o">......</span><span class="n">R</span> <span class="o">|</span> <span class="n">cOnfigure</span> <span class="n">Minicom</span><span class="o">..</span><span class="n">O</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">comm</span> <span class="n">Parameters</span><span class="o">....</span><span class="n">P</span>  <span class="n">Add</span> <span class="n">linefeed</span><span class="o">.......</span><span class="n">A</span> <span class="o">|</span> <span class="n">Suspend</span> <span class="n">minicom</span><span class="o">....</span><span class="n">J</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Capture</span> <span class="n">on</span><span class="o">/</span><span class="n">off</span><span class="o">.....</span><span class="n">L</span>  <span class="n">Hangup</span><span class="o">.............</span><span class="n">H</span> <span class="o">|</span> <span class="n">eXit</span> <span class="ow">and</span> <span class="n">reset</span><span class="o">.....</span><span class="n">X</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">send</span> <span class="k">break</span><span class="o">.........</span><span class="n">F</span>  <span class="n">initialize</span> <span class="n">Modem</span><span class="o">...</span><span class="n">M</span> <span class="o">|</span> <span class="n">Quit</span> <span class="k">with</span> <span class="n">no</span> <span class="n">reset</span><span class="o">.</span><span class="n">Q</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Terminal</span> <span class="n">settings</span><span class="o">..</span><span class="n">T</span>  <span class="n">run</span> <span class="n">Kermit</span><span class="o">.........</span><span class="n">K</span> <span class="o">|</span> <span class="n">Cursor</span> <span class="n">key</span> <span class="n">mode</span><span class="o">....</span><span class="n">I</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">lineWrap</span> <span class="n">on</span><span class="o">/</span><span class="n">off</span><span class="o">....</span><span class="n">W</span>  <span class="n">local</span> <span class="n">Echo</span> <span class="n">on</span><span class="o">/</span><span class="n">off</span><span class="o">..</span><span class="n">E</span> <span class="o">|</span> <span class="n">Help</span> <span class="n">screen</span><span class="o">........</span><span class="n">Z</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Paste</span> <span class="n">file</span><span class="o">.........</span><span class="n">Y</span>  <span class="n">Timestamp</span> <span class="n">toggle</span><span class="o">...</span><span class="n">N</span> <span class="o">|</span> <span class="n">scroll</span> <span class="n">Back</span><span class="o">........</span><span class="n">B</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Add</span> <span class="n">Carriage</span> <span class="n">Ret</span><span class="o">...</span><span class="n">U</span>                                              <span class="o">|</span>
+<span class="o">|</span>                                                                   <span class="o">|</span>
+<span class="o">|</span>             <span class="n">Select</span> <span class="n">function</span> <span class="ow">or</span> <span class="n">press</span> <span class="n">Enter</span> <span class="k">for</span> <span class="n">none</span><span class="o">.</span>              <span class="o">|</span>
+<span class="o">+-------------------------------------------------------------------+</span>
+</pre></div>
+</div>
+<p>Press O to enter the setting interface, as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>           <span class="o">+-----</span><span class="p">[</span><span class="n">configuration</span><span class="p">]</span><span class="o">------+</span>
+           <span class="o">|</span> <span class="n">Filenames</span> <span class="ow">and</span> <span class="n">paths</span>      <span class="o">|</span>
+           <span class="o">|</span> <span class="n">File</span> <span class="n">transfer</span> <span class="n">protocols</span>  <span class="o">|</span>
+           <span class="o">|</span> <span class="n">Serial</span> <span class="n">port</span> <span class="n">setup</span>        <span class="o">|</span>
+           <span class="o">|</span> <span class="n">Modem</span> <span class="ow">and</span> <span class="n">dialing</span>        <span class="o">|</span>
+           <span class="o">|</span> <span class="n">Screen</span> <span class="ow">and</span> <span class="n">keyboard</span>      <span class="o">|</span>
+           <span class="o">|</span> <span class="n">Save</span> <span class="n">setup</span> <span class="k">as</span> <span class="n">dfl</span>        <span class="o">|</span>
+           <span class="o">|</span> <span class="n">Save</span> <span class="n">setup</span> <span class="k">as</span><span class="o">..</span>          <span class="o">|</span>
+           <span class="o">|</span> <span class="n">Exit</span>                     <span class="o">|</span>
+           <span class="o">+--------------------------+</span>
+</pre></div>
+</div>
+<p>Move the cursor to <code class="docutils literal notranslate"><span class="pre">Serial</span> <span class="pre">port</span> <span class="pre">setup</span></code>, press enter to enter the Serial port setup interface, then enter the letter prompted earlier, select the corresponding option, and set it as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  +-----------------------------------------------------------------------+
+   | A -    Serial Device      : /dev/ttyUSB0                              |
+   | B - Lockfile Location     : /var/lock                                 |
+   | C -   Callin Program      :                                           |
+   | D -  Callout Program      :                                           |
+   | E -    Bps/Par/Bits       : 1500000 8N1                               |
+   | F - Hardware Flow Control : No                                        |
+   | G - Software Flow Control : No                                        |
+   |                                                                       |
+   |    Change which setting?                                              |
+   +-----------------------------------------------------------------------+
+</pre></div>
+</div>
+<p><font color=#ff0000><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">Hardware</span> <span class="pre">Flow</span> <span class="pre">Control</span></code> and <code class="docutils literal notranslate"><span class="pre">Software</span> <span class="pre">Flow</span> <span class="pre">Control</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">No</span></code>, otherwise it may not be impossible to input.</font></p>
+<p>After finishing the setting, go back to the previous menu and select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">setup</span> <span class="pre">as</span> <span class="pre">dfl</span></code> to save as the default configuration, which will be used by default later.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="01-bootmode.html" class="btn btn-neutral float-right" title="1. Introduction to updating firmware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="started.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/debug.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:31 GMT -->
+</html>

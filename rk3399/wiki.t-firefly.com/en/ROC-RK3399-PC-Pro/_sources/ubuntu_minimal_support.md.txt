@@ -1,0 +1,33 @@
+Firefly Ubuntu Minimal Introduction
+
+ROC-RK3399-PC Pro The Ubuntu Minimal system is based on the Ubuntu
+64bit system. Currently, Ubuntu 18.04 is released. Compared with
+Ubuntu Desktop, it has the following features:
+
+There is no desktop environment, occupying less resources, etc. The
+simplified system memory occupies only 40M.
+
+For embedded platforms, streamline system services.
+
+Adapt to QT, Docker, Electron and other development frameworks.
+
+Provide a series of interfaces to operate onboard resource devices.
+
+The system adopts overlayfs file system, supports exporting rootfs,
+secondary packaging, restoring factory settings and other functions
+
+How to use Qt
+
+After the Firefly Linux Minimal system is booted, it will
+automatically log in to the root user with the password firefly
+
+The system has added OpenGL ES, OpenCL, DRM support.
+
+Due to security policy, sshd does not support remote login via root
+user by default, it can be turned on by the following method
+
+   sed -i -e 's/#PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config
+
+For more introduction, please refer to
+
+"Firefly Ubuntu User Manual"

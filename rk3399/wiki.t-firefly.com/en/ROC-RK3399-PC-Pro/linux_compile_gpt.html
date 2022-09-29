@@ -1,0 +1,981 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/linux_compile_gpt.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:35 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Compile Ubuntu firmware(GPT) &mdash; Firefly Wiki</title>
+  
+  <meta name="keywords" content="ROC-RK3399-PC Pro">
+  <meta name="description" content="ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/themec652.css?v=20201016" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Firefly Ubuntu Desktop Introduction" href="ubuntu_desktop_support.html" />
+    <link rel="prev" title="3. Instructions for writing with USB cable (important)" href="02-upgrade_table.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          <!-- <img class="logo" src="_images/Logo.png"> -->
+
+            
+           
+          <a href="http://wiki.t-firefly.com/en/" class="logo_a">
+            <img src="_static/Logo.png" class="logo" alt="Logo" />
+          </a>
+          
+
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ROC-RK3399-PC Pro Manual
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+
+            
+              <p class="caption"><span class="caption-text">ROC-RK3399-PC Pro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Serial debug</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Upgrade Firmware</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01-bootmode.html">1. Introduction to updating firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FW_Changelog.html">2. Firmware update log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-upgrade_table.html">3. Instructions for writing with USB cable (important)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Compile Ubuntu firmware(GPT)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preparatory-work">1.1. Preparatory work</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-compilation-environment">1.1.1. Set up compilation environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-firefly-linux-sdk-sub-volume-compressed-package">1.1.2. Download Firefly_Linux_SDK sub-volume compressed package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unpack-firefly-linux-sdk-sub-volume-compressed-package">1.1.3. Unpack Firefly_Linux_SDK sub-volume compressed package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-firefly-linux-sdk">1.1.4. Update Firefly_Linux_SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux-sdk-catalog">1.1.5. Linux_SDK catalog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compile-sdk">1.2. Compile SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-before-compilation">1.2.1. Configuration before compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-compilation">1.2.2. Automatic compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#partial-compilation">1.2.3. Partial compilation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#kernel">1.2.3.1. kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#u-boot">1.2.3.2. u-boot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recovery">1.2.3.3. recovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rootfs">1.2.3.4. rootfs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pack-the-firmware">1.3. Pack the firmware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#update-the-part-images-synchronously">1.3.1. Update the part images synchronously</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#packaged-into-a-unified-firmware">1.3.2. Packaged into a unified firmware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#partition-introduction">1.4. Partition introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameter">1.4.1. parameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-file">1.4.2. package-file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#faqs">1.5. FAQs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-enter-upgrade-mode">1.5.1. How to enter upgrade mode ?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_desktop_support.html">2. Firefly Ubuntu Desktop Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu_minimal_support.html">3. Firefly Ubuntu Minimal Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_Linux_OS_support.html">4. <font color="red">More Linux OS support</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_technical_cases_show.html">5. More technical cases show</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firefly_linux_guide.html">6. Firefly Linux User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adb_use.html">1. ADB use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_compile_android.html">2. Compile environment to build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android7.1_industry_firmware.html">3. Compile Android7.1 Industry firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile_android10.0_firmware.html">4. Compile Android10.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_android_firmware.html">5. Customized Android firmware</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uboot_introduction.html">U-Boot</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driver_adc.html">ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_gpio.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_ir.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_lcd.html">LCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_led.html">LED</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_timer.html">TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver_uart.html">UART</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Accessories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_serial.html">Conversion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_display.html">Screen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_camera.html">Camera Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_wireless.html">Wireless module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_12V_adapter.html">Power adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_ir.html">Remote control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_cooling.html">Heat sink</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Questions and answers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Hardware resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware_doc.html">Related document</a></li>
+</ul>
+
+            
+
+            
+<style>
+    .wy-menu-vertical a.download:hover{
+        background: none;
+    }
+    .wy-menu-vertical a.download{
+
+        padding: 0;
+        color: #fff;
+
+    }
+</style>
+
+
+<p class="caption">
+    <a href="https://wiki.t-firefly.com/en/Firefly-Linux-Guide/index.html" target="_blank" class="download"><span class="caption-text">Firefly Linux User Guide</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/Firefly-Android-Manual/system_function.html" target="_blank" class="download"><span class="caption-text">Firefly Android User Manual</span></a>
+</p>
+
+<p class="caption">
+    <a href="http://wiki.t-firefly.com/en/FireflyApi/FireflyApi.html" target="_blank" class="download"><span class="caption-text">FireflyApi</span></a>
+</p>
+
+<p class="caption">
+    <a href=" ./download/en.t-firefly.com/doc/download/127.html" target="_blank" class="download"><span class="caption-text">Resource download</span></a>
+</p>
+
+
+
+
+
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ROC-RK3399-PC Pro Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    @media screen and (max-width: 1100px){
+        .prodcut-show-main{
+            display: none;
+        }
+    }
+    .prodcut-show-main{
+        background: #edf0f2;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 24px;
+    }
+    .prodcut-show-main .prodcut-show-main-left{
+        width: 33%;
+    }
+    .prodcut-show-main .prodcut-show-main-right{
+        width: 64%;
+        margin-top: 36px;
+        margin-right: 18px;
+    }
+    .prodcut-show-main .prodcut-show-main-right p{
+        color: gray;
+        font-size: 84%;
+        height: 74px;
+        overflow-x: hidden;
+    }
+    .product-show-name .fa-pull-left{
+        
+        font-size: 124%;
+        color: #ff6600;
+        font-weight: bolder;
+        
+    }
+    .product-show-name{
+        margin-bottom: 12px;
+    }
+    .product-show-name .fa-pull-right a{
+        
+        background: #ff6600;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 80%;
+        margin-left: 10px;
+
+    }
+    .prodcut-show-img{
+        height: 170px;
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    
+</style>
+
+<div class="prodcut-show-main clearfix">
+    <div class="fa-pull-left prodcut-show-main-left">
+        <div class="prodcut-show-img">
+            <img src="../../../en.t-firefly.com/upload/portal/20211215/169f38798b9bd74f729d3a37766fa3b2.png" alt="">
+        </div>
+    </div>
+    <div class="fa-pull-right prodcut-show-main-right">
+        <div class="product-show-name clearfix">
+            <div class="fa-pull-left ">
+                ROC-RK3399-PC Pro <span></span>
+            </div>
+
+            <div class="fa-pull-right">
+                
+                <a href="hhttps://download.t-firefly.com/product/Board/RK3399/Document/Hardware/ROC-RK3399-PC%20Pro/Specification/ROC-RK3399-PC%20Pro%20Specification.pdf" target="_blank">Spec</a>
+                
+
+                
+                
+                
+            </div>
+        </div>
+
+        <p>ROC-RK3399-PC Pro uses RK3399 6-core (A72x2+A53x4) 64-bit processor with a main frequency of up to 1.8GHz. It integrates four-core Mali-T860 GPU with excellent performance.</p>
+    </div>
+</div>
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>1. Compile Ubuntu firmware(GPT)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/linux_compile_gpt.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="compile-ubuntu-firmware-gpt">
+<h1>1. Compile Ubuntu firmware(GPT)<a class="headerlink" href="#compile-ubuntu-firmware-gpt" title="Permalink to this headline">¶</a></h1>
+<p>In order to facilitate the use and development of users, the official Linux development kit SDK is provided. This chapter explains the specific use of the SDK in detail.</p>
+<div class="section" id="preparatory-work">
+<h2>1.1. Preparatory work<a class="headerlink" href="#preparatory-work" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="set-up-compilation-environment">
+<h3>1.1.1. Set up compilation environment<a class="headerlink" href="#set-up-compilation-environment" title="Permalink to this headline">¶</a></h3>
+<p><strong>Please confirm the installation of the following files!</strong></p>
+<p>Here is use Ubuntu 18.04 for testing(It is recommended to use the ubuntu18.04 system for development, or use docker to deploy the Ubuntu18.04 container, otherwise the environment package cannot be installed):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">repo</span> <span class="n">git</span><span class="o">-</span><span class="n">core</span> <span class="n">gitk</span> <span class="n">git</span><span class="o">-</span><span class="n">gui</span> <span class="n">gcc</span><span class="o">-</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabihf</span> <span class="n">u</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">tools</span> <span class="n">device</span><span class="o">-</span><span class="n">tree</span><span class="o">-</span><span class="n">compiler</span> \
+<span class="n">gcc</span><span class="o">-</span><span class="n">aarch64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> <span class="n">mtools</span> <span class="n">parted</span> <span class="n">libudev</span><span class="o">-</span><span class="n">dev</span> <span class="n">libusb</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="n">dev</span> <span class="n">python</span><span class="o">-</span><span class="n">linaro</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">tools</span> \
+<span class="n">linaro</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">tools</span> <span class="n">gcc</span><span class="o">-</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabihf</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">liblz4</span><span class="o">-</span><span class="n">tool</span> <span class="n">genext2fs</span> <span class="n">lib32stdc</span><span class="o">++</span><span class="mi">6</span> \
+<span class="n">gcc</span><span class="o">-</span><span class="n">aarch64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> <span class="n">g</span><span class="o">+</span><span class="n">conf</span> <span class="n">autotools</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsigsegv2</span> <span class="n">m4</span> <span class="n">intltool</span> <span class="n">libdrm</span><span class="o">-</span><span class="n">dev</span> <span class="n">curl</span> <span class="n">sed</span> <span class="n">make</span> \
+<span class="n">binutils</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">gcc</span> <span class="n">g</span><span class="o">++</span> <span class="n">bash</span> <span class="n">patch</span> <span class="n">gzip</span> <span class="n">bzip2</span> <span class="n">perl</span> <span class="n">tar</span> <span class="n">cpio</span> <span class="n">python</span> <span class="n">unzip</span> <span class="n">rsync</span> <span class="n">file</span> <span class="n">bc</span> <span class="n">wget</span> \
+<span class="n">libncurses5</span> <span class="n">libqt4</span><span class="o">-</span><span class="n">dev</span> <span class="n">libglib2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgtk2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">dev</span> <span class="n">libglade2</span><span class="o">-</span><span class="n">dev</span> <span class="n">cvs</span> <span class="n">git</span> <span class="n">mercurial</span> <span class="n">rsync</span> <span class="n">openssh</span><span class="o">-</span><span class="n">client</span> \
+<span class="n">subversion</span> <span class="n">asciidoc</span> <span class="n">w3m</span> <span class="n">dblatex</span> <span class="n">graphviz</span> <span class="n">python</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">texinfo</span> <span class="n">fakeroot</span> \
+<span class="n">libparse</span><span class="o">-</span><span class="n">yapp</span><span class="o">-</span><span class="n">perl</span> <span class="n">default</span><span class="o">-</span><span class="n">jre</span> <span class="n">patchutils</span> <span class="n">swig</span> <span class="n">chrpath</span> <span class="n">diffstat</span> <span class="n">gawk</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> Ubuntu 17.04 or higher systems also need the following dependency packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">lib32gcc</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">dev</span> <span class="n">g</span><span class="o">++-</span><span class="mi">7</span> <span class="n">libstdc</span><span class="o">++-</span><span class="mi">7</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-firefly-linux-sdk-sub-volume-compressed-package">
+<h3>1.1.2. Download Firefly_Linux_SDK sub-volume compressed package<a class="headerlink" href="#download-firefly-linux-sdk-sub-volume-compressed-package" title="Permalink to this headline">¶</a></h3>
+<p><strong>Since the Firefly_Linux_SDK source code package is relatively large, some users’ computers do not support files above 4G or the network transmission of a single file is slow, so we use the method of sub-volume compression to package the SDK. Users can obtain the Firefly_Linux_SDK source code package in the following ways:</strong><a class="reference external" href=" #other_144">Firefly_Linux_SDK Source</a></p>
+<p>After the download is complete, verify the MD5 code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ md5sum rk3399_linux_release_v2.5.1_20210301_split_dir/*firefly_split*
+2cf71e64d35eb8083a4a0fc30c256484  rk3399_linux_release_v2.5.1_20210301_split_dir/rk3399_linux_release_v2.5.1_20210301_firefly_split.file0
+f0e9292b3816a8f1ce0eb1eeb483ad56  rk3399_linux_release_v2.5.1_20210301_split_dir/rk3399_linux_release_v2.5.1_20210301_firefly_split.file1
+c6aaa5d761d0e7917bea1cb78a0e7229  rk3399_linux_release_v2.5.1_20210301_split_dir/rk3399_linux_release_v2.5.1_20210301_firefly_split.file2
+16022cc729d06a28fec30ac52885d91c  rk3399_linux_release_v2.5.1_20210301_split_dir/rk3399_linux_release_v2.5.1_20210301_firefly_split.file3
+565426354c01d56c7d48479dd7f3c35b  rk3399_linux_release_v2.5.1_20210301_split_dir/rk3399_linux_release_v2.5.1_20210301_firefly_split.file4
+313d311f1705fbfb7bfc45b7937ecf24  rk3399_linux_release_v2.5.1_20210301_split_dir/rk3399_linux_release_v2.5.1_20210301_firefly_split.file5
+</pre></div>
+</div>
+</div>
+<div class="section" id="unpack-firefly-linux-sdk-sub-volume-compressed-package">
+<h3>1.1.3. Unpack Firefly_Linux_SDK sub-volume compressed package<a class="headerlink" href="#unpack-firefly-linux-sdk-sub-volume-compressed-package" title="Permalink to this headline">¶</a></h3>
+<p>After confirming that it is correct, you can unpack:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">rk3399_linux_release_v2</span><span class="o">.</span><span class="mf">5.1_20210301</span><span class="n">_split_dir</span><span class="o">/*</span><span class="n">firefly_split</span><span class="o">*</span> <span class="o">|</span> <span class="n">tar</span> <span class="o">-</span><span class="n">xzv</span>
+
+<span class="c1">#This SDK folder contains a .repo directory, after decompression, perform the following operations in the current directory</span>
+<span class="n">cd</span> <span class="n">rk3399_linux_release_v2</span><span class="o">.</span><span class="mf">5.1_20210301</span>
+<span class="n">ls</span> <span class="o">-</span><span class="n">al</span>
+
+<span class="o">.</span><span class="n">repo</span><span class="o">/</span><span class="n">repo</span><span class="o">/</span><span class="n">repo</span> <span class="n">sync</span> <span class="o">-</span><span class="n">l</span>
+<span class="o">.</span><span class="n">repo</span><span class="o">/</span><span class="n">repo</span><span class="o">/</span><span class="n">repo</span> <span class="n">sync</span> <span class="o">-</span><span class="n">c</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">tags</span>
+<span class="o">.</span><span class="n">repo</span><span class="o">/</span><span class="n">repo</span><span class="o">/</span><span class="n">repo</span> <span class="n">start</span> <span class="n">firefly</span> <span class="o">--</span><span class="nb">all</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-firefly-linux-sdk">
+<h3>1.1.4. Update Firefly_Linux_SDK<a class="headerlink" href="#update-firefly-linux-sdk" title="Permalink to this headline">¶</a></h3>
+<p>You can use the following command to update the SDK later</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">repo</span><span class="o">/</span><span class="n">repo</span><span class="o">/</span><span class="n">repo</span> <span class="n">sync</span> <span class="o">-</span><span class="n">c</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">tags</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="linux-sdk-catalog">
+<h3>1.1.5. Linux_SDK catalog<a class="headerlink" href="#linux-sdk-catalog" title="Permalink to this headline">¶</a></h3>
+<p>catalog:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── linux_sdk
+│   ├── app
+│   ├── buildroot                                               compile buildroot rootfs directory
+│   ├── build.sh -&gt; device/rockchip/common/build.sh             automatic compile script
+│   ├── device                                                  config file
+│   ├── distro                                                  debian_root.img directory
+│   ├── docs                                                    document
+│   ├── envsetup.sh -&gt; buildroot/build/envsetup.sh
+│   ├── external
+│   ├── kernel                                                  kernel directory
+│   ├── Makefile -&gt; buildroot/build/Makefile
+│   ├── mkfirmware.sh -&gt; device/rockchip/common/mkfirmware.sh   update rockdev script
+│   ├── prebuilts
+│   ├── rkbin
+│   ├── rkflash.sh -&gt; device/rockchip/common/rkflash.sh         flashing firmware script
+│   ├── rootfs                                                  compile debian rootfs directory
+│   ├── tools                                                   flashing and package tools
+│   └── u-boot                                                  uboot directory
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="compile-sdk">
+<h2>1.2. Compile SDK<a class="headerlink" href="#compile-sdk" title="Permalink to this headline">¶</a></h2>
+<p><a id="configuration"></a></p>
+<div class="section" id="configuration-before-compilation">
+<h3>1.2.1. Configuration before compilation<a class="headerlink" href="#configuration-before-compilation" title="Permalink to this headline">¶</a></h3>
+<p>The configuration file <code class="docutils literal notranslate"><span class="pre">roc-rk3399-pc-plus-ubuntu.mk</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="n">roc</span><span class="o">-</span><span class="n">rk3399</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">plus</span><span class="o">-</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">mk</span>
+
+<span class="c1">#The file path: `device/rockchip/rk3399/roc-rk3399-pc-plus-ubuntu.mk`</span>
+</pre></div>
+</div>
+<p>Effective configuration file will be connected to the <code class="docutils literal notranslate"><span class="pre">device/rockchip/.BoardConfig.mk</span></code>, check the file to verify that the configuration was successful.</p>
+<p><strong>Note :</strong> <code class="docutils literal notranslate"><span class="pre">roc-rk3399-pc-plus-ubuntu.mk</span></code> is configuration file after compiled buildroot firmware. At the same time, users can also generate new configuration files by referring to this configuration to adapt the firmware they need.</p>
+<p>Important configuration information :(if you need diy firmware, you may need to modify the following configuration information)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Uboot defconfig</span>
+<span class="n">export</span> <span class="n">RK_UBOOT_DEFCONFIG</span><span class="o">=</span><span class="n">roc</span><span class="o">-</span><span class="n">rk3399</span><span class="o">-</span><span class="n">pc_defconfig</span>              <span class="c1">#Compile the uboot configuration file</span>
+
+<span class="c1">#Kernel defconfig</span>
+<span class="n">export</span> <span class="n">RK_KERNEL_DEFCONFIG</span><span class="o">=</span><span class="n">firefly_linux_defconfig</span>            <span class="c1">#Compile the kernel configuration file</span>
+
+<span class="c1">#Kernel dts</span>
+<span class="n">export</span> <span class="n">RK_KERNEL_DTS</span><span class="o">=</span><span class="n">rk3399</span><span class="o">-</span><span class="n">roc</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">plus</span>                                  <span class="c1">#Compile the DTS used by kernel</span>
+
+<span class="c1">#parameter for GPT table</span>
+<span class="n">export</span> <span class="n">RK_PARAMETER</span><span class="o">=</span><span class="n">parameter</span><span class="o">-</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">txt</span>                      <span class="c1">#Partitioning information (very important)</span>
+
+<span class="c1">#packagefile for make update image</span>
+<span class="n">export</span> <span class="n">RK_PACKAGE_FILE</span><span class="o">=</span><span class="n">rk3399</span><span class="o">-</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">package</span><span class="o">-</span><span class="n">file</span>             <span class="c1">#Packaging configuration file</span>
+
+<span class="c1">#rootfs image path</span>
+<span class="n">export</span> <span class="n">RK_ROOTFS_IMG</span><span class="o">=</span><span class="n">xxxx</span><span class="o">/</span><span class="n">xxxx</span><span class="o">.</span><span class="n">img</span>                            <span class="c1">#The root file system image path</span>
+</pre></div>
+</div>
+<p><strong><font color=#ff0000 >Attention, very important ! !</font></strong></p>
+<p>Buildroot firmware is compiled by default. If you want to compile other firmware (such as ubuntu firmware), please do the following:</p>
+<ul class="simple">
+<li><p><a class="reference external" href=" #other_117">Download the Ubuntu root filesystem image</a></p></li>
+<li><p>Because RK3399 belongs to a 64-bit processor, so select the required file system under the corresponding <code class="docutils literal notranslate"><span class="pre">Linux</span> <span class="pre">Rootfs/arm64</span></code> folder. This article uses <code class="docutils literal notranslate"><span class="pre">rk3399_ubuntu18.04.img.7z</span></code> as an example.
+Place the resulting image at the root of the SDK:</p></li>
+<li><p>Put the resulting image in the specified directory in SDK:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Unpack</span>
+<span class="mi">7</span><span class="n">z</span> <span class="n">x</span> <span class="n">rk3399_ubuntu18</span><span class="o">.</span><span class="mf">04.</span><span class="n">img</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span>
+
+<span class="c1">#The root directory of sdk</span>
+<span class="n">mkdir</span> <span class="n">ubunturootfs</span>
+<span class="n">mv</span> <span class="n">rk3399_ubuntu18</span><span class="o">.</span><span class="mf">04.</span><span class="n">img</span> <span class="n">ubunturootfs</span><span class="o">/</span>
+
+<span class="c1">#Modify roc-rk3399-pc-plus-ubuntu.mk :</span>
+
+<span class="n">vim</span> <span class="n">device</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">/</span><span class="n">roc</span><span class="o">-</span><span class="n">rk3399</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">plus</span><span class="o">-</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">mk</span>
+
+<span class="c1">#Change the RK_ROOTFS_IMG property to the ubuntu file system image path(such as rk3399_ubuntu18.04.img)</span>
+<span class="n">RK_ROOTFS_IMG</span><span class="o">=</span><span class="n">ubunturootfs</span><span class="o">/</span><span class="n">rk3399_ubuntu18</span><span class="o">.</span><span class="mf">04.</span><span class="n">img</span>
+</pre></div>
+</div>
+<p><strong><font color=#ff0000 >NOTE</font></strong>: Ubuntu root file system image storage path can not be wrong !!</p>
+</div>
+<div class="section" id="automatic-compilation">
+<h3>1.2.2. Automatic compilation<a class="headerlink" href="#automatic-compilation" title="Permalink to this headline">¶</a></h3>
+<p>Under the premise that the configuration and setting up of the environment are completed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Automatic compilation of firmware default compiler <code class="docutils literal notranslate"><span class="pre">buildroot</span></code> firmware. Generate the firmware directory <code class="docutils literal notranslate"><span class="pre">rockdev/</span></code>, at the same time will backup in the IMAGE.</p>
+</div>
+<div class="section" id="partial-compilation">
+<h3>1.2.3. Partial compilation<a class="headerlink" href="#partial-compilation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="kernel">
+<h4>1.2.3.1. kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="n">kernel</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="u-boot">
+<h4>1.2.3.2. u-boot<a class="headerlink" href="#u-boot" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="n">uboot</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="recovery">
+<h4>1.2.3.3. recovery<a class="headerlink" href="#recovery" title="Permalink to this headline">¶</a></h4>
+<p>recovery partition can be omitted, if necessary, compile it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="n">recovery</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rootfs">
+<h4>1.2.3.4. rootfs<a class="headerlink" href="#rootfs" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>buildroot</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="n">rootfs</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>debian:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">rootfs</span><span class="o">/</span>
+
+<span class="mi">1</span><span class="p">:</span>
+<span class="c1">#Building base debian system by ubuntu-build-service from linaro</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">binfmt</span><span class="o">-</span><span class="n">support</span> <span class="n">qemu</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">static</span> <span class="n">live</span><span class="o">-</span><span class="n">build</span>
+<span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">ubuntu</span><span class="o">-</span><span class="n">build</span><span class="o">-</span><span class="n">service</span><span class="o">/</span><span class="n">packages</span><span class="o">/*</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">f</span>
+
+<span class="mi">2</span><span class="p">:</span>
+<span class="c1">#Compile 32-bit debian:</span>
+<span class="n">RELEASE</span><span class="o">=</span><span class="n">stretch</span> <span class="n">TARGET</span><span class="o">=</span><span class="n">desktop</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">armhf</span> <span class="o">./</span><span class="n">mk</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">debian</span><span class="o">.</span><span class="n">sh</span>
+<span class="c1">#Or compile 64-bit debian:</span>
+<span class="n">RELEASE</span><span class="o">=</span><span class="n">stretch</span> <span class="n">TARGET</span><span class="o">=</span><span class="n">desktop</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm64</span> <span class="o">./</span><span class="n">mk</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">debian</span><span class="o">.</span><span class="n">sh</span>
+
+<span class="c1">#If the above compilation encounters the following problems:</span>
+<span class="n">noexec</span> <span class="ow">or</span> <span class="n">nodev</span> <span class="n">issue</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">debootstrap</span><span class="o">/</span><span class="n">functions</span><span class="p">:</span> <span class="n">line</span> <span class="mi">1450</span><span class="p">:</span> <span class="o">..../</span><span class="n">rootfs</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">build</span><span class="o">-</span>
+<span class="n">service</span><span class="o">/</span><span class="n">stretch</span><span class="o">-</span><span class="n">desktop</span><span class="o">-</span><span class="n">armhf</span><span class="o">/</span><span class="n">chroot</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">dev</span><span class="o">-</span><span class="n">null</span><span class="p">:</span> <span class="n">Permission</span> <span class="n">denied</span> <span class="n">E</span><span class="p">:</span> <span class="n">Cannot</span> <span class="n">install</span> <span class="n">into</span> <span class="n">target</span>
+<span class="s1">&#39;/home/foxluo/work3/rockchip/rk_linux/rk3399_linux/rootfs/ubuntu-build-service/stretch-</span>
+<span class="n">desktop</span><span class="o">-</span><span class="n">armhf</span><span class="o">/</span><span class="n">chroot</span><span class="s1">&#39; mounted with noexec or nodev</span>
+
+<span class="c1"># Solutions:</span>
+<span class="n">mount</span> <span class="o">-</span><span class="n">o</span> <span class="n">remount</span><span class="p">,</span><span class="n">exec</span><span class="p">,</span><span class="n">dev</span> <span class="n">xxx</span> <span class="p">(</span><span class="n">xxx</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">mount</span> <span class="n">place</span><span class="p">),</span> <span class="n">then</span> <span class="n">rebuild</span> <span class="n">it</span><span class="o">.</span>
+
+<span class="mi">3</span><span class="p">:</span>
+<span class="c1">#Compile 32-bit stretch:</span>
+<span class="n">VERSION</span><span class="o">=</span><span class="n">debug</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">armhf</span> <span class="o">./</span><span class="n">mk</span><span class="o">-</span><span class="n">rootfs</span><span class="o">-</span><span class="n">stretch</span><span class="o">.</span><span class="n">sh</span>
+
+<span class="c1">#It is recommend to use that rear band debug in the development phase</span>
+<span class="c1">#Compile 64-bit stretch:</span>
+<span class="n">VERSION</span><span class="o">=</span><span class="n">debug</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm64</span> <span class="o">./</span><span class="n">mk</span><span class="o">-</span><span class="n">rootfs</span><span class="o">-</span><span class="n">stretch</span><span class="o">-</span><span class="n">arm64</span><span class="o">.</span><span class="n">sh</span>
+
+<span class="mi">4</span><span class="p">:</span>
+<span class="o">./</span><span class="n">mk</span><span class="o">-</span><span class="n">image</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">mv</span> <span class="n">linaro</span><span class="o">-</span><span class="n">rootfs</span><span class="o">.</span><span class="n">img</span> <span class="o">../</span><span class="n">distro</span><span class="o">/</span>
+
+<span class="mi">5</span><span class="p">:</span>
+<span class="n">Modify</span> <span class="n">roc</span><span class="o">-</span><span class="n">rk3399</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">plus</span><span class="o">-</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">mk</span>
+<span class="n">vim</span> <span class="n">device</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">RK3399</span><span class="o">/</span><span class="n">roc</span><span class="o">-</span><span class="n">rk3399</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">plus</span><span class="o">-</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">mk</span>
+
+<span class="c1">#Change the RK_ROOTFS_IMG property to the ubuntu file system image path(such as linaro-rootfs.img)</span>
+<span class="n">RK_ROOTFS_IMG</span><span class="o">=</span><span class="n">distro</span><span class="o">/</span><span class="n">linaro</span><span class="o">-</span><span class="n">rootfs</span><span class="o">.</span><span class="n">img</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>ubuntu18.04 can be downloaded via cloud disk:<a class="reference external" href=" #other_117">18.04 FS</a></p></li>
+<li><p>Because RK3399 belongs to a 64-bit processor, so select the required file system under the corresponding <code class="docutils literal notranslate"><span class="pre">Linux</span> <span class="pre">Rootfs/arm64</span></code> folder. This article uses <code class="docutils literal notranslate"><span class="pre">rk3399_ubuntu18.04.img.7z</span></code> as an example.
+Place the resulting image at the root of the SDK:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Unpack</span>
+<span class="mi">7</span><span class="n">z</span> <span class="n">x</span> <span class="n">rk3399_ubuntu18</span><span class="o">.</span><span class="mf">04.</span><span class="n">img</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span>
+
+<span class="c1">#The root directory of sdk</span>
+<span class="n">mkdir</span> <span class="n">ubunturootfs</span>
+<span class="n">mv</span> <span class="n">rk3399_ubuntu18</span><span class="o">.</span><span class="mf">04.</span><span class="n">img</span> <span class="n">ubunturootfs</span><span class="o">/</span>
+
+<span class="c1">#Modify roc-rk3399-pc-plus-ubuntu.mk :</span>
+
+<span class="n">vim</span> <span class="n">device</span><span class="o">/</span><span class="n">rockchip</span><span class="o">/</span><span class="n">rk3399</span><span class="o">/</span><span class="n">roc</span><span class="o">-</span><span class="n">rk3399</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">plus</span><span class="o">-</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">mk</span>
+
+<span class="c1">#Change the RK_ROOTFS_IMG property to the ubuntu file system image path(such asrk3399_ubuntu18.04.img)</span>
+<span class="n">RK_ROOTFS_IMG</span><span class="o">=</span><span class="n">ubunturootfs</span><span class="o">/</span><span class="n">rk3399_ubuntu18</span><span class="o">.</span><span class="mf">04.</span><span class="n">img</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong>:buntu root file system image storage path can not be wrong!!</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">./mkfirmware.sh</span></code> will automatically update <code class="docutils literal notranslate"><span class="pre">rockdev/rootfs.img</span></code> links.</p>
+</div>
+</div>
+</div>
+<div class="section" id="pack-the-firmware">
+<h2>1.3. Pack the firmware<a class="headerlink" href="#pack-the-firmware" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="update-the-part-images-synchronously">
+<h3>1.3.1. Update the part images synchronously<a class="headerlink" href="#update-the-part-images-synchronously" title="Permalink to this headline">¶</a></h3>
+<p>Before each package firmware, ensure <code class="docutils literal notranslate"><span class="pre">rockdev/</span></code> directory file link is correct:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ls -l
+
+├── boot.img -&gt; ~/project/linux_sdk/kernel/boot.img
+├── idbloader.img -&gt; ~/project/linux_sdk/u-boot/idbloader.img
+├── linaro-rootfs.img
+├── MiniLoaderAll.bin -&gt; ~/project/linux_sdk/u-boot/rk3399_loader_v1.14.115.bin
+├── misc.img -&gt; ~/project/linux_sdk/device/rockchip/rockimg/wipe_all-misc.img
+├── oem.img
+├── parameter.txt -&gt; ~/project/linux_sdk/device/rockchip/RK3399/parameter-ubuntu.txt
+├── recovery.img -&gt; ~/project/linux_sdk/buildroot/output/rockchip_rk3399_recovery/images/recovery.img
+├── rootfs.img -&gt; ~/project/linux_sdk/ubunturootfs/rk3399_ubuntu18.04.img
+├── trust.img -&gt; ~/project/linux_sdk/u-boot/trust.img
+├── uboot.img -&gt; ~/project/linux_sdk/u-boot:/uboot.img
+└── userdata.img
+</pre></div>
+</div>
+<p>Runing <code class="docutils literal notranslate"><span class="pre">./mkfirmware.sh</span></code> to update links</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mkfirmware</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p><strong>Tip:</strong> If you do not compile all the partition images, you will encounter the following situation when running <code class="docutils literal notranslate"><span class="pre">./mkfirmware</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>error: /home/ljh/proj/linux-sdk/buildroot/output/rockchip_rk3399_recovery/images/recovery.img not found!
+#Represents that the recovery partition has not compiled an image, and other situations are similar, such as oem.img, userdata.img. As mentioned above, these are elliptical partition images and can be ignored.
+</pre></div>
+</div>
+</div>
+<div class="section" id="packaged-into-a-unified-firmware">
+<h3>1.3.2. Packaged into a unified firmware<a class="headerlink" href="#packaged-into-a-unified-firmware" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note:</strong> Please make sure <code class="docutils literal notranslate"><span class="pre">tools/linux/Linux_Pack_Firmware/rockdev/package-file</span></code> is correct before packing. The packaging is partitioned based on this file. This file link is updated when the <code class="docutils literal notranslate"><span class="pre">./build.sh</span> <span class="pre">aio-rk3399c.mk</span></code> command is executed. If the configuration is not correct, go back to the <code class="docutils literal notranslate"><span class="pre">Configuration</span> <span class="pre">before</span> <span class="pre">compilation</span></code> section and configure it again.</p>
+<p>Integrated into unified firmware:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="n">updateimg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="partition-introduction">
+<h2>1.4. Partition introduction<a class="headerlink" href="#partition-introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parameter">
+<h3>1.4.1. parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">parameter.txt</span></code> contains firmware partition information is very important. You can find some <code class="docutils literal notranslate"><span class="pre">parameter.txt</span></code> files in <code class="docutils literal notranslate"><span class="pre">device/rockchip/RK3399</span></code> directory. The following is introduced with <code class="docutils literal notranslate"><span class="pre">parameter-debian.txt</span></code> as an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FIRMWARE_VER</span><span class="p">:</span> <span class="mf">8.1</span>
+<span class="n">MACHINE_MODEL</span><span class="p">:</span> <span class="n">RK3399</span>
+<span class="n">MACHINE_ID</span><span class="p">:</span> <span class="mi">007</span>
+<span class="n">MANUFACTURER</span><span class="p">:</span> <span class="n">RK3399</span>
+<span class="n">MAGIC</span><span class="p">:</span> <span class="mh">0x5041524B</span>
+<span class="n">ATAG</span><span class="p">:</span> <span class="mh">0x00200800</span>
+<span class="n">MACHINE</span><span class="p">:</span> <span class="mi">3399</span>
+<span class="n">CHECK_MASK</span><span class="p">:</span> <span class="mh">0x80</span>
+<span class="n">PWR_HLD</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+<span class="n">TYPE</span><span class="p">:</span> <span class="n">GPT</span>
+<span class="n">CMDLINE</span><span class="p">:</span> <span class="n">mtdparts</span><span class="o">=</span><span class="n">rk29xxnand</span><span class="p">:</span><span class="mh">0x00002000</span><span class="nd">@0x00004000</span><span class="p">(</span><span class="n">uboot</span><span class="p">),</span><span class="mh">0x00002000</span><span class="nd">@0x00006000</span><span class="p">(</span><span class="n">trust</span><span class="p">),</span><span class="mh">0x00002000</span><span class="nd">@0x00008000</span><span class="p">(</span><span class="n">misc</span><span class="p">),</span><span class="mh">0x00010000</span><span class="nd">@0x0000a000</span><span class="p">(</span><span class="n">boot</span><span class="p">),</span><span class="mh">0x00010000</span><span class="nd">@0x0001a000</span><span class="p">(</span><span class="n">recovery</span><span class="p">),</span><span class="mh">0x00010000</span><span class="nd">@0x0002a000</span><span class="p">(</span><span class="n">backup</span><span class="p">),</span><span class="mh">0x00020000</span><span class="nd">@0x0003a000</span><span class="p">(</span><span class="n">oem</span><span class="p">),</span><span class="mh">0x00700000</span><span class="nd">@0x0005a000</span><span class="p">(</span><span class="n">rootfs</span><span class="p">),</span><span class="o">-</span><span class="nd">@0x0075a000</span><span class="p">(</span><span class="n">userdata</span><span class="p">:</span><span class="n">grow</span><span class="p">)</span>
+<span class="n">uuid</span><span class="p">:</span><span class="n">rootfs</span><span class="o">=</span><span class="mf">614e0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">4</span><span class="n">b53</span><span class="o">-</span><span class="mi">8000</span><span class="o">-</span><span class="mi">1</span><span class="n">d28000054a9</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CMDLINE</span></code> property is what we care about. Take uboot as an example, <code class="docutils literal notranslate"><span class="pre">0x00004000</span></code> in <code class="docutils literal notranslate"><span class="pre">0x00002000&#64;0x00004000(uboot)</span></code> is the starting position of the uboot partition, and <code class="docutils literal notranslate"><span class="pre">0x00002000</span></code> is the size of the partition. The following partition rules are the same. Users can add or subtract or modify partition information according to their needs, but please keep at least the <code class="docutils literal notranslate"><span class="pre">uboot</span></code>, <code class="docutils literal notranslate"><span class="pre">trust</span></code>, <code class="docutils literal notranslate"><span class="pre">boot</span></code>, <code class="docutils literal notranslate"><span class="pre">rootfs</span></code> partition, which is a prerequisite for the machine to start normally. The simplest partition scheme is used in <code class="docutils literal notranslate"><span class="pre">parameter-ubuntu.txt</span></code>.</p>
+<p>Partition introduction:</p>
+<p><strong>uboot:</strong> Upgrade the <em>uboot.img</em> compiled by uboot.</p>
+<p><strong>trust:</strong> Upgrade the <em>trust.img</em> compiled by uboot.</p>
+<p><strong>misc:</strong> Upgrade the <em>misc.img</em>. Turn on and Enter <em>recovery</em> mode.(omitted)</p>
+<p><strong>boot:</strong> Upgrade the <em>boot.img</em> compiled by kernel. Contains kernel and device tree information.</p>
+<p><strong>recovery:</strong>  Upgrade the <em>recovery.img</em>.(omitted)</p>
+<p><strong>backup:</strong> Reserved. Not for the time being. In the future, it will be used as <em>backup</em> of <em>recovery</em> just like Android.(omitted)</p>
+<p><strong>oem:</strong> For manufacturers to use, used to store the manufacturer’s app or data. Read-only. Replace the data partition of the original speaker. Mount in <code class="docutils literal notranslate"><span class="pre">/oem</span></code>.(omitted)</p>
+<p><strong>rootfs:</strong> Store the rootfs.img compiled by buildroot or debian,  Read-only.</p>
+<p><strong>userdata:</strong> Save the files generated by the app or is for the end user. Read and Write, Mount in <code class="docutils literal notranslate"><span class="pre">/userdata</span></code>.(omitted)</p>
+</div>
+<div class="section" id="package-file">
+<h3>1.4.2. package-file<a class="headerlink" href="#package-file" title="Permalink to this headline">¶</a></h3>
+<p>This file should be consistent with the <code class="docutils literal notranslate"><span class="pre">parameter</span></code> and used for firmware packaging. Relevant documents can be found under <code class="docutils literal notranslate"><span class="pre">tools/linux/Linux_Pack_Firmware/rockdev</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># NAME          Relative path</span>
+<span class="c1">#</span>
+<span class="c1"># HWDEF         HWDEF</span>
+<span class="n">package</span><span class="o">-</span><span class="n">file</span>    <span class="n">package</span><span class="o">-</span><span class="n">file</span>
+<span class="n">bootloader</span>      <span class="n">Image</span><span class="o">/</span><span class="n">MiniLoaderAll</span><span class="o">.</span><span class="n">bin</span>
+<span class="n">parameter</span>       <span class="n">Image</span><span class="o">/</span><span class="n">parameter</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">trust</span>           <span class="n">Image</span><span class="o">/</span><span class="n">trust</span><span class="o">.</span><span class="n">img</span>
+<span class="n">uboot</span>           <span class="n">Image</span><span class="o">/</span><span class="n">uboot</span><span class="o">.</span><span class="n">img</span>
+<span class="n">boot</span>            <span class="n">Image</span><span class="o">/</span><span class="n">boot</span><span class="o">.</span><span class="n">img</span>
+<span class="n">rootfs</span><span class="p">:</span><span class="n">grow</span>     <span class="n">Image</span><span class="o">/</span><span class="n">rootfs</span><span class="o">.</span><span class="n">img</span>
+<span class="n">backup</span>          <span class="n">RESERVED</span>
+</pre></div>
+</div>
+<p>The above is the mirror file generated after SDK compilation. Package only the img files you use according to <code class="docutils literal notranslate"><span class="pre">parameter.txt</span></code>.</p>
+</div>
+</div>
+<div class="section" id="faqs">
+<h2>1.5. FAQs<a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-enter-upgrade-mode">
+<h3>1.5.1. How to enter upgrade mode ?<a class="headerlink" href="#how-to-enter-upgrade-mode" title="Permalink to this headline">¶</a></h3>
+<p>See operation method in <a class="reference internal" href="03-upgrade_firmware.html"><span class="doc">Upgrade firmware</span></a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ubuntu_desktop_support.html" class="btn btn-neutral float-right" title="2. Firefly Ubuntu Desktop Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02-upgrade_table.html" class="btn btn-neutral" title="3. Instructions for writing with USB cable (important)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Firefly Team.
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "../../../hm.baidu.com/hmfe8c.js?a59c4f3b4ec58882544d7cc51d1d78e1";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
+    </p>
+    
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+
+  <style>
+    /* 触发弹窗图片的样式 */
+    /* #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    } */
+
+    /* 弹窗背景 */
+    .modal-img {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* 设置显示的优先层级级别 */
+      z-index: 1234;
+      /* Sit on top */
+      /* padding-top: 100px; */
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Black w/ opacity */
+    }
+
+    .modal-img-flex{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 设置弹出图片的样式 */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-height: 100%;
+      /* width: 40%; */
+      /* max-width: 430px; */
+    }
+
+    /* 设置文本内容的样式 */
+    /* #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    } */
+
+    /* 设置弹出图片的动画，添加动画 */
+    /* .modal-content{
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    } */
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* 设置span标签的关闭按钮样式 */
+    .close {
+      position: absolute;
+      top: 100px;
+      right: 400px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* 小屏幕中图片宽度为 100% */
+    @media only screen and (max-width: 700px) {
+      .modal-content {
+        width: 100%;
+      }
+    }
+  </style>
+  
+<div class="modal-img">
+    
+    <img src="#" alt="" data-large="" class="modal-content">
+    <span class="close">&times;</span>
+
+</div>
+
+<script type="text/javascript" src="_static/js/zoomsl.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.document a').click(function(){
+          console.log(this.href)
+
+          var fileExt=(/[.]/.exec(this.href)) ? /[^.]+$/.exec(this.href.toLowerCase()) : '';
+
+          if(fileExt[0] === 'jpg' || fileExt[0] === 'png' || fileExt[0] === 'jpeg'){
+            jQuery('.modal-img').addClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', this.href);
+            jQuery('.modal-content').data('large', this.href);
+
+            // jQuery('.modal-content').imagezoomsl({
+            //   magnifiereffectanimate: "fadeIn"
+            // });
+            return false
+          }
+          
+        })
+
+        jQuery('.modal-img').click(function(){
+            // jQuery('.modal-img').hide()
+            jQuery('.modal-img').removeClass('modal-img-flex');
+            jQuery('.modal-content').attr('src', '');
+        })
+    });
+</script> 
+
+</body>
+
+<!-- Mirrored from wiki.t-firefly.com/en/ROC-RK3399-PC-Pro/linux_compile_gpt.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2022 08:27:36 GMT -->
+</html>

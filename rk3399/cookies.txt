@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+en.t-firefly.com	TRUE	/	FALSE	1999999999	acw_tc	c0a8050116644400103602300e22eb34c950cf5e18eebaa0e4aac310f05843
+hm.baidu.com	TRUE	/	FALSE	1999999999	HMACCOUNT	03F02C172EC6CE87
+

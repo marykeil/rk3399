@@ -1,0 +1,23 @@
+Conversion module
+
+USB to TTL serial module
+
+USB to TTL serial module
+
+Product Parameter
+
+Brand：Firefly
+
+Size：29mm * 19mm
+
+Reference material
+
+Download driver：
+
+http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41
+
+Picture
+
+
+Connection Method
+

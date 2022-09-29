@@ -1,0 +1,59 @@
+SD upgrade mode
+
+This article mainly introduces how to use a MicroSD card to update the
+firmware on the motherboard. But only if the firmware is smaller than
+4G, otherwise, please check
+
+"If the firmware is larger than 4G SD upgrade card making tutorial"
+
+.
+
+To use MicroSD to update the firmware, you need to write the unified
+firmware into the MicroSD card by using a card tool on the computer.
+Currently, this operation is only supported on the Windows operating
+system.
+
+Ready to work
+
+ROC-RK3399-PC Pro
+
+computer
+
+MicroSD card (ie TF card)
+
+Type-C data cable
+
+USB card reader
+
+Go to
+
+SD Firmware Tool Download Page
+
+ to download "SD_Firmware_Tool" and unzip it.
+
+Run SD_Firmware_Tool.exe
+
+
+Download the SD card maker tool: SD_Firmware_Tool
+
+You can modify the config.ini file, set Selected=1 to set the language
+to Chinese, set Selected=2 to set the language to English.
+
+Download the unified firmware that needs to be upgraded to the
+motherboard.
+
+Insert the MicroSD into the USB card reader and then into the USB port
+of the computer.
+
+Open SD_Firmware_Tool, check the "Firmware Upgrade" box, select the
+correct removable disk device and upgrade the firmware.
+
+After clicking Start Creation, wait for the creation to finish.
+
+Take out the MicroSD card, insert it into the MicroSD card slot of the
+motherboard, power on the motherboard, and the motherboard will
+automatically start to upgrade.
+
+After the upgrade is complete, take out the MicroSD card and the
+motherboard will automatically restart to complete the entire firmware
+update process.
